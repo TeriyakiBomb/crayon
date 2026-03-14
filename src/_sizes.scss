@@ -1,13 +1,21 @@
+@use "utility";
+
 $base: 4px;
 
 $sizes: (
   1 : $base,
   2 : $base * 2,
-  "2\\.5" : $base * 2.5
+  2.5 : $base * 2.5
 );
 
+
 @each $size, $value in $sizes {
-  .p-#{$size} {
-    padding: #{$value};
+  // 1. Run the size through our function. 
+  // 2. We search for "." and replace it with "\\." 
+  // (We need two backslashes in Sass to output one backslash in CSS)
+  $escaped-size: utility.str-replace($size, ".", "\\.");
+
+  .p-#{$escaped-size} {
+    padding: $value;
   }
 }

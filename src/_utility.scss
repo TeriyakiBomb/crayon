@@ -1,0 +1,14 @@
+@use "sass:string";
+
+// A reusable find-and-replace function
+@function str-replace($string, $search, $replace: "") {
+  // Coerce the input to a string, just in case it is a raw number like 2.5
+  $string: $string + "";
+  $index: string.index($string, $search);
+
+  @if $index {
+    @return string.slice($string, 1, $index - 1)+$replace +str-replace(string.slice($string, $index + string.length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
