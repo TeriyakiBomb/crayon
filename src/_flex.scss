@@ -1,0 +1,35 @@
+$flex: (
+  'row': row,
+  'col': column,
+  'row-reverse': row-reverse,
+  'col-reverse': column-reverse
+);
+
+@each $name, $dir in $flex {
+  .flex-#{$name} {
+    display: flex;
+    flex-direction: $dir;
+  }
+
+  .f-#{$name} {
+    @extend .flex-#{$name};
+  }
+}
+
+.grow {
+  flex-grow: 1;
+}
+
+.no-grow,
+.grow-0 {
+  flex-grow: 0;
+}
+
+.shrink {
+  flex-shrink: 1;
+}
+
+.no-shrink,
+.shrink-0 {
+  flex-shrink: 0;
+}
