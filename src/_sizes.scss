@@ -2,7 +2,7 @@
 @use "utility";
 @use "sass:math";
 
-$baseSizes: (
+$base-sizes: (
   0.5 : math.div(config.$base, 2),
   1 : config.$base,
   1.5 : config.$base * 1.5,
@@ -196,7 +196,7 @@ $baseSizes: (
   }
 }
 
-@each $size, $value in $baseSizes {
+@each $size, $value in $base-sizes {
   @include padding-classes($size, $value);
   @include margin-classes($size, $value);
   @include width-classes($size, $value);
