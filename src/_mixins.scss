@@ -1,0 +1,17 @@
+@use "config";
+@use "sass:map";
+
+// Responsive
+@mixin screen($name) {
+  @media (min-width: map.get(config.$breakpoints, $name)) {
+    @content;
+  }
+}
+
+// States
+@mixin hover  { &:hover  { @content; } }
+@mixin focus  { &:focus  { @content; } }
+@mixin active { &:active { @content; } }
+
+// Dark
+@mixin dark { @media (prefers-color-scheme: dark) { @content; } }
