@@ -2,6 +2,28 @@
 @use "utility";
 @use "sass:math";
 
+$baseSizes: (
+  0.5 : math.div(config.$base, 2),
+  1 : config.$base,
+  1.5 : config.$base * 1.5,
+  2 : config.$base * 2,
+  2.5 : config.$base * 2.5,
+  3 : config.$base * 3,
+  3.5 : config.$base * 3.5,
+  4 : config.$base * 4,
+  4.5 : config.$base * 4.5,
+  5 : config.$base * 5,
+  5.5 : config.$base * 5.5,
+  6 : config.$base * 6,
+  6.5 : config.$base * 6.5,
+  7 : config.$base * 7,
+  7.5 : config.$base * 7.5,
+  8 : config.$base * 8,
+  8.5 : config.$base * 8.5,
+  9 : config.$base * 9,
+  9.5 : config.$base * 9.5
+);
+
 @mixin padding-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
@@ -102,32 +124,56 @@
   }
 }
 
-$baseSizes: (
-  0.5 : math.div(config.$base, 2),
-  1 : config.$base,
-  1.5 : config.$base * 1.5,
-  2 : config.$base * 2,
-  2.5 : config.$base * 2.5,
-  3 : config.$base * 3,
-  3.5 : config.$base * 3.5,
-  4 : config.$base * 4,
-  4.5 : config.$base * 4.5,
-  5 : config.$base * 5,
-  5.5 : config.$base * 5.5,
-  6 : config.$base * 6,
-  6.5 : config.$base * 6.5,
-  7 : config.$base * 7,
-  7.5 : config.$base * 7.5,
-  8 : config.$base * 8,
-  8.5 : config.$base * 8.5,
-  9 : config.$base * 9,
-  9.5 : config.$base * 9.5
-);
+@mixin width-classes($size-name, $value) {
+  $converted-value: utility.px-to-rem($value);
+  $escaped: utility.str-replace($size-name, ".", "\\.");
 
+  .w-#{$escaped} {
+    width: $converted-value;
+  }
+
+  .min-w-#{$escaped} {
+    min-width: $converted-value;
+  }
+
+  .max-w-#{$escaped} {
+    max-width: $converted-value;
+  }
+}
+
+@mixin height-classes($size-name, $value) {
+  $converted-value: utility.px-to-rem($value);
+  $escaped: utility.str-replace($size-name, ".", "\\.");
+
+  .h-#{$escaped} {
+    height: $converted-value;
+  }
+
+  .min-h-#{$escaped} {
+    min-height: $converted-value;
+  }
+
+  .max-h-#{$escaped} {
+    max-height: $converted-value;
+  }
+}
+
+@mixin size-classes($size-name, $value) {
+  $converted-value: utility.px-to-rem($value);
+  $escaped: utility.str-replace($size-name, ".", "\\.");
+
+  .size-#{$escaped} {
+    width: $converted-value;
+    height: $converted-value;
+  }
+}
 
 @each $size, $value in $baseSizes {
   @include padding-classes($size, $value);
   @include margin-classes($size, $value);
+  @include width-classes($size, $value);
+  @include height-classes($size, $value);
+  @include size-classes($size, $value);
 }
 
 //extended sizes
@@ -136,5 +182,8 @@ $size: 10;
 @while $size <= config.$highestMultiplier {
   @include padding-classes($size, config.$base * $size);
   @include margin-classes($size, config.$base * $size);
+  @include width-classes($size, config.$base * $size);
+  @include height-classes($size, config.$base * $size);
+  @include size-classes($size, config.$base * $size);
   $size: $size + 1;
 }
