@@ -26,6 +26,7 @@ $baseSizes: (
   9.5 : $base * 9.5
 );
 
+
 @each $size, $value in $baseSizes {
   // 1. Run the size through our function. 
   // 2. We search for "." and replace it with "\\." 
@@ -34,6 +35,32 @@ $baseSizes: (
 
   .p-#{$escaped-size} {
     padding: $value;
+  }
+
+  .pr-#{$escaped-size} {
+    padding-right: $value;
+  }
+
+  .pl-#{$escaped-size} {
+    padding-left: $value;
+  }
+
+  .pt-#{$escaped-size} {
+    padding-top: $value;
+  }
+
+  .pb-#{$escaped-size} {
+    padding-bottom: $value;
+  }
+
+  .px-#{$escaped-size} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+
+  .py-#{$escaped-size} {
+    padding-top: $value;
+    padding-bottom: $value;
   }
 }
 
