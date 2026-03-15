@@ -1,9 +1,10 @@
 @use "sass:math";
 
+$font-family: sans-serif;
 $base-font-size: 16px;
-$highest-multiplier: 96;
 
 $base-size: 4px;
+$highest-multiplier: 96;
 
 /* Base sizes can be whatever you want, the multiplier just fills it the rest of the way to that number, so you can go beyond 96. Bases can have any name or multiplier you want for greater granularity */
 $base-sizes: (
