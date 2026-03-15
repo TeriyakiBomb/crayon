@@ -4,6 +4,40 @@
 $base: 4px;
 $highestMultiplier: 96;
 
+@mixin padding-classes($size-name, $value) {
+  $escaped: utility.str-replace($size-name, ".", "\\.");
+
+  .p-#{$escaped} {
+    padding: $value;
+  }
+
+  .pr-#{$escaped} {
+    padding-right: $value;
+  }
+
+  .pl-#{$escaped} {
+    padding-left: $value;
+  }
+
+  .pt-#{$escaped} {
+    padding-top: $value;
+  }
+
+  .pb-#{$escaped} {
+    padding-bottom: $value;
+  }
+
+  .px-#{$escaped} {
+    padding-left: $value;
+    padding-right: $value;
+  }
+
+  .py-#{$escaped} {
+    padding-top: $value;
+    padding-bottom: $value;
+  }
+}
+
 $baseSizes: (
   0.5 : math.div($base, 2),
   1 : $base,
@@ -28,48 +62,13 @@ $baseSizes: (
 
 
 @each $size, $value in $baseSizes {
-  // 1. Run the size through our function. 
-  // 2. We search for "." and replace it with "\\." 
-  // (We need two backslashes in Sass to output one backslash in CSS)
-  $escaped-size: utility.str-replace($size, ".", "\\.");
-
-  .p-#{$escaped-size} {
-    padding: $value;
-  }
-
-  .pr-#{$escaped-size} {
-    padding-right: $value;
-  }
-
-  .pl-#{$escaped-size} {
-    padding-left: $value;
-  }
-
-  .pt-#{$escaped-size} {
-    padding-top: $value;
-  }
-
-  .pb-#{$escaped-size} {
-    padding-bottom: $value;
-  }
-
-  .px-#{$escaped-size} {
-    padding-left: $value;
-    padding-right: $value;
-  }
-
-  .py-#{$escaped-size} {
-    padding-top: $value;
-    padding-bottom: $value;
-  }
+  @include padding-classes($size, $value);
 }
 
+//extended sizes
 $size: 10;
 
 @while $size <=$highestMultiplier {
-  .p-#{$size} {
-    padding: $base * $size;
-  }
-
+  @include padding-classes($size, $base * $size);
   $size: $size + 1;
 }
