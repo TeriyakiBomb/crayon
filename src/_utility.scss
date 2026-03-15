@@ -7,10 +7,6 @@
   @return math.div($px, config.$base-font-size) * 1rem;
 }
 
-@function color($name) {
-  @return map.get(config.$colors, $name);
-}
-
 @function str-replace($string, $search, $replace: "") {
   // Coerce the input to a string, just in case it is a raw number like 2.5
   $string: $string + "";

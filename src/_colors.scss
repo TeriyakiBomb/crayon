@@ -13,3 +13,7 @@
     border-color: $value;
   }
 }
+
+@function color($name) {
+  @return map.get(config.$colors, $name);
+}
