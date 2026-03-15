@@ -1,9 +1,14 @@
 @use "config";
 @use "sass:string";
 @use "sass:math";
+@use "sass:map";
 
 @function px-to-rem($px) {
   @return math.div($px, config.$base-font-size) * 1rem;
+}
+
+@function color($name) {
+  @return map.get(config.$colors, $name);
 }
 
 @function str-replace($string, $search, $replace: "") {

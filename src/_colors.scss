@@ -1,0 +1,15 @@
+@use "config";
+
+@each $name, $value in config.$colors {
+  .bg-#{$name} {
+    background-color: $value;
+  }
+
+  .text-#{$name} {
+    color: $value;
+  }
+
+  .border-#{$name} {
+    border-color: $value;
+  }
+}
