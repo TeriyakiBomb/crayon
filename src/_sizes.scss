@@ -1,63 +1,62 @@
+@use "config";
 @use "utility";
 @use "sass:math";
 
-$base: 4px;
-$highestMultiplier: 96;
-
 @mixin padding-classes($size-name, $value) {
+  $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
   .p-#{$escaped} {
-    padding: $value;
+    padding: $converted-value;
   }
 
   .pr-#{$escaped} {
-    padding-right: $value;
+    padding-right: $converted-value;
   }
 
   .pl-#{$escaped} {
-    padding-left: $value;
+    padding-left: $converted-value;
   }
 
   .pt-#{$escaped} {
-    padding-top: $value;
+    padding-top: $converted-value;
   }
 
   .pb-#{$escaped} {
-    padding-bottom: $value;
+    padding-bottom: $converted-value;
   }
 
   .px-#{$escaped} {
-    padding-left: $value;
-    padding-right: $value;
+    padding-left: $converted-value;
+    padding-right: $converted-value;
   }
 
   .py-#{$escaped} {
-    padding-top: $value;
-    padding-bottom: $value;
+    padding-top: $converted-value;
+    padding-bottom: $converted-value;
   }
 }
 
 $baseSizes: (
-  0.5 : math.div($base, 2),
-  1 : $base,
-  1.5 : $base * 1.5,
-  2 : $base * 2,
-  2.5 : $base * 2.5,
-  3 : $base * 3,
-  3.5 :$base * 3.5,
-  4 : $base * 4,
-  4.5 : $base * 4.5,
-  5 : $base * 5,
-  5.5 : $base * 5.5,
-  6 : $base * 6,
-  6.5 : $base * 6.5,
-  7 : $base * 7,
-  7.5 : $base * 7.5,
-  8 : $base * 8,
-  8.5 : $base * 8.5,
-  9 : $base * 9,
-  9.5 : $base * 9.5
+  0.5 : math.div(config.$base, 2),
+  1 : config.$base,
+  1.5 : config.$base * 1.5,
+  2 : config.$base * 2,
+  2.5 : config.$base * 2.5,
+  3 : config.$base * 3,
+  3.5 : config.$base * 3.5,
+  4 : config.$base * 4,
+  4.5 : config.$base * 4.5,
+  5 : config.$base * 5,
+  5.5 : config.$base * 5.5,
+  6 : config.$base * 6,
+  6.5 : config.$base * 6.5,
+  7 : config.$base * 7,
+  7.5 : config.$base * 7.5,
+  8 : config.$base * 8,
+  8.5 : config.$base * 8.5,
+  9 : config.$base * 9,
+  9.5 : config.$base * 9.5
 );
 
 
@@ -68,7 +67,7 @@ $baseSizes: (
 //extended sizes
 $size: 10;
 
-@while $size <=$highestMultiplier {
-  @include padding-classes($size, $base * $size);
+@while $size <= config.$highestMultiplier {
+  @include padding-classes($size, config.$base * $size);
   $size: $size + 1;
 }
