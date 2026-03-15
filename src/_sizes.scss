@@ -37,6 +37,71 @@
   }
 }
 
+@mixin margin-classes($size-name, $value) {
+  $converted-value: utility.px-to-rem($value);
+  $escaped: utility.str-replace($size-name, ".", "\\.");
+
+  .m-#{$escaped} {
+    margin: $converted-value;
+  }
+
+  .mr-#{$escaped} {
+    margin-right: $converted-value;
+  }
+
+  .ml-#{$escaped} {
+    margin-left: $converted-value;
+  }
+
+  .mt-#{$escaped} {
+    margin-top: $converted-value;
+  }
+
+  .mb-#{$escaped} {
+    margin-bottom: $converted-value;
+  }
+
+  .mx-#{$escaped} {
+    margin-left: $converted-value;
+    margin-right: $converted-value;
+  }
+
+  .my-#{$escaped} {
+    margin-top: $converted-value;
+    margin-bottom: $converted-value;
+  }
+
+  .-m-#{$escaped} {
+    margin: -$converted-value;
+  }
+
+  .-mr-#{$escaped} {
+    margin-right: -$converted-value;
+  }
+
+  .-ml-#{$escaped} {
+    margin-left: -$converted-value;
+  }
+
+  .-mt-#{$escaped} {
+    margin-top: -$converted-value;
+  }
+
+  .-mb-#{$escaped} {
+    margin-bottom: -$converted-value;
+  }
+
+  .-mx-#{$escaped} {
+    margin-left: -$converted-value;
+    margin-right: -$converted-value;
+  }
+
+  .-my-#{$escaped} {
+    margin-top: -$converted-value;
+    margin-bottom: -$converted-value;
+  }
+}
+
 $baseSizes: (
   0.5 : math.div(config.$base, 2),
   1 : config.$base,
@@ -62,6 +127,7 @@ $baseSizes: (
 
 @each $size, $value in $baseSizes {
   @include padding-classes($size, $value);
+  @include margin-classes($size, $value);
 }
 
 //extended sizes
@@ -69,5 +135,6 @@ $size: 10;
 
 @while $size <= config.$highestMultiplier {
   @include padding-classes($size, config.$base * $size);
+  @include margin-classes($size, config.$base * $size);
   $size: $size + 1;
 }
