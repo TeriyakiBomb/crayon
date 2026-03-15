@@ -1,4 +1,6 @@
 @use "config";
+@use "utility";
+@use "sass:list";
 
 body {
   font-family: config.$font-family;
@@ -62,11 +64,14 @@ code {
   }
 
   //style
-  .italic {
-    font-style: italic;
-  }
+  .italic     { font-style: italic; }
+  .not-italic { font-style: normal; }
+}
 
-  .normal {
-    font-style: normal;
+// Font sizes
+@each $name, $values in config.$font-sizes {
+  .#{$name} {
+    font-size: utility.px-to-rem(list.nth($values, 1));
+    line-height: list.nth($values, 2);
   }
 }
