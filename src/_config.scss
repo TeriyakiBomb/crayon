@@ -1,7 +1,18 @@
 @use "sass:math";
 
+//Typography
 $font-family: sans-serif;
 $base-font-size: 16px;
+
+$font-weight-thin: 100;
+$font-weight-extralight: 200;
+$font-weight-light: 300;
+$font-weight-normal: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+$font-weight-extrabold: 800;
+$font-weight-black: 900;
 
 $base-size: 4px;
 $highest-multiplier: 96;

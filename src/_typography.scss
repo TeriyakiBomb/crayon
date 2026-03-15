@@ -1,0 +1,72 @@
+@use "config";
+
+body {
+  font-family: config.$font-family;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a,
+span,
+li,
+button,
+label,
+td,
+th,
+blockquote,
+figcaption,
+caption,
+small,
+code {
+
+  //weights
+  .thin {
+    font-weight: config.$font-weight-thin;
+  }
+
+  .extralight {
+    font-weight: config.$font-weight-extralight;
+  }
+
+  .light {
+    font-weight: config.$font-weight-light;
+  }
+
+  .normal {
+    font-weight: config.$font-weight-normal;
+  }
+
+  .medium {
+    font-weight: config.$font-weight-medium;
+  }
+
+  .semibold {
+    font-weight: config.$font-weight-semibold;
+  }
+
+  .bold {
+    font-weight: config.$font-weight-bold;
+  }
+
+  .extrabold {
+    font-weight: config.$font-weight-extrabold;
+  }
+
+  .black {
+    font-weight: config.$font-weight-black;
+  }
+
+  //style
+  .italic {
+    font-style: italic;
+  }
+
+  .normal {
+    font-style: normal;
+  }
+}
