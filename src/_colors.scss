@@ -1,19 +1,31 @@
 @use "config";
+@use "sass:map";
+@use "sass:color" as sasscolor;
 
-@each $name, $value in config.$colors {
-  .bg-#{$name} {
-    background-color: $value;
-  }
-
-  .text-#{$name} {
-    color: $value;
-  }
-
-  .border-#{$name} {
-    border-color: $value;
-  }
-}
+// ─── lookup ───────────────────────────────────────────────────────────
 
 @function color($name) {
   @return map.get(config.$colors, $name);
+}
+
+// ─── Colour space conversion ──────────────────────────────────────────────────
+
+@function convert($color, $space: config.$output-colorspace) {
+  @if config.$convert-colorspace {
+    @return sasscolor.to-space($color, $space);
+  }
+  @return $color;
+}
+
+@function to-oklch($color)  { @if config.$convert-colorspace { @return sasscolor.to-space($color, oklch); }  @return $color; }
+@function to-oklab($color)  { @if config.$convert-colorspace { @return sasscolor.to-space($color, oklab); }  @return $color; }
+@function to-hsl($color)    { @if config.$convert-colorspace { @return sasscolor.to-space($color, hsl); }    @return $color; }
+@function to-rgb($color)    { @if config.$convert-colorspace { @return sasscolor.to-space($color, srgb); }   @return $color; }
+@function to-p3($color)     { @if config.$convert-colorspace { @return sasscolor.to-space($color, display-p3); } @return $color; }
+
+// generate them colours ------------------------------------------------------------
+@each $name, $value in config.$colors {
+  .bg-#{$name}     { background-color: convert($value); }
+  .text-#{$name}   { color: convert($value); }
+  .border-#{$name} { border-color: convert($value); }
 }
