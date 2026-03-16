@@ -1,12 +1,35 @@
 {
-  "name": "crayon",
-  "version": "0.0.0",
-  "private": true,
+  "name": "crayon-css",
+  "version": "0.1.0",
+  "description": "A Sass utility CSS toolkit. Broadly Tailwind-compatible, config-first, without the single-property class noise.",
+  "sass": "src/crayon.scss",
+  "files": [
+    "src"
+  ],
+  "keywords": [
+    "css",
+    "sass",
+    "utility",
+    "tailwind"
+  ],
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
+  },
+  "peerDependencies": {
+    "sass": ">=1.79.0",
+    "sass-embedded": ">=1.79.0"
+  },
+  "peerDependenciesMeta": {
+    "sass": {
+      "optional": true
+    },
+    "sass-embedded": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^8.0.0",
