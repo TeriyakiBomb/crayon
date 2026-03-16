@@ -13,6 +13,18 @@
   @return map.get(config.$font-weights, $name);
 }
 
+:root {
+  --font-family: #{config.$font-family};
+
+  @each $name, $value in config.$font-weights {
+    --font-weight-#{$name}: #{$value};
+  }
+
+  @each $name, $values in config.$font-sizes {
+    --#{$name}: #{utility.px-to-rem(list.nth($values, 1))};
+  }
+}
+
 body {
   font-family: config.$font-family;
 }
