@@ -1,6 +1,17 @@
 @use "config";
 @use "utility";
 @use "sass:math";
+@use "sass:map";
+
+// ─── Lookup ───────────────────────────────────────────────────────────────────
+
+// Returns a rem value for a size key. Covers $base-sizes (fractional) and
+// any integer from 1–$highest-multiplier via $base-size * $key.
+@function size($key) {
+  $from-map: map.get(config.$base-sizes, $key);
+  @if $from-map { @return utility.px-to-rem($from-map); }
+  @return utility.px-to-rem(config.$base-size * $key);
+}
 
 @mixin padding-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
