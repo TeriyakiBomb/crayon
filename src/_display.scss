@@ -58,3 +58,17 @@ $gap-size: 10;
 .hide {
   display: none;
 }
+
+// ─── Container ────────────────────────────────────────────────────────────────
+
+.container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @each $name, $breakpoint in config.$breakpoints {
+    @media (min-width: #{$breakpoint}) {
+      max-width: $breakpoint;
+    }
+  }
+}
