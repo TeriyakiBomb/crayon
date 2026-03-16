@@ -1,6 +1,9 @@
-@use "reset";
-@use "display";
-@use "sizes";
-@use "colors";
-@use "typography";
-@use "mixins";
+@forward "reset";
+@forward "display";
+@forward "flex";
+@forward "sizes";
+@forward "colors";
+@forward "typography";
+@forward "mixins";
+@forward "utility";
+@forward "config";
