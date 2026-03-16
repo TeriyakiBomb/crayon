@@ -1,6 +1,17 @@
 @use "config";
 @use "utility";
 @use "sass:list";
+@use "sass:map";
+
+// ─── Lookups ──────────────────────────────────────────────────────────────────
+
+@function font-size($name) {
+  @return utility.px-to-rem(list.nth(map.get(config.$font-sizes, $name), 1));
+}
+
+@function font-weight($name) {
+  @return map.get(config.$font-weights, $name);
+}
 
 body {
   font-family: config.$font-family;
@@ -27,40 +38,8 @@ small,
 code {
 
   //weights
-  .thin {
-    font-weight: config.$font-weight-thin;
-  }
-
-  .extralight {
-    font-weight: config.$font-weight-extralight;
-  }
-
-  .light {
-    font-weight: config.$font-weight-light;
-  }
-
-  .normal {
-    font-weight: config.$font-weight-normal;
-  }
-
-  .medium {
-    font-weight: config.$font-weight-medium;
-  }
-
-  .semibold {
-    font-weight: config.$font-weight-semibold;
-  }
-
-  .bold {
-    font-weight: config.$font-weight-bold;
-  }
-
-  .extrabold {
-    font-weight: config.$font-weight-extrabold;
-  }
-
-  .black {
-    font-weight: config.$font-weight-black;
+  @each $name, $value in config.$font-weights {
+    .#{$name} { font-weight: $value; }
   }
 
   //style
