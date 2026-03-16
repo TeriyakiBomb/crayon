@@ -7,7 +7,6 @@ $flex: (
 
 @each $name, $dir in $flex {
   .flex-#{$name} {
-    display: flex;
     flex-direction: $dir;
   }
 
