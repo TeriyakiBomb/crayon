@@ -189,6 +189,20 @@
   }
 }
 
+:root {
+  @each $size, $value in config.$base-sizes {
+    $name: utility.str-replace("#{$size}", ".", "_");
+    --size-#{$name}: #{utility.px-to-rem($value)};
+  }
+
+  $size: 10;
+
+  @while $size <= config.$highest-multiplier {
+    --size-#{$size}: #{utility.px-to-rem(config.$base-size * $size)};
+    $size: $size + 1;
+  }
+}
+
 @each $size, $value in config.$base-sizes {
   @include padding-classes($size, $value);
   @include margin-classes($size, $value);

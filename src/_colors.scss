@@ -14,18 +14,67 @@
   @if config.$convert-colorspace {
     @return sasscolor.to-space($color, $space);
   }
+
   @return $color;
 }
 
-@function to-oklch($color)  { @if config.$convert-colorspace { @return sasscolor.to-space($color, oklch); }  @return $color; }
-@function to-oklab($color)  { @if config.$convert-colorspace { @return sasscolor.to-space($color, oklab); }  @return $color; }
-@function to-hsl($color)    { @if config.$convert-colorspace { @return sasscolor.to-space($color, hsl); }    @return $color; }
-@function to-rgb($color)    { @if config.$convert-colorspace { @return sasscolor.to-space($color, srgb); }   @return $color; }
-@function to-p3($color)     { @if config.$convert-colorspace { @return sasscolor.to-space($color, display-p3); } @return $color; }
+@function to-oklch($color) {
+  @if config.$convert-colorspace {
+    @return sasscolor.to-space($color, oklch);
+  }
+
+  @return $color;
+}
+
+@function to-oklab($color) {
+  @if config.$convert-colorspace {
+    @return sasscolor.to-space($color, oklab);
+  }
+
+  @return $color;
+}
+
+@function to-hsl($color) {
+  @if config.$convert-colorspace {
+    @return sasscolor.to-space($color, hsl);
+  }
+
+  @return $color;
+}
+
+@function to-rgb($color) {
+  @if config.$convert-colorspace {
+    @return sasscolor.to-space($color, srgb);
+  }
+
+  @return $color;
+}
+
+@function to-p3($color) {
+  @if config.$convert-colorspace {
+    @return sasscolor.to-space($color, display-p3);
+  }
+
+  @return $color;
+}
 
 // generate them colours ------------------------------------------------------------
+:root {
+  @each $name, $value in config.$colors {
+    --color-#{$name}: #{convert($value)};
+  }
+}
+
 @each $name, $value in config.$colors {
-  .bg-#{$name}     { background-color: convert($value); }
-  .text-#{$name}   { color: convert($value); }
-  .border-#{$name} { border-color: convert($value); }
+  .bg-#{$name} {
+    background-color: convert($value);
+  }
+
+  .text-#{$name} {
+    color: convert($value);
+  }
+
+  .border-#{$name} {
+    border-color: convert($value);
+  }
 }
