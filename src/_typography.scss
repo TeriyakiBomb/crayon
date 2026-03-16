@@ -21,7 +21,7 @@
   }
 
   @each $name, $values in config.$font-sizes {
-    --#{$name}: #{utility.px-to-rem(list.nth($values, 1))};
+    --text-#{$name}: #{utility.px-to-rem(list.nth($values, 1))};
   }
 }
 
@@ -51,18 +51,34 @@ code {
 
   //weights
   @each $name, $value in config.$font-weights {
-    .#{$name} { font-weight: $value; }
+    $escaped: utility.str-replace($name, ".", "\\.");
+
+    .#{$escaped} {
+      font-weight: $value;
+    }
   }
 
   //style
-  .italic     { font-style: italic; }
-  .not-italic { font-style: normal; }
+  .italic {
+    font-style: italic;
+  }
+
+  .not-italic {
+    font-style: normal;
+  }
 }
 
 // Font sizes
 @each $name, $values in config.$font-sizes {
-  .#{$name} {
+  .text-#{$name} {
     font-size: utility.px-to-rem(list.nth($values, 1));
     line-height: list.nth($values, 2);
+  }
+}
+
+//TW weights
+@each $name, $value in config.$font-weights {
+  .font-#{$name} {
+    font-weight: $value;
   }
 }

@@ -6,17 +6,24 @@ $convert-colorspace: true;
 $output-colorspace: oklch;
 
 // Layout divisions — used to generate fractional width/height classes like w-1/3, h-3/4 etc
-$layout-divisions: (2, 3, 4, 5, 6, 12);
+$layout-divisions: (
+  2,
+  3,
+  4,
+  5,
+  6,
+  12
+);
 
 // Layout columns — used to generate grid-cols-* and col/row-span-* classes
 $layout-columns: 12;
 
 // Breakpoints
 $breakpoints: (
-  "sm":  640px,
-  "md":  768px,
-  "lg":  1024px,
-  "xl":  1280px,
+  "sm": 640px,
+  "md": 768px,
+  "lg": 1024px,
+  "xl": 1280px,
   "2xl": 1536px,
 );
 
@@ -25,31 +32,31 @@ $font-family: sans-serif;
 $base-font-size: 16px;
 
 $font-sizes: (
-  "text-xs":   ($base-font-size * 0.75,  1rem),
-  "text-sm":   ($base-font-size * 0.875, 1.25rem),
-  "text-base": ($base-font-size * 1,     1.5rem),
-  "text-lg":   ($base-font-size * 1.125, 1.75rem),
-  "text-xl":   ($base-font-size * 1.25,  1.75rem),
-  "text-2xl":  ($base-font-size * 1.5,   2rem),
-  "text-3xl":  ($base-font-size * 1.875, 2.25rem),
-  "text-4xl":  ($base-font-size * 2.25,  2.5rem),
-  "text-5xl":  ($base-font-size * 3,     1),
-  "text-6xl":  ($base-font-size * 3.75,  1),
-  "text-7xl":  ($base-font-size * 4.5,   1),
-  "text-8xl":  ($base-font-size * 6,     1),
-  "text-9xl":  ($base-font-size * 8,     1),
+  "xs": ($base-font-size * 0.75, 1rem),
+  "sm": ($base-font-size * 0.875, 1.25rem),
+  "base": ($base-font-size * 1, 1.5rem),
+  "lg": ($base-font-size * 1.125, 1.75rem),
+  "xl": ($base-font-size * 1.25, 1.75rem),
+  "2xl": ($base-font-size * 1.5, 2rem),
+  "3xl": ($base-font-size * 1.875, 2.25rem),
+  "4xl": ($base-font-size * 2.25, 2.5rem),
+  "5xl": ($base-font-size * 3, 1),
+  "6xl": ($base-font-size * 3.75, 1),
+  "7xl": ($base-font-size * 4.5, 1),
+  "8xl": ($base-font-size * 6, 1),
+  "9xl": ($base-font-size * 8, 1),
 );
 
 $font-weights: (
-  "thin":       100,
+  "thin": 100,
   "extralight": 200,
-  "light":      300,
-  "normal":     400,
-  "medium":     500,
-  "semibold":   600,
-  "bold":       700,
-  "extrabold":  800,
-  "black":      900,
+  "light": 300,
+  "normal": 400,
+  "medium": 500,
+  "semibold": 600,
+  "bold": 700,
+  "extrabold": 800,
+  "black": 900,
 );
 
 $base-size: 4px;
