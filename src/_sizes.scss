@@ -1,5 +1,6 @@
 @use "config";
 @use "utility";
+@use "sass:math";
 
 @mixin padding-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
@@ -193,11 +194,115 @@ $size: 10;
   $size: $size + 1;
 }
 
-// Auto margins
-.m-auto  { margin: auto; }
-.mx-auto { margin-left: auto; margin-right: auto; }
-.my-auto { margin-top: auto; margin-bottom: auto; }
-.mt-auto { margin-top: auto; }
-.mb-auto { margin-bottom: auto; }
-.ml-auto { margin-left: auto; }
-.mr-auto { margin-right: auto; }
+.m-auto {
+  margin: auto;
+}
+
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.my-auto {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.mt-auto {
+  margin-top: auto;
+}
+
+.mb-auto {
+  margin-bottom: auto;
+}
+
+.ml-auto {
+  margin-left: auto;
+}
+
+.mr-auto {
+  margin-right: auto;
+}
+
+.w-auto {
+  width: auto;
+}
+
+// Fractional widths and heights
+@each $columns in config.$layout-divisions {
+  @for $span from 1 through ($columns - 1) {
+    $size: math.percentage(math.div($span, $columns));
+
+    .w-#{$span}\/#{$columns} {
+      width: $size;
+    }
+
+    .h-#{$span}\/#{$columns} {
+      height: $size;
+    }
+  }
+}
+
+.w-full {
+  width: 100%;
+}
+
+.w-screen {
+  width: 100vw;
+}
+
+.w-svw {
+  width: 100svw;
+}
+
+.w-lvw {
+  width: 100lvw;
+}
+
+.w-dvw {
+  width: 100dvw;
+}
+
+.w-min {
+  width: min-content;
+}
+
+.w-max {
+  width: max-content;
+}
+
+.w-fit {
+  width: fit-content;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.h-screen {
+  height: 100vh;
+}
+
+.h-svh {
+  height: 100svh;
+}
+
+.h-lvh {
+  height: 100lvh;
+}
+
+.h-dvh {
+  height: 100dvh;
+}
+
+.h-min {
+  height: min-content;
+}
+
+.h-max {
+  height: max-content;
+}
+
+.h-fit {
+  height: fit-content;
+}
