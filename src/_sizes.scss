@@ -196,7 +196,7 @@
 //extended sizes
 $size: 10;
 
-@while $size <=config.$highest-multiplier {
+@while $size <= config.$highest-multiplier {
   @include padding-classes($size, config.$base-size * $size);
   @include margin-classes($size, config.$base-size * $size);
   @include width-classes($size, config.$base-size * $size);

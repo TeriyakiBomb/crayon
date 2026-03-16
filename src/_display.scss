@@ -1,4 +1,30 @@
 @use "flex";
+@use "config";
+@use "utility";
+
+// ─── Gap ──────────────────────────────────────────────────────────────────────
+
+@mixin gap-classes($size-name, $value) {
+  $converted-value: utility.px-to-rem($value);
+  $escaped: utility.str-replace($size-name, ".", "\\.");
+
+  .gap-#{$escaped}, .gap#{$escaped}     { gap:        $converted-value; }
+  .gap-x-#{$escaped}, .gapx#{$escaped} { column-gap: $converted-value; }
+  .gap-y-#{$escaped}, .gapy#{$escaped} { row-gap:    $converted-value; }
+}
+
+@each $size, $value in config.$base-sizes {
+  @include gap-classes($size, $value);
+}
+
+$gap-size: 10;
+@while $gap-size <= config.$highest-multiplier {
+  @include gap-classes($gap-size, config.$base-size * $gap-size);
+  $gap-size: $gap-size + 1;
+}
+
+// ─── Display ──────────────────────────────────────────────────────────────────
+
 
 .block {
   display: block;

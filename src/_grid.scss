@@ -1,0 +1,22 @@
+@use "config";
+
+// ─── Grid template columns ────────────────────────────────────────────────────
+
+@for $column from 1 through config.$layout-columns {
+  .grid-cols-#{$column} {
+    grid-template-columns: repeat(#{$column}, minmax(0, 1fr));
+  }
+}
+
+.grid-cols-none { grid-template-columns: none; }
+
+// ─── Column & row span ────────────────────────────────────────────────────────
+
+@for $columns from 1 through config.$layout-columns {
+  .col-span-#{$columns} { grid-column: span #{$columns} / span #{$columns}; }
+  .row-span-#{$columns} { grid-row:    span #{$columns} / span #{$columns}; }
+}
+
+.col-span-full { grid-column: 1 / -1; }
+.row-span-full { grid-row:    1 / -1; }
+
