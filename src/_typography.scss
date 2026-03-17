@@ -48,7 +48,6 @@ figcaption,
 caption,
 small,
 code {
-
   //weights
   @each $name, $value in config.$font-weights {
     $escaped: utility.str-replace($name, ".", "\\.");
@@ -69,10 +68,10 @@ code {
 }
 
 // Font sizes
-@each $name, $values in config.$font-sizes {
-  .text-#{$name} {
-    font-size: utility.px-to-rem(list.nth($values, 1));
-    line-height: list.nth($values, 2);
+@each $size, $value in config.$font-sizes {
+  .text-#{$size} {
+    font-size: utility.px-to-rem(list.nth($value, 1));
+    line-height: list.nth($value, 2);
   }
 }
 
