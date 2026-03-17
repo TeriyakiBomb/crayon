@@ -1,6 +1,13 @@
 @use "config";
 @use "sass:map";
 
+// Custom media — for use in plain CSS / ERB <style> blocks
+// Requires postcss-custom-media in your pipeline for browser support
+@each $name, $value in config.$breakpoints {
+  @custom-media --#{$name} (min-width: #{$value});
+}
+@custom-media --dark (prefers-color-scheme: dark);
+
 // Responsive
 @mixin screen($name) {
   @media (min-width: map.get(config.$breakpoints, $name)) {
