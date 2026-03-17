@@ -1,8 +1,8 @@
 $flex: (
-  'row': row,
-  'col': column,
-  'row-reverse': row-reverse,
-  'col-reverse': column-reverse
+  "row": row,
+  "col": column,
+  "row-reverse": row-reverse,
+  "col-reverse": column-reverse,
 );
 
 @each $name, $dir in $flex {
@@ -33,6 +33,12 @@ $flex: (
   flex-shrink: 0;
 }
 
-.flex-wrap         { flex-wrap: wrap; }
-.flex-wrap-reverse { flex-wrap: wrap-reverse; }
-.flex-nowrap       { flex-wrap: nowrap; }
+.flex-wrap {
+  flex-wrap: wrap;
+}
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+.flex-nowrap {
+  flex-wrap: nowrap;
+}
