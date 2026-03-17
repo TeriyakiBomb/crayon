@@ -1,5 +1,9 @@
 @use "config";
 
+.grid {
+  display: grid;
+}
+
 // ─── Grid template columns ────────────────────────────────────────────────────
 
 @for $column from 1 through config.$layout-columns {
@@ -8,17 +12,27 @@
   }
 }
 
-.grid-cols-none { grid-template-columns: none; }
+.grid-cols-none {
+  grid-template-columns: none;
+}
 
 // ─── Column & row span ────────────────────────────────────────────────────────
 
 @for $columns from 1 through config.$layout-columns {
-  .col-span-#{$columns} { grid-column: span #{$columns} / span #{$columns}; }
-  .row-span-#{$columns} { grid-row:    span #{$columns} / span #{$columns}; }
+  .col-span-#{$columns} {
+    grid-column: span #{$columns} / span #{$columns};
+  }
+  .row-span-#{$columns} {
+    grid-row: span #{$columns} / span #{$columns};
+  }
 }
 
-.col-span-full { grid-column: 1 / -1; }
-.row-span-full { grid-row:    1 / -1; }
+.col-span-full {
+  grid-column: 1 / -1;
+}
+.row-span-full {
+  grid-row: 1 / -1;
+}
 
 // ─── Grid template rows ───────────────────────────────────────────────────────
 
@@ -28,25 +42,52 @@
   }
 }
 
-.grid-rows-none { grid-template-rows: none; }
+.grid-rows-none {
+  grid-template-rows: none;
+}
 
 // ─── Auto columns & rows ──────────────────────────────────────────────────────
 
-.auto-cols-auto { grid-auto-columns: auto; }
-.auto-cols-min  { grid-auto-columns: min-content; }
-.auto-cols-max  { grid-auto-columns: max-content; }
-.auto-cols-fr   { grid-auto-columns: minmax(0, 1fr); }
+.auto-cols-auto {
+  grid-auto-columns: auto;
+}
+.auto-cols-min {
+  grid-auto-columns: min-content;
+}
+.auto-cols-max {
+  grid-auto-columns: max-content;
+}
+.auto-cols-fr {
+  grid-auto-columns: minmax(0, 1fr);
+}
 
-.auto-rows-auto { grid-auto-rows: auto; }
-.auto-rows-min  { grid-auto-rows: min-content; }
-.auto-rows-max  { grid-auto-rows: max-content; }
-.auto-rows-fr   { grid-auto-rows: minmax(0, 1fr); }
+.auto-rows-auto {
+  grid-auto-rows: auto;
+}
+.auto-rows-min {
+  grid-auto-rows: min-content;
+}
+.auto-rows-max {
+  grid-auto-rows: max-content;
+}
+.auto-rows-fr {
+  grid-auto-rows: minmax(0, 1fr);
+}
 
 // ─── Grid auto flow ───────────────────────────────────────────────────────────
 
-.grid-flow-row        { grid-auto-flow: row; }
-.grid-flow-col        { grid-auto-flow: column; }
-.grid-flow-dense      { grid-auto-flow: dense; }
-.grid-flow-row-dense  { grid-auto-flow: row dense; }
-.grid-flow-col-dense  { grid-auto-flow: column dense; }
-
+.grid-flow-row {
+  grid-auto-flow: row;
+}
+.grid-flow-col {
+  grid-auto-flow: column;
+}
+.grid-flow-dense {
+  grid-auto-flow: dense;
+}
+.grid-flow-row-dense {
+  grid-auto-flow: row dense;
+}
+.grid-flow-col-dense {
+  grid-auto-flow: column dense;
+}
