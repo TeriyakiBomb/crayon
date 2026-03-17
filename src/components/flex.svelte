@@ -23,7 +23,7 @@
             <tr>
               <td>
                 {#each row.crayon as name, i}
-                  {#if i > 0}, {/if}<code>{name}</code>
+                  {#if i > 0},  {/if}<code>{name}</code>
                 {/each}
               </td>
               <td><code>{row.tailwind}</code></td>
@@ -59,5 +59,6 @@
     background-color: crayon.color("blue-200");
     border-radius: crayon.rounded("lg");
     color: crayon.color("blue-950");
+    font-size: crayon.font-size("sm");
   }
 </style>
