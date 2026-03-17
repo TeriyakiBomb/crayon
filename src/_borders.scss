@@ -1,0 +1,77 @@
+@use "config";
+@use "utility";
+@use "sass:map";
+
+// ─── Lookups ──────────────────────────────────────────────────────────────────
+
+@function border-width($key: "DEFAULT") {
+  @return map.get(config.$border-widths, $key);
+}
+
+@function rounded($key: "DEFAULT") {
+  $value: map.get(config.$border-radii, $key);
+  @if $value == 0 or $value == 9999px { @return $value; }
+  @return utility.px-to-rem($value);
+}
+
+// ─── CSS Variables ────────────────────────────────────────────────────────────
+
+:root {
+  @each $key, $value in config.$border-widths {
+    @if $key == "DEFAULT" {
+      --border: #{$value};
+    } @else {
+      --border-#{$key}: #{$value};
+    }
+  }
+
+  @each $key, $value in config.$border-radii {
+    $rem: if($value == 0 or $value == 9999px, $value, utility.px-to-rem($value));
+    @if $key == "DEFAULT" {
+      --rounded: #{$rem};
+    } @else {
+      --rounded-#{$key}: #{$rem};
+    }
+  }
+}
+
+// ─── Border Width ─────────────────────────────────────────────────────────────
+
+@mixin _border-width-classes($suffix, $width) {
+  @if $suffix == "" {
+    .border               { border-width: $width; }
+    .border-x             { border-left-width: $width; border-right-width: $width; }
+    .border-y             { border-top-width: $width; border-bottom-width: $width; }
+    .border-t             { border-top-width: $width; }
+    .border-r             { border-right-width: $width; }
+    .border-b             { border-bottom-width: $width; }
+    .border-l             { border-left-width: $width; }
+  } @else {
+    .border-#{$suffix}    { border-width: $width; }
+    .border-x-#{$suffix}  { border-left-width: $width; border-right-width: $width; }
+    .border-y-#{$suffix}  { border-top-width: $width; border-bottom-width: $width; }
+    .border-t-#{$suffix}  { border-top-width: $width; }
+    .border-r-#{$suffix}  { border-right-width: $width; }
+    .border-b-#{$suffix}  { border-bottom-width: $width; }
+    .border-l-#{$suffix}  { border-left-width: $width; }
+  }
+}
+
+@each $key, $width in config.$border-widths {
+  @if $key == "DEFAULT" {
+    @include _border-width-classes("", $width);
+  } @else {
+    @include _border-width-classes($key, $width);
+  }
+}
+
+// ─── Border Radius ────────────────────────────────────────────────────────────
+
+@each $key, $radius in config.$border-radii {
+  $rem: if($radius == 0 or $radius == 9999px, $radius, utility.px-to-rem($radius));
+  @if $key == "DEFAULT" {
+    .rounded { border-radius: $rem; }
+  } @else {
+    .rounded-#{$key} { border-radius: $rem; }
+  }
+}
