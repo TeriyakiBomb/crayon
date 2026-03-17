@@ -1,0 +1,13 @@
+# Dev tooling
+vite.config.js
+index.html
+postcss.config.js
+
+# Demo / preview
+public/
+
+# CI
+.github/
+
+# Misc
+.DS_Store
