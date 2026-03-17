@@ -1,7 +1,7 @@
 {
   "name": "crayon-css",
   "version": "0.1.2",
-  "description": "A Sass utility CSS toolkit. Broadly Tailwind-compatible, config-first, without the single-property class noise.",
+  "description": "A Sass utility CSS toolkit.",
   "sass": "src/crayon.scss",
   "files": [
     "src"
@@ -13,6 +13,14 @@
     "tailwind"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TeriyakiBomb/crayon.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TeriyakiBomb/crayon/issues"
+  },
+  "homepage": "https://github.com/TeriyakiBomb/crayon#readme",
   "type": "module",
   "scripts": {
     "dev": "vite",
