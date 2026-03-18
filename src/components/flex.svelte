@@ -9,8 +9,8 @@
   </p>
   <div>
     {#each sections as section}
-      <h3>{section.title}</h3>
-      <table>
+      <h3 class="text-red-400">{section.title}</h3>
+      <table class="bg-blue-100">
         <thead class="text-blue-800">
           <tr>
             <td><b>Crayon</b></td>
@@ -23,11 +23,11 @@
             <tr>
               <td>
                 {#each row.crayon as name, i}
-                  {#if i > 0},  {/if}<code>{name}</code>
+                  {#if i > 0},  {/if}<code class="bg-blue-200 text-blue-950">{name}</code>
                 {/each}
               </td>
-              <td><code>{row.tailwind}</code></td>
-              <td><code>{row.css}</code></td>
+              <td><code class="bg-blue-200 text-blue-950">{row.tailwind}</code></td>
+              <td><code class="bg-blue-200 text-blue-950">{row.css}</code></td>
             </tr>
           {/each}
         </tbody>
@@ -39,26 +39,42 @@
 <style lang="scss">
   @use "../crayon";
 
+  h2 {
+    @include crayon.dark { color: crayon.color("red-400"); }
+  }
+
   h3 {
     padding: crayon.size(4) 0;
-    color: crayon.color("red-400");
+    @include crayon.dark { color: crayon.color("red-300"); }
+  }
+
+  p {
+    @include crayon.dark { color: crayon.color("blue-200"); }
+  }
+
+  thead {
+    @include crayon.dark { color: crayon.color("blue-300"); }
   }
 
   table {
-    background-color: crayon.color("blue-100");
     border-radius: crayon.rounded("xl");
+    @include crayon.dark { background-color: crayon.color("blue-900"); }
 
     td {
       border-bottom: crayon.size(0.5) crayon.color("blue-900") dashed;
       padding: crayon.size(4);
+      @include crayon.dark { border-bottom-color: crayon.color("blue-700"); }
     }
   }
 
   code {
     padding: crayon.size(1.5) crayon.size(2);
-    background-color: crayon.color("blue-200");
     border-radius: crayon.rounded("lg");
-    color: crayon.color("blue-950");
     font-size: crayon.font-size("sm");
+
+    @include crayon.dark {
+      background-color: crayon.color("blue-800");
+      color: crayon.color("blue-100");
+    }
   }
 </style>

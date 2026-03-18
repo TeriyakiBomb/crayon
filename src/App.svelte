@@ -14,8 +14,4 @@ import Flex from "./components/flex.svelte";
     height: crayon.size(20);
     width: auto;
   }
-
-  h1 {
-    color: crayon.color("blue-950");
-  }
 </style>
