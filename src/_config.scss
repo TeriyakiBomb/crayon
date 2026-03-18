@@ -35,8 +35,16 @@ $breakpoints: (
 );
 
 //Typography
-$font-family: sans-serif;
 $base-font-size: 16px;
+
+$font-families: (
+  "sans": (sans-serif),
+  "serif": (Georgia, "Times New Roman", serif),
+  "mono": (ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace),
+);
+
+// Default font — must be a key from $font-families
+$default-font: "sans";
 
 $font-sizes: (
   "xs": (

@@ -13,8 +13,16 @@
   @return map.get(config.$font-weights, $name);
 }
 
+@function font-family($name) {
+  @return map.get(config.$font-families, $name);
+}
+
 :root {
-  --font-family: #{config.$font-family};
+  --font-family: #{map.get(config.$font-families, config.$default-font)};
+
+  @each $name, $stack in config.$font-families {
+    --font-#{$name}: #{$stack};
+  }
 
   @each $name, $value in config.$font-weights {
     --font-weight-#{$name}: #{$value};
@@ -26,7 +34,7 @@
 }
 
 body {
-  font-family: config.$font-family;
+  font-family: map.get(config.$font-families, config.$default-font);
 }
 
 @layer utilities {
@@ -81,5 +89,12 @@ body {
     .font-#{$name} {
       font-weight: $value;
     }
+  }
+}
+
+// Font families
+@each $name, $stack in config.$font-families {
+  .font-#{$name} {
+    font-family: $stack;
   }
 }
