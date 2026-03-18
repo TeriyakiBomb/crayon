@@ -57,21 +57,23 @@
   }
 }
 
-@each $key, $width in config.$border-widths {
-  @if $key == "DEFAULT" {
-    @include _border-width-classes("", $width);
-  } @else {
-    @include _border-width-classes($key, $width);
+@layer utilities {
+  @each $key, $width in config.$border-widths {
+    @if $key == "DEFAULT" {
+      @include _border-width-classes("", $width);
+    } @else {
+      @include _border-width-classes($key, $width);
+    }
   }
-}
 
-// ─── Border Radius ────────────────────────────────────────────────────────────
+  // ─── Border Radius ────────────────────────────────────────────────────────────
 
-@each $key, $radius in config.$border-radii {
-  $rem: if($radius == 0 or $radius == 9999px, $radius, utility.px-to-rem($radius));
-  @if $key == "DEFAULT" {
-    .rounded { border-radius: $rem; }
-  } @else {
-    .rounded-#{$key} { border-radius: $rem; }
+  @each $key, $radius in config.$border-radii {
+    $rem: if($radius == 0 or $radius == 9999px, $radius, utility.px-to-rem($radius));
+    @if $key == "DEFAULT" {
+      .rounded { border-radius: $rem; }
+    } @else {
+      .rounded-#{$key} { border-radius: $rem; }
+    }
   }
 }
