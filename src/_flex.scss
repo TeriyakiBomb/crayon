@@ -1,14 +1,4 @@
-// ─── Display ──────────────────────────────────────────────────────────────────
-
-.flex {
-  display: flex;
-}
-
-.inline-flex {
-  display: inline-flex;
-}
-
-// ─── Direction ────────────────────────────────────────────────────────────────
+// ─── Direction (map needed before @layer for @extend) ─────────────────────────
 
 $flex: (
   "row": row,
@@ -17,44 +7,58 @@ $flex: (
   "col-reverse": column-reverse,
 );
 
-@each $name, $dir in $flex {
-  .flex-#{$name} {
-    flex-direction: $dir;
+@layer utilities {
+  // ─── Display ──────────────────────────────────────────────────────────────────
+
+  .flex {
+    display: flex;
   }
 
-  .f-#{$name} {
-    @extend .flex-#{$name};
+  .inline-flex {
+    display: inline-flex;
   }
-}
 
-// ─── Grow & shrink ────────────────────────────────────────────────────────────
+  // ─── Direction ────────────────────────────────────────────────────────────────
 
-.grow {
-  flex-grow: 1;
-}
+  @each $name, $dir in $flex {
+    .flex-#{$name} {
+      flex-direction: $dir;
+    }
 
-.no-grow,
-.grow-0 {
-  flex-grow: 0;
-}
+    .f-#{$name} {
+      @extend .flex-#{$name};
+    }
+  }
 
-.shrink {
-  flex-shrink: 1;
-}
+  // ─── Grow & shrink ────────────────────────────────────────────────────────────
 
-.no-shrink,
-.shrink-0 {
-  flex-shrink: 0;
-}
+  .grow {
+    flex-grow: 1;
+  }
 
-// ─── Wrap ─────────────────────────────────────────────────────────────────────
+  .no-grow,
+  .grow-0 {
+    flex-grow: 0;
+  }
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
-.flex-wrap-reverse {
-  flex-wrap: wrap-reverse;
-}
-.flex-nowrap {
-  flex-wrap: nowrap;
+  .shrink {
+    flex-shrink: 1;
+  }
+
+  .no-shrink,
+  .shrink-0 {
+    flex-shrink: 0;
+  }
+
+  // ─── Wrap ─────────────────────────────────────────────────────────────────────
+
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .flex-wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+  .flex-nowrap {
+    flex-wrap: nowrap;
+  }
 }

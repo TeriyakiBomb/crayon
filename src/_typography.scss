@@ -29,55 +29,57 @@ body {
   font-family: config.$font-family;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a,
-span,
-li,
-button,
-label,
-td,
-th,
-blockquote,
-figcaption,
-caption,
-small,
-code {
-  //weights
-  @each $name, $value in config.$font-weights {
-    $escaped: utility.str-replace($name, ".", "\\.");
+@layer utilities {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  p,
+  a,
+  span,
+  li,
+  button,
+  label,
+  td,
+  th,
+  blockquote,
+  figcaption,
+  caption,
+  small,
+  code {
+    //weights
+    @each $name, $value in config.$font-weights {
+      $escaped: utility.str-replace($name, ".", "\\.");
 
-    .#{$escaped} {
-      font-weight: $value;
+      .#{$escaped} {
+        font-weight: $value;
+      }
+    }
+
+    //style
+    .italic {
+      font-style: italic;
+    }
+
+    .not-italic {
+      font-style: normal;
     }
   }
 
-  //style
-  .italic {
-    font-style: italic;
+  // Font sizes
+  @each $size, $value in config.$font-sizes {
+    .text-#{$size} {
+      font-size: utility.px-to-rem(list.nth($value, 1));
+      line-height: list.nth($value, 2);
+    }
   }
 
-  .not-italic {
-    font-style: normal;
-  }
-}
-
-// Font sizes
-@each $size, $value in config.$font-sizes {
-  .text-#{$size} {
-    font-size: utility.px-to-rem(list.nth($value, 1));
-    line-height: list.nth($value, 2);
-  }
-}
-
-//TW weights
-@each $name, $value in config.$font-weights {
-  .font-#{$name} {
-    font-weight: $value;
+  //TW weights
+  @each $name, $value in config.$font-weights {
+    .font-#{$name} {
+      font-weight: $value;
+    }
   }
 }
