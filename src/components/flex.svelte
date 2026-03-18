@@ -18,7 +18,7 @@
             <td><b>What do?</b></td>
           </tr>
         </thead>
-        <tbody>
+        <tbody class="divide-y divide-blue-900 divide-dashed">
           {#each section.classes as row}
             <tr>
               <td>
@@ -61,9 +61,11 @@
     @include crayon.dark { background-color: crayon.color("blue-900"); }
 
     td {
-      border-bottom: crayon.size(0.5) crayon.color("blue-900") dashed;
       padding: crayon.size(4);
-      @include crayon.dark { border-bottom-color: crayon.color("blue-700"); }
+    }
+
+    tbody > tr {
+      @include crayon.dark { border-color: crayon.color("blue-700"); }
     }
   }
 
