@@ -65,16 +65,18 @@
   }
 }
 
-@each $name, $value in config.$colors {
-  .bg-#{$name} {
-    background-color: convert($value);
-  }
+@layer utilities {
+  @each $name, $value in config.$colors {
+    .bg-#{$name} {
+      background-color: convert($value);
+    }
 
-  .text-#{$name} {
-    color: convert($value);
-  }
+    .text-#{$name} {
+      color: convert($value);
+    }
 
-  .border-#{$name} {
-    border-color: convert($value);
+    .border-#{$name} {
+      border-color: convert($value);
+    }
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "crayon-css",
-  "version": "0.2.1",
+  "version": "0.2.3",
   "description": "A Sass utility CSS toolkit.",
   "sass": "src/crayon.scss",
   "files": [

@@ -203,237 +203,239 @@
   }
 }
 
-@each $size, $value in config.$base-sizes {
-  @include padding-classes($size, $value);
-  @include margin-classes($size, $value);
-  @include width-classes($size, $value);
-  @include height-classes($size, $value);
-  @include size-classes($size, $value);
-}
+@layer utilities {
+  @each $size, $value in config.$base-sizes {
+    @include padding-classes($size, $value);
+    @include margin-classes($size, $value);
+    @include width-classes($size, $value);
+    @include height-classes($size, $value);
+    @include size-classes($size, $value);
+  }
 
-//extended sizes
-$size: 10;
+  //extended sizes
+  $size: 10;
 
-@while $size <=config.$highest-multiplier {
-  @include padding-classes($size, config.$base-size * $size);
-  @include margin-classes($size, config.$base-size * $size);
-  @include width-classes($size, config.$base-size * $size);
-  @include height-classes($size, config.$base-size * $size);
-  @include size-classes($size, config.$base-size * $size);
-  $size: $size + 1;
-}
+  @while $size <=config.$highest-multiplier {
+    @include padding-classes($size, config.$base-size * $size);
+    @include margin-classes($size, config.$base-size * $size);
+    @include width-classes($size, config.$base-size * $size);
+    @include height-classes($size, config.$base-size * $size);
+    @include size-classes($size, config.$base-size * $size);
+    $size: $size + 1;
+  }
 
-.m-auto {
-  margin: auto;
-}
+  .m-auto {
+    margin: auto;
+  }
 
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-.my-auto {
-  margin-top: auto;
-  margin-bottom: auto;
-}
+  .my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 
-.mt-auto {
-  margin-top: auto;
-}
+  .mt-auto {
+    margin-top: auto;
+  }
 
-.mb-auto {
-  margin-bottom: auto;
-}
+  .mb-auto {
+    margin-bottom: auto;
+  }
 
-.ml-auto {
-  margin-left: auto;
-}
+  .ml-auto {
+    margin-left: auto;
+  }
 
-.mr-auto {
-  margin-right: auto;
-}
+  .mr-auto {
+    margin-right: auto;
+  }
 
-.w-auto {
-  width: auto;
-}
+  .w-auto {
+    width: auto;
+  }
 
-// Fractional widths and heights
-@each $columns in config.$layout-divisions {
-  @for $span from 1 through ($columns - 1) {
-    $size: math.percentage(math.div($span, $columns));
+  // Fractional widths and heights
+  @each $columns in config.$layout-divisions {
+    @for $span from 1 through ($columns - 1) {
+      $size: math.percentage(math.div($span, $columns));
 
-    .w-#{$span}\/#{$columns} {
-      width: $size;
-    }
+      .w-#{$span}\/#{$columns} {
+        width: $size;
+      }
 
-    .h-#{$span}\/#{$columns} {
-      height: $size;
+      .h-#{$span}\/#{$columns} {
+        height: $size;
+      }
     }
   }
-}
 
-.w-full {
-  width: 100%;
-}
+  .w-full {
+    width: 100%;
+  }
 
-.w-screen {
-  width: 100vw;
-}
+  .w-screen {
+    width: 100vw;
+  }
 
-.w-svw {
-  width: 100svw;
-}
+  .w-svw {
+    width: 100svw;
+  }
 
-.w-lvw {
-  width: 100lvw;
-}
+  .w-lvw {
+    width: 100lvw;
+  }
 
-.w-dvw {
-  width: 100dvw;
-}
+  .w-dvw {
+    width: 100dvw;
+  }
 
-.w-min {
-  width: min-content;
-}
+  .w-min {
+    width: min-content;
+  }
 
-.w-max {
-  width: max-content;
-}
+  .w-max {
+    width: max-content;
+  }
 
-.w-fit {
-  width: fit-content;
-}
+  .w-fit {
+    width: fit-content;
+  }
 
-.h-full {
-  height: 100%;
-}
+  .h-full {
+    height: 100%;
+  }
 
-.h-screen {
-  height: 100vh;
-}
+  .h-screen {
+    height: 100vh;
+  }
 
-.h-svh {
-  height: 100svh;
-}
+  .h-svh {
+    height: 100svh;
+  }
 
-.h-lvh {
-  height: 100lvh;
-}
+  .h-lvh {
+    height: 100lvh;
+  }
 
-.h-dvh {
-  height: 100dvh;
-}
+  .h-dvh {
+    height: 100dvh;
+  }
 
-.h-min {
-  height: min-content;
-}
+  .h-min {
+    height: min-content;
+  }
 
-.h-max {
-  height: max-content;
-}
+  .h-max {
+    height: max-content;
+  }
 
-.h-fit {
-  height: fit-content;
-}
+  .h-fit {
+    height: fit-content;
+  }
 
-.h-auto {
-  height: auto;
-}
+  .h-auto {
+    height: auto;
+  }
 
-// Min/max widths
-.min-w-full {
-  min-width: 100%;
-}
+  // Min/max widths
+  .min-w-full {
+    min-width: 100%;
+  }
 
-.min-w-screen {
-  min-width: 100vw;
-}
+  .min-w-screen {
+    min-width: 100vw;
+  }
 
-.min-w-min {
-  min-width: min-content;
-}
+  .min-w-min {
+    min-width: min-content;
+  }
 
-.min-w-max {
-  min-width: max-content;
-}
+  .min-w-max {
+    min-width: max-content;
+  }
 
-.min-w-fit {
-  min-width: fit-content;
-}
+  .min-w-fit {
+    min-width: fit-content;
+  }
 
-.max-w-full {
-  max-width: 100%;
-}
+  .max-w-full {
+    max-width: 100%;
+  }
 
-.max-w-screen {
-  max-width: 100vw;
-}
+  .max-w-screen {
+    max-width: 100vw;
+  }
 
-.max-w-none {
-  max-width: none;
-}
+  .max-w-none {
+    max-width: none;
+  }
 
-.max-w-min {
-  max-width: min-content;
-}
+  .max-w-min {
+    max-width: min-content;
+  }
 
-.max-w-max {
-  max-width: max-content;
-}
+  .max-w-max {
+    max-width: max-content;
+  }
 
-.max-w-fit {
-  max-width: fit-content;
-}
+  .max-w-fit {
+    max-width: fit-content;
+  }
 
-// Min/max heights
-.min-h-full {
-  min-height: 100%;
-}
+  // Min/max heights
+  .min-h-full {
+    min-height: 100%;
+  }
 
-.min-h-screen {
-  min-height: 100vh;
-}
+  .min-h-screen {
+    min-height: 100vh;
+  }
 
-.min-h-svh {
-  min-height: 100svh;
-}
+  .min-h-svh {
+    min-height: 100svh;
+  }
 
-.min-h-dvh {
-  min-height: 100dvh;
-}
+  .min-h-dvh {
+    min-height: 100dvh;
+  }
 
-.min-h-0 {
-  min-height: 0;
-}
+  .min-h-0 {
+    min-height: 0;
+  }
 
-.max-h-full {
-  max-height: 100%;
-}
+  .max-h-full {
+    max-height: 100%;
+  }
 
-.max-h-screen {
-  max-height: 100vh;
-}
+  .max-h-screen {
+    max-height: 100vh;
+  }
 
-.max-h-svh {
-  max-height: 100svh;
-}
+  .max-h-svh {
+    max-height: 100svh;
+  }
 
-.max-h-dvh {
-  max-height: 100dvh;
-}
+  .max-h-dvh {
+    max-height: 100dvh;
+  }
 
-.max-h-none {
-  max-height: none;
-}
+  .max-h-none {
+    max-height: none;
+  }
 
-.size-full {
-  width: 100%;
-  height: 100%;
-}
+  .size-full {
+    width: 100%;
+    height: 100%;
+  }
 
-.size-auto {
-  width: auto;
-  height: auto;
+  .size-auto {
+    width: auto;
+    height: auto;
+  }
 }
 
 @mixin gap-classes($size-name, $value) {
@@ -456,13 +458,15 @@ $size: 10;
   }
 }
 
-@each $size, $value in config.$base-sizes {
-  @include gap-classes($size, $value);
-}
+@layer utilities {
+  @each $size, $value in config.$base-sizes {
+    @include gap-classes($size, $value);
+  }
 
-$gap-size: 10;
+  $gap-size: 10;
 
-@while $gap-size <=config.$highest-multiplier {
-  @include gap-classes($gap-size, config.$base-size * $gap-size);
-  $gap-size: $gap-size + 1;
+  @while $gap-size <=config.$highest-multiplier {
+    @include gap-classes($gap-size, config.$base-size * $gap-size);
+    $gap-size: $gap-size + 1;
+  }
 }

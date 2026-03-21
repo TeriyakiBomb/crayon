@@ -1,14 +1,4 @@
-// ─── Display ──────────────────────────────────────────────────────────────────
-
-.flex {
-  display: flex;
-}
-
-.inline-flex {
-  display: inline-flex;
-}
-
-// ─── Direction ────────────────────────────────────────────────────────────────
+// ─── Direction (map needed before @layer for @extend) ─────────────────────────
 
 $flex: (
   "row": row,
@@ -17,145 +7,139 @@ $flex: (
   "col-reverse": column-reverse,
 );
 
-@each $name, $dir in $flex {
-  .flex-#{$name} {
-    flex-direction: $dir;
+@layer utilities {
+  // ─── Display ──────────────────────────────────────────────────────────────────
+
+  .flex {
+    display: flex;
   }
 
-  .f-#{$name} {
-    @extend .flex-#{$name};
+  .inline-flex {
+    display: inline-flex;
   }
-}
 
-// ─── Grow & shrink ────────────────────────────────────────────────────────────
+  // ─── Direction ────────────────────────────────────────────────────────────────
 
-.grow {
-  flex-grow: 1;
-}
+  @each $name, $dir in $flex {
+    .flex-#{$name} {
+      flex-direction: $dir;
+    }
 
-.no-grow,
-.grow-0 {
-  flex-grow: 0;
-}
+    .f-#{$name} {
+      @extend .flex-#{$name};
+    }
+  }
 
-.shrink {
-  flex-shrink: 1;
-}
+  // ─── Grow & shrink ────────────────────────────────────────────────────────────
 
-.no-shrink,
-.shrink-0 {
-  flex-shrink: 0;
-}
+  .grow {
+    flex-grow: 1;
+  }
 
-// ─── Wrap ─────────────────────────────────────────────────────────────────────
+  .no-grow,
+  .grow-0 {
+    flex-grow: 0;
+  }
 
-.flex-wrap {
-  flex-wrap: wrap;
-}
-.flex-wrap-reverse {
-  flex-wrap: wrap-reverse;
-}
-.flex-nowrap {
-  flex-wrap: nowrap;
-}
+  .shrink {
+    flex-shrink: 1;
+  }
 
-// ─── Justify content ──────────────────────────────────────────────────────────
+  .no-shrink,
+  .shrink-0 {
+    flex-shrink: 0;
+  }
 
-.justify-start {
-  justify-content: flex-start;
-}
-.justify-end {
-  justify-content: flex-end;
-}
-.justify-center {
-  justify-content: center;
-}
-.justify-between {
-  justify-content: space-between;
-}
-.justify-around {
-  justify-content: space-around;
-}
-.justify-evenly {
-  justify-content: space-evenly;
-}
+  // ─── Wrap ─────────────────────────────────────────────────────────────────────
 
-// ─── Align items ──────────────────────────────────────────────────────────────
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+  .flex-wrap-reverse {
+    flex-wrap: wrap-reverse;
+  }
+  .flex-nowrap {
+    flex-wrap: nowrap;
+  }
 
-.items-start {
-  align-items: flex-start;
-}
-.items-end {
-  align-items: flex-end;
-}
-.items-center {
-  align-items: center;
-}
-.items-baseline {
-  align-items: baseline;
-}
-.items-stretch {
-  align-items: stretch;
-}
+  // ─── Justify content ──────────────────────────────────────────────────────────
 
-.flex {
-  .align-start {
+  .justify-start {
+    justify-content: flex-start;
+  }
+  .justify-end {
+    justify-content: flex-end;
+  }
+  .justify-center {
+    justify-content: center;
+  }
+  .justify-between {
+    justify-content: space-between;
+  }
+  .justify-around {
+    justify-content: space-around;
+  }
+  .justify-evenly {
+    justify-content: space-evenly;
+  }
+
+  // ─── Align items ──────────────────────────────────────────────────────────────
+
+  .items-start {
     align-items: flex-start;
   }
-  .align-end {
+  .items-end {
     align-items: flex-end;
   }
-  // Not sure about this least concern stuff - might regret. Who knows?
-  .align-center,
-  .align-middle {
+  .items-center {
     align-items: center;
   }
-  .align-baseline {
+  .items-baseline {
     align-items: baseline;
   }
-  .align-stretch {
+  .items-stretch {
     align-items: stretch;
   }
-}
 
-// ─── Align self ───────────────────────────────────────────────────────────────
+  // ─── Align self ───────────────────────────────────────────────────────────────
 
-.self-auto {
-  align-self: auto;
-}
-.self-start {
-  align-self: flex-start;
-}
-.self-end {
-  align-self: flex-end;
-}
-.self-center {
-  align-self: center;
-}
-.self-baseline {
-  align-self: baseline;
-}
-.self-stretch {
-  align-self: stretch;
-}
+  .self-auto {
+    align-self: auto;
+  }
+  .self-start {
+    align-self: flex-start;
+  }
+  .self-end {
+    align-self: flex-end;
+  }
+  .self-center {
+    align-self: center;
+  }
+  .self-baseline {
+    align-self: baseline;
+  }
+  .self-stretch {
+    align-self: stretch;
+  }
 
-// ─── Align content ────────────────────────────────────────────────────────────
+  // ─── Align content ────────────────────────────────────────────────────────────
 
-.content-start {
-  align-content: flex-start;
-}
-.content-end {
-  align-content: flex-end;
-}
-.content-center {
-  align-content: center;
-}
-.content-between {
-  align-content: space-between;
-}
-.content-around {
-  align-content: space-around;
-}
-.content-evenly {
-  align-content: space-evenly;
+  .content-start {
+    align-content: flex-start;
+  }
+  .content-end {
+    align-content: flex-end;
+  }
+  .content-center {
+    align-content: center;
+  }
+  .content-between {
+    align-content: space-between;
+  }
+  .content-around {
+    align-content: space-around;
+  }
+  .content-evenly {
+    align-content: space-evenly;
+  }
 }

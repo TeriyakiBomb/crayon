@@ -30,8 +30,8 @@ dd {
 }
 
 /* Remove list styles on ul, ol elements with a list role, which suggests default styling will be removed */
-ul[role='list'],
-ol[role='list'] {
+ul[role="list"],
+ol[role="list"] {
   list-style: none;
 }
 
@@ -42,6 +42,11 @@ body {
   margin: 0;
   font-size: config.$base-font-size;
   font-weight: typography.font-weight("normal");
+}
+
+/* Table */
+table {
+  border-collapse: collapse;
 }
 
 /* Set shorter line heights on headings and interactive elements */
@@ -61,6 +66,10 @@ h2,
 h3,
 h4 {
   text-wrap: balance;
+}
+
+p {
+  margin: 0;
 }
 
 /*
@@ -87,12 +96,7 @@ kbd,
 samp,
 pre {
   font-family:
-    ui-monospace,
-    SFMono-Regular,
-    Consolas,
-    'Liberation Mono',
-    Menlo,
-    monospace;
+    ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
   /* 1 */
   font-size: 1em;
   /* 2 */
