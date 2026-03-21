@@ -1,37 +1,43 @@
 @use "config";
 @use "sass:map";
 
-// ─── Divide Width ─────────────────────────────────────────────────────────────
-
-.divide-x > :not(:last-child) {
-  border-right-width: map.get(config.$border-widths, "DEFAULT");
-  border-left-width: 0;
-  border-style: solid;
-}
-
-.divide-y > :not(:last-child) {
-  border-bottom-width: map.get(config.$border-widths, "DEFAULT");
-  border-top-width: 0;
-  border-style: solid;
-}
-
-@each $key, $width in config.$border-widths {
-  @if $key != "DEFAULT" {
-    .divide-x-#{$key} > :not(:last-child) { border-right-width: $width; border-left-width: 0; }
-    .divide-y-#{$key} > :not(:last-child) { border-bottom-width: $width; border-top-width: 0; }
-  }
-}
-
-// ─── Divide Style ─────────────────────────────────────────────────────────────
-
 $-styles: solid, dashed, dotted, double, none;
 
-@each $style in $-styles {
-  .divide-#{$style} > :not(:last-child) { border-style: $style; }
-}
+@layer utilities {
+  // ─── Divide Width ─────────────────────────────────────────────────────────────
 
-// ─── Divide Color ─────────────────────────────────────────────────────────────
+  .divide-x > :not(:last-child) {
+    border-right-width: map.get(config.$border-widths, "DEFAULT");
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-style: solid;
+  }
 
-@each $name, $value in config.$colors {
-  .divide-#{$name} > :not(:last-child) { border-color: $value; }
+  .divide-y > :not(:last-child) {
+    border-bottom-width: map.get(config.$border-widths, "DEFAULT");
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-style: solid;
+  }
+
+  @each $key, $width in config.$border-widths {
+    @if $key != "DEFAULT" {
+      .divide-x-#{$key} > :not(:last-child) { border-right-width: $width; border-top-width: 0; border-bottom-width: 0; border-left-width: 0; }
+      .divide-y-#{$key} > :not(:last-child) { border-bottom-width: $width; border-top-width: 0; border-left-width: 0; border-right-width: 0; }
+    }
+  }
+
+  // ─── Divide Style ─────────────────────────────────────────────────────────────
+
+  @each $style in $-styles {
+    .divide-#{$style} > :not(:last-child) { border-style: $style; }
+  }
+
+  // ─── Divide Color ─────────────────────────────────────────────────────────────
+
+  @each $name, $value in config.$colors {
+    .divide-#{$name} > :not(:last-child) { border-color: $value; }
+  }
 }
