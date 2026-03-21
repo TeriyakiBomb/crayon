@@ -3,6 +3,11 @@
   "version": "0.3.0",
   "description": "A Sass utility CSS toolkit.",
   "sass": "src/crayon.scss",
+  "exports": {
+    ".": {
+      "sass": "./src/crayon.scss"
+    }
+  },
   "files": [
     "src"
   ],
@@ -28,25 +33,14 @@
     "preview": "vite preview"
   },
   "peerDependencies": {
-    "sass": ">=1.79.0",
     "sass-embedded": ">=1.79.0"
-  },
-  "peerDependenciesMeta": {
-    "sass": {
-      "optional": true
-    },
-    "sass-embedded": {
-      "optional": true
-    }
   },
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^8.0.0",
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
     "js-yaml": "^4.1.1",
     "sass-embedded": "^1.98.0",
+    "svelte": "^5.53.13",
     "vite": "^8.0.0"
-  },
-  "dependencies": {
-    "@sveltejs/vite-plugin-svelte": "^7.0.0",
-    "svelte": "^5.53.13"
   }
 }

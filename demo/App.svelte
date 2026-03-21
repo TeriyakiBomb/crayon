@@ -8,7 +8,7 @@ import Flex from "./components/flex.svelte";
 </main>
 
 <style lang="scss">
-  @use "crayon";
+  @use "../src/crayon";
 
   .logo {
     height: crayon.size(20);

@@ -37,7 +37,7 @@
 </section>
 
 <style lang="scss">
-  @use "../crayon";
+  @use "../../src/crayon";
 
   h2 {
     @include crayon.dark { color: crayon.color("red-400"); }
