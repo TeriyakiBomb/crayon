@@ -1,0 +1,53 @@
+- title: Display
+  classes:
+    - crayon: [flex]
+      tailwind: flex
+      css: "display: flex"
+    - crayon: [inline-flex]
+      tailwind: inline-flex
+      css: "display: inline-flex"
+
+- title: Direction
+  classes:
+    - crayon: [flex-row, f-row]
+      tailwind: flex-row
+      css: "flex-direction: row"
+    - crayon: [flex-col, f-col]
+      tailwind: flex-col
+      css: "flex-direction: column"
+    - crayon: [flex-row-reverse, f-row-reverse]
+      tailwind: flex-row-reverse
+      css: "flex-direction: row-reverse"
+    - crayon: [flex-col-reverse, f-col-reverse]
+      tailwind: flex-col-reverse
+      css: "flex-direction: column-reverse"
+
+- title: Grow
+  classes:
+    - crayon: [grow]
+      tailwind: grow
+      css: "flex-grow: 1"
+    - crayon: [grow-0, no-grow]
+      tailwind: grow-0
+      css: "flex-grow: 0"
+
+- title: Shrink
+  classes:
+    - crayon: [shrink]
+      tailwind: shrink
+      css: "flex-shrink: 1"
+    - crayon: [shrink-0, no-shrink]
+      tailwind: shrink-0
+      css: "flex-shrink: 0"
+
+- title: Wrap
+  classes:
+    - crayon: [flex-wrap]
+      tailwind: flex-wrap
+      css: "flex-wrap: wrap"
+    - crayon: [flex-wrap-reverse]
+      tailwind: flex-wrap-reverse
+      css: "flex-wrap: wrap-reverse"
+    - crayon: [flex-nowrap]
+      tailwind: flex-nowrap
+      css: "flex-wrap: nowrap"
