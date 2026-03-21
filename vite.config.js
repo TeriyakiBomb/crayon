@@ -19,7 +19,7 @@ export default defineConfig({
       plugins: [
         ...(process.env.NODE_ENV === 'production' ? [
           purgecss({
-            content: ['./index.html', './src/**/*.{js,ts,svelte,html}'],
+            content: ['./index.html', './demo/**/*.{js,ts,svelte,html}'],
             defaultExtractor: content => content.match(/[\w\-\.]+/g) || []
           })
         ] : [])
