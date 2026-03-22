@@ -5,15 +5,14 @@
 
 // ─── Lookup ───────────────────────────────────────────────────────────────────
 
-// Returns a rem value for a size key. Covers $base-sizes (fractional) and
-// any integer from 1–$highest-multiplier via $base-size * $key.
 @function size($key) {
-  $from-map: map.get(config.$base-sizes, $key);
+  $from-map: map.get(config.$sizes, $key);
 
   @if $from-map {
     @return utility.px-to-rem($from-map);
   }
 
+  // Fallback for programmatic use with arbitrary keys
   @return utility.px-to-rem(config.$base-size * $key);
 }
 
@@ -21,39 +20,32 @@
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
-  .p-#{$escaped},
-  .p#{$escaped} {
+  .p-#{$escaped} {
     padding: $converted-value;
   }
 
-  .pr-#{$escaped},
-  .pr#{$escaped} {
+  .pr-#{$escaped} {
     padding-right: $converted-value;
   }
 
-  .pl-#{$escaped},
-  .pl#{$escaped} {
+  .pl-#{$escaped} {
     padding-left: $converted-value;
   }
 
-  .pt-#{$escaped},
-  .pt#{$escaped} {
+  .pt-#{$escaped} {
     padding-top: $converted-value;
   }
 
-  .pb-#{$escaped},
-  .pb#{$escaped} {
+  .pb-#{$escaped} {
     padding-bottom: $converted-value;
   }
 
-  .px-#{$escaped},
-  .px#{$escaped} {
+  .px-#{$escaped} {
     padding-left: $converted-value;
     padding-right: $converted-value;
   }
 
-  .py-#{$escaped},
-  .py#{$escaped} {
+  .py-#{$escaped} {
     padding-top: $converted-value;
     padding-bottom: $converted-value;
   }
@@ -63,76 +55,62 @@
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
-  .m-#{$escaped},
-  .m#{$escaped} {
+  .m-#{$escaped} {
     margin: $converted-value;
   }
 
-  .mr-#{$escaped},
-  .mr#{$escaped} {
+  .mr-#{$escaped} {
     margin-right: $converted-value;
   }
 
-  .ml-#{$escaped},
-  .ml#{$escaped} {
+  .ml-#{$escaped} {
     margin-left: $converted-value;
   }
 
-  .mt-#{$escaped},
-  .mt#{$escaped} {
+  .mt-#{$escaped} {
     margin-top: $converted-value;
   }
 
-  .mb-#{$escaped},
-  .mb#{$escaped} {
+  .mb-#{$escaped} {
     margin-bottom: $converted-value;
   }
 
-  .mx-#{$escaped},
-  .mx#{$escaped} {
+  .mx-#{$escaped} {
     margin-left: $converted-value;
     margin-right: $converted-value;
   }
 
-  .my-#{$escaped},
-  .my#{$escaped} {
+  .my-#{$escaped} {
     margin-top: $converted-value;
     margin-bottom: $converted-value;
   }
 
-  .-m-#{$escaped},
-  .-m#{$escaped} {
+  .-m-#{$escaped} {
     margin: -$converted-value;
   }
 
-  .-mr-#{$escaped},
-  .-mr#{$escaped} {
+  .-mr-#{$escaped} {
     margin-right: -$converted-value;
   }
 
-  .-ml-#{$escaped},
-  .-ml#{$escaped} {
+  .-ml-#{$escaped} {
     margin-left: -$converted-value;
   }
 
-  .-mt-#{$escaped},
-  .-mt#{$escaped} {
+  .-mt-#{$escaped} {
     margin-top: -$converted-value;
   }
 
-  .-mb-#{$escaped},
-  .-mb#{$escaped} {
+  .-mb-#{$escaped} {
     margin-bottom: -$converted-value;
   }
 
-  .-mx-#{$escaped},
-  .-mx#{$escaped} {
+  .-mx-#{$escaped} {
     margin-left: -$converted-value;
     margin-right: -$converted-value;
   }
 
-  .-my-#{$escaped},
-  .-my#{$escaped} {
+  .-my-#{$escaped} {
     margin-top: -$converted-value;
     margin-bottom: -$converted-value;
   }
@@ -142,18 +120,15 @@
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
-  .w-#{$escaped},
-  .w#{$escaped} {
+  .w-#{$escaped} {
     width: $converted-value;
   }
 
-  .min-w-#{$escaped},
-  .minw#{$escaped} {
+  .min-w-#{$escaped} {
     min-width: $converted-value;
   }
 
-  .max-w-#{$escaped},
-  .maxw#{$escaped} {
+  .max-w-#{$escaped} {
     max-width: $converted-value;
   }
 }
@@ -162,18 +137,15 @@
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
-  .h-#{$escaped},
-  .h#{$escaped} {
+  .h-#{$escaped} {
     height: $converted-value;
   }
 
-  .min-h-#{$escaped},
-  .minh#{$escaped} {
+  .min-h-#{$escaped} {
     min-height: $converted-value;
   }
 
-  .max-h-#{$escaped},
-  .maxh#{$escaped} {
+  .max-h-#{$escaped} {
     max-height: $converted-value;
   }
 }
@@ -182,46 +154,26 @@
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
-  .size-#{$escaped},
-  .size#{$escaped} {
+  .size-#{$escaped} {
     width: $converted-value;
     height: $converted-value;
   }
 }
 
 :root {
-  @each $size, $value in config.$base-sizes {
+  @each $size, $value in config.$sizes {
     $name: utility.str-replace("#{$size}", ".", "_");
     --size-#{$name}: #{utility.px-to-rem($value)};
-  }
-
-  $size: 10;
-
-  @while $size <= config.$highest-multiplier {
-    --size-#{$size}: #{utility.px-to-rem(config.$base-size * $size)};
-    $size: $size + 1;
   }
 }
 
 @layer utilities {
-  @each $size, $value in config.$base-sizes {
+  @each $size, $value in config.$sizes {
     @include padding-classes($size, $value);
     @include margin-classes($size, $value);
     @include width-classes($size, $value);
     @include height-classes($size, $value);
     @include size-classes($size, $value);
-  }
-
-  //extended sizes
-  $size: 10;
-
-  @while $size <=config.$highest-multiplier {
-    @include padding-classes($size, config.$base-size * $size);
-    @include margin-classes($size, config.$base-size * $size);
-    @include width-classes($size, config.$base-size * $size);
-    @include height-classes($size, config.$base-size * $size);
-    @include size-classes($size, config.$base-size * $size);
-    $size: $size + 1;
   }
 
   .m-auto {
@@ -459,14 +411,7 @@
 }
 
 @layer utilities {
-  @each $size, $value in config.$base-sizes {
+  @each $size, $value in config.$sizes {
     @include gap-classes($size, $value);
-  }
-
-  $gap-size: 10;
-
-  @while $gap-size <=config.$highest-multiplier {
-    @include gap-classes($gap-size, config.$base-size * $gap-size);
-    $gap-size: $gap-size + 1;
   }
 }

@@ -147,11 +147,9 @@ $line-heights: (
 );
 
 $base-size: 4px;
-$highest-multiplier: 96;
 
-/* Base sizes can be whatever you want, the multiplier just fills it the rest of the way to that number, so you can go beyond 96. Bases can have any name or multiplier you want for greater granularity */
-$base-sizes: (
-  0.5: math.div($base-size, 2),
+$sizes: (
+  0.5: $base-size * 0.5,
   1: $base-size,
   1.5: $base-size * 1.5,
   2: $base-size * 2,
@@ -170,6 +168,25 @@ $base-sizes: (
   8.5: $base-size * 8.5,
   9: $base-size * 9,
   9.5: $base-size * 9.5,
+  10: $base-size * 10,
+  12: $base-size * 12,
+  14: $base-size * 14,
+  16: $base-size * 16,
+  20: $base-size * 20,
+  24: $base-size * 24,
+  28: $base-size * 28,
+  32: $base-size * 32,
+  36: $base-size * 36,
+  40: $base-size * 40,
+  44: $base-size * 44,
+  48: $base-size * 48,
+  52: $base-size * 52,
+  56: $base-size * 56,
+  60: $base-size * 60,
+  64: $base-size * 64,
+  72: $base-size * 72,
+  80: $base-size * 80,
+  96: $base-size * 96,
 );
 
 // Colour output space — used by colors.convert() and to-<space>()
