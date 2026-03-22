@@ -72,3 +72,9 @@
     .border-#{$name} { border-color: convert($value); }
   }
 }
+
+// ─── Mixins ──────────────────────────────────────────────────────────────────
+
+@mixin bg($name) { background-color: convert(color($name)); }
+@mixin text-color($name) { color: convert(color($name)); }
+@mixin border-color($name) { border-color: convert(color($name)); }
