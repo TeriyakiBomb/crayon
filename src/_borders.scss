@@ -77,3 +77,8 @@
     }
   }
 }
+
+// ─── Mixins ──────────────────────────────────────────────────────────────────
+
+@mixin rounded($key: "DEFAULT") { border-radius: rounded($key); }
+@mixin border($key: "DEFAULT") { border-width: border-width($key); }

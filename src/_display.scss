@@ -34,3 +34,10 @@
     }
   }
 }
+
+// ─── Mixins ──────────────────────────────────────────────────────────────────
+
+@mixin block { display: block; }
+@mixin inline { display: inline; }
+@mixin inline-block { display: inline-block; }
+@mixin hidden { display: none; }

@@ -128,3 +128,13 @@ body {
     font-family: $stack;
   }
 }
+
+// ─── Mixins ──────────────────────────────────────────────────────────────────
+
+@mixin text($name) { font-size: font-size($name); }
+@mixin font($name) { font-weight: font-weight($name); }
+@mixin font-family($name) { font-family: font-family($name); }
+@mixin tracking($name) { letter-spacing: tracking($name); }
+@mixin leading($name) { line-height: leading($name); }
+@mixin italic { font-style: italic; }
+@mixin not-italic { font-style: normal; }
