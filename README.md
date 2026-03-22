@@ -87,6 +87,51 @@ h1 {
 </style>
 ```
 
+#### Ember (Polaris / Embroider + Vite)
+
+Add `sass-embedded` and configure Vite to resolve Sass packages from `node_modules`:
+
+```js
+// vite.config.mjs
+export default defineConfig({
+  // ... plugins
+  css: {
+    preprocessorOptions: {
+      scss: {
+        loadPaths: ['node_modules'],
+      },
+    },
+  },
+});
+```
+
+Import Crayon globally by adding a Sass entry point to your app:
+
+```scss
+// app/styles/crayon.scss
+@use 'crayon-css';
+```
+
+```js
+// app/app.js
+import './styles/crayon.scss';
+```
+
+To use Crayon's functions in scoped component styles, set up [ember-scoped-css](https://github.com/auditboard/ember-scoped-css) in your Vite and Babel configs, then in your components:
+
+```gjs
+<template>
+  <div class="card bg-blue-500">Hello</div>
+  <style lang="scss" scoped>
+    @use "crayon-css" as crayon;
+    .card {
+      padding: crayon.size(4);
+      border-radius: crayon.rounded("lg");
+    }
+  </style>
+</template>
+```
+
 ### Plain HTML / vanilla Sass
 
 If you're compiling Sass yourself (without a bundler), add `node_modules` to your load paths:
