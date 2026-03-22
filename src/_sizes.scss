@@ -204,20 +204,9 @@
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
-  .gap-#{$escaped},
-  .gap#{$escaped} {
-    gap: $converted-value;
-  }
-
-  .gap-x-#{$escaped},
-  .gapx#{$escaped} {
-    column-gap: $converted-value;
-  }
-
-  .gap-y-#{$escaped},
-  .gapy#{$escaped} {
-    row-gap: $converted-value;
-  }
+  .gap-#{$escaped} { gap: $converted-value; }
+  .gap-x-#{$escaped} { column-gap: $converted-value; }
+  .gap-y-#{$escaped} { row-gap: $converted-value; }
 }
 
 @layer utilities {
