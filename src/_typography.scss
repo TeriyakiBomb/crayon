@@ -13,8 +13,24 @@
   @return map.get(config.$font-weights, $name);
 }
 
+@function font-family($name) {
+  @return map.get(config.$font-families, $name);
+}
+
+@function tracking($name) {
+  @return map.get(config.$letter-spacings, $name);
+}
+
+@function leading($name) {
+  @return map.get(config.$line-heights, $name);
+}
+
 :root {
-  --font-family: #{config.$font-family};
+  --font-family: #{map.get(config.$font-families, config.$default-font)};
+
+  @each $name, $stack in config.$font-families {
+    --font-#{$name}: #{$stack};
+  }
 
   @each $name, $value in config.$font-weights {
     --font-weight-#{$name}: #{$value};
@@ -23,10 +39,18 @@
   @each $name, $values in config.$font-sizes {
     --text-#{$name}: #{utility.px-to-rem(list.nth($values, 1))};
   }
+
+  @each $name, $value in config.$letter-spacings {
+    --tracking-#{$name}: #{$value};
+  }
+
+  @each $name, $value in config.$line-heights {
+    --leading-#{$name}: #{$value};
+  }
 }
 
 body {
-  font-family: config.$font-family;
+  font-family: map.get(config.$font-families, config.$default-font);
 }
 
 @layer utilities {
@@ -81,5 +105,26 @@ body {
     .font-#{$name} {
       font-weight: $value;
     }
+  }
+
+  // Letter spacing
+  @each $name, $value in config.$letter-spacings {
+    .tracking-#{$name} {
+      letter-spacing: $value;
+    }
+  }
+
+  // Line height
+  @each $name, $value in config.$line-heights {
+    .leading-#{$name} {
+      line-height: $value;
+    }
+  }
+}
+
+// Font families
+@each $name, $stack in config.$font-families {
+  .font-#{$name} {
+    font-family: $stack;
   }
 }
