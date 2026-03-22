@@ -1,9 +1,11 @@
 # Dev tooling
 vite.config.js
+svelte.config.js
 index.html
 postcss.config.js
 
 # Demo / preview
+demo/
 public/
 
 # CI
