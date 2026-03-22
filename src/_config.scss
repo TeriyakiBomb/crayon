@@ -38,82 +38,28 @@ $breakpoints: (
 $base-font-size: 16px;
 
 $font-families: (
-  "sans": (
-    sans-serif,
-  ),
-  "serif": (
-    Georgia,
-    "Times New Roman",
-    serif,
-  ),
-  "mono": (
-    ui-monospace,
-    "Cascadia Mono",
-    "Segoe UI Mono",
-    "Liberation Mono",
-    Menlo,
-    Monaco,
-    Consolas,
-    monospace,
-  ),
+  "sans": ( sans-serif),
+  "serif": ( Georgia, "Times New Roman", serif),
+  "mono": ( ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace),
 );
 
 // Default font — must be a key from $font-families
 $default-font: "sans";
 
 $font-sizes: (
-  "xs": (
-    $base-font-size * 0.75,
-    1rem,
-  ),
-  "sm": (
-    $base-font-size * 0.875,
-    1.25rem,
-  ),
-  "base": (
-    $base-font-size * 1,
-    1.5rem,
-  ),
-  "lg": (
-    $base-font-size * 1.125,
-    1.75rem,
-  ),
-  "xl": (
-    $base-font-size * 1.25,
-    1.75rem,
-  ),
-  "2xl": (
-    $base-font-size * 1.5,
-    2rem,
-  ),
-  "3xl": (
-    $base-font-size * 1.875,
-    2.25rem,
-  ),
-  "4xl": (
-    $base-font-size * 2.25,
-    2.5rem,
-  ),
-  "5xl": (
-    $base-font-size * 3,
-    1,
-  ),
-  "6xl": (
-    $base-font-size * 3.75,
-    1,
-  ),
-  "7xl": (
-    $base-font-size * 4.5,
-    1,
-  ),
-  "8xl": (
-    $base-font-size * 6,
-    1,
-  ),
-  "9xl": (
-    $base-font-size * 8,
-    1,
-  ),
+  "xs": ( $base-font-size * 0.75, 1rem),
+  "sm": ( $base-font-size * 0.875, 1.25rem),
+  "base": ( $base-font-size * 1, 1.5rem),
+  "lg": ( $base-font-size * 1.125, 1.75rem ),
+  "xl": ( $base-font-size * 1.25, 1.75rem ),
+  "2xl": ( $base-font-size * 1.5, 2rem ),
+  "3xl": ( $base-font-size * 1.875, 2.25rem ),
+  "4xl": ( $base-font-size * 2.25, 2.5rem ),
+  "5xl": ( $base-font-size * 3, 1 ),
+  "6xl": ( $base-font-size * 3.75, 1 ),
+  "7xl": ( $base-font-size * 4.5, 1 ),
+  "8xl": ( $base-font-size * 6, 1 ),
+  "9xl": ( $base-font-size * 8, 1 ),
 );
 
 $font-weights: (
