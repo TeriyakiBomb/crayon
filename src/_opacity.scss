@@ -1,0 +1,26 @@
+@use "config";
+@use "sass:map";
+
+// ─── Lookup ──────────────────────────────────────────────────────────────────
+
+@function opacity($name) {
+  @return map.get(config.$opacities, $name);
+}
+
+// ─── CSS Variables ───────────────────────────────────────────────────────────
+
+:root {
+  @each $name, $value in config.$opacities {
+    --opacity-#{$name}: #{$value};
+  }
+}
+
+// ─── Utility classes ─────────────────────────────────────────────────────────
+
+@layer utilities {
+  @each $name, $value in config.$opacities {
+    .opacity-#{$name} {
+      opacity: $value;
+    }
+  }
+}
