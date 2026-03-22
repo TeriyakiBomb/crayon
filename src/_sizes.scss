@@ -5,15 +5,14 @@
 
 // ─── Lookup ───────────────────────────────────────────────────────────────────
 
-// Returns a rem value for a size key. Covers $base-sizes (fractional) and
-// any integer from 1–$highest-multiplier via $base-size * $key.
 @function size($key) {
-  $from-map: map.get(config.$base-sizes, $key);
+  $from-map: map.get(config.$sizes, $key);
 
   @if $from-map {
     @return utility.px-to-rem($from-map);
   }
 
+  // Fallback for programmatic use with arbitrary keys
   @return utility.px-to-rem(config.$base-size * $key);
 }
 
@@ -162,38 +161,19 @@
 }
 
 :root {
-  @each $size, $value in config.$base-sizes {
+  @each $size, $value in config.$sizes {
     $name: utility.str-replace("#{$size}", ".", "_");
     --size-#{$name}: #{utility.px-to-rem($value)};
-  }
-
-  $size: 10;
-
-  @while $size <= config.$highest-multiplier {
-    --size-#{$size}: #{utility.px-to-rem(config.$base-size * $size)};
-    $size: $size + 1;
   }
 }
 
 @layer utilities {
-  @each $size, $value in config.$base-sizes {
+  @each $size, $value in config.$sizes {
     @include padding-classes($size, $value);
     @include margin-classes($size, $value);
     @include width-classes($size, $value);
     @include height-classes($size, $value);
     @include size-classes($size, $value);
-  }
-
-  //extended sizes
-  $size: 10;
-
-  @while $size <=config.$highest-multiplier {
-    @include padding-classes($size, config.$base-size * $size);
-    @include margin-classes($size, config.$base-size * $size);
-    @include width-classes($size, config.$base-size * $size);
-    @include height-classes($size, config.$base-size * $size);
-    @include size-classes($size, config.$base-size * $size);
-    $size: $size + 1;
   }
 
   .m-auto {
@@ -431,14 +411,7 @@
 }
 
 @layer utilities {
-  @each $size, $value in config.$base-sizes {
+  @each $size, $value in config.$sizes {
     @include gap-classes($size, $value);
-  }
-
-  $gap-size: 10;
-
-  @while $gap-size <=config.$highest-multiplier {
-    @include gap-classes($gap-size, config.$base-size * $gap-size);
-    $gap-size: $gap-size + 1;
   }
 }
