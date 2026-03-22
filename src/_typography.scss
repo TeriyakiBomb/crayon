@@ -77,19 +77,12 @@ body {
     @each $name, $value in config.$font-weights {
       $escaped: utility.str-replace($name, ".", "\\.");
 
-      .#{$escaped} {
-        font-weight: $value;
-      }
+      .#{$escaped} { font-weight: $value; }
     }
 
     //style
-    .italic {
-      font-style: italic;
-    }
-
-    .not-italic {
-      font-style: normal;
-    }
+    .italic { font-style: italic; }
+    .not-italic { font-style: normal; }
   }
 
   // Font sizes
@@ -102,31 +95,23 @@ body {
 
   //TW weights
   @each $name, $value in config.$font-weights {
-    .font-#{$name} {
-      font-weight: $value;
-    }
+    .font-#{$name} { font-weight: $value; }
   }
 
   // Letter spacing
   @each $name, $value in config.$letter-spacings {
-    .tracking-#{$name} {
-      letter-spacing: $value;
-    }
+    .tracking-#{$name} { letter-spacing: $value; }
   }
 
   // Line height
   @each $name, $value in config.$line-heights {
-    .leading-#{$name} {
-      line-height: $value;
-    }
+    .leading-#{$name} { line-height: $value; }
   }
 }
 
 // Font families
 @each $name, $stack in config.$font-families {
-  .font-#{$name} {
-    font-family: $stack;
-  }
+  .font-#{$name} { font-family: $stack; }
 }
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────

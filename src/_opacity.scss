@@ -19,9 +19,7 @@
 
 @layer utilities {
   @each $name, $value in config.$opacities {
-    .opacity-#{$name} {
-      opacity: $value;
-    }
+    .opacity-#{$name} { opacity: $value; }
   }
 }
 
