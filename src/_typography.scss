@@ -17,6 +17,14 @@
   @return map.get(config.$font-families, $name);
 }
 
+@function tracking($name) {
+  @return map.get(config.$letter-spacings, $name);
+}
+
+@function leading($name) {
+  @return map.get(config.$line-heights, $name);
+}
+
 :root {
   --font-family: #{map.get(config.$font-families, config.$default-font)};
 
@@ -30,6 +38,14 @@
 
   @each $name, $values in config.$font-sizes {
     --text-#{$name}: #{utility.px-to-rem(list.nth($values, 1))};
+  }
+
+  @each $name, $value in config.$letter-spacings {
+    --tracking-#{$name}: #{$value};
+  }
+
+  @each $name, $value in config.$line-heights {
+    --leading-#{$name}: #{$value};
   }
 }
 
@@ -88,6 +104,20 @@ body {
   @each $name, $value in config.$font-weights {
     .font-#{$name} {
       font-weight: $value;
+    }
+  }
+
+  // Letter spacing
+  @each $name, $value in config.$letter-spacings {
+    .tracking-#{$name} {
+      letter-spacing: $value;
+    }
+  }
+
+  // Line height
+  @each $name, $value in config.$line-heights {
+    .leading-#{$name} {
+      line-height: $value;
     }
   }
 }

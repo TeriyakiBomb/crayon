@@ -38,9 +38,24 @@ $breakpoints: (
 $base-font-size: 16px;
 
 $font-families: (
-  "sans": (sans-serif),
-  "serif": (Georgia, "Times New Roman", serif),
-  "mono": (ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace),
+  "sans": (
+    sans-serif,
+  ),
+  "serif": (
+    Georgia,
+    "Times New Roman",
+    serif,
+  ),
+  "mono": (
+    ui-monospace,
+    "Cascadia Mono",
+    "Segoe UI Mono",
+    "Liberation Mono",
+    Menlo,
+    Monaco,
+    Consolas,
+    monospace,
+  ),
 );
 
 // Default font — must be a key from $font-families
@@ -111,6 +126,24 @@ $font-weights: (
   "bold": 700,
   "extrabold": 800,
   "black": 900,
+);
+
+$letter-spacings: (
+  "tighter": -0.05em,
+  "tight": -0.025em,
+  "normal": 0em,
+  "wide": 0.025em,
+  "wider": 0.05em,
+  "widest": 0.1em,
+);
+
+$line-heights: (
+  "none": 1,
+  "tight": 1.25,
+  "snug": 1.375,
+  "normal": 1.5,
+  "relaxed": 1.625,
+  "loose": 2,
 );
 
 $base-size: 4px;
