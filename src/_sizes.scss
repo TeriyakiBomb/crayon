@@ -415,3 +415,28 @@
     @include gap-classes($size, $value);
   }
 }
+
+// ─── Mixins ──────────────────────────────────────────────────────────────────
+
+@mixin p($key) { padding: size($key); }
+@mixin pt($key) { padding-top: size($key); }
+@mixin pb($key) { padding-bottom: size($key); }
+@mixin pl($key) { padding-left: size($key); }
+@mixin pr($key) { padding-right: size($key); }
+@mixin px($key) { padding-left: size($key); padding-right: size($key); }
+@mixin py($key) { padding-top: size($key); padding-bottom: size($key); }
+
+@mixin m($key) { margin: size($key); }
+@mixin mt($key) { margin-top: size($key); }
+@mixin mb($key) { margin-bottom: size($key); }
+@mixin ml($key) { margin-left: size($key); }
+@mixin mr($key) { margin-right: size($key); }
+@mixin mx($key) { margin-left: size($key); margin-right: size($key); }
+@mixin my($key) { margin-top: size($key); margin-bottom: size($key); }
+@mixin mx-auto { margin-left: auto; margin-right: auto; }
+
+@mixin w($key) { width: size($key); }
+@mixin h($key) { height: size($key); }
+@mixin gap($key) { gap: size($key); }
+@mixin gap-x($key) { column-gap: size($key); }
+@mixin gap-y($key) { row-gap: size($key); }
