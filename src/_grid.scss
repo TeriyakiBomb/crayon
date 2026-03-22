@@ -58,3 +58,18 @@
   .grid-flow-row-dense { grid-auto-flow: row dense; }
   .grid-flow-col-dense { grid-auto-flow: column dense; }
 }
+
+// ─── Mixins ──────────────────────────────────────────────────────────────────
+
+@mixin grid { display: grid; }
+@mixin grid-cols($n) { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
+@mixin grid-cols-none { grid-template-columns: none; }
+@mixin grid-rows($n) { grid-template-rows: repeat(#{$n}, minmax(0, 1fr)); }
+@mixin grid-rows-none { grid-template-rows: none; }
+@mixin col-span($n) { grid-column: span #{$n} / span #{$n}; }
+@mixin col-span-full { grid-column: 1 / -1; }
+@mixin row-span($n) { grid-row: span #{$n} / span #{$n}; }
+@mixin row-span-full { grid-row: 1 / -1; }
+@mixin grid-flow-row { grid-auto-flow: row; }
+@mixin grid-flow-col { grid-auto-flow: column; }
+@mixin grid-flow-dense { grid-auto-flow: dense; }
