@@ -118,7 +118,7 @@
 
 // ─── Range Mixins ─────────────────────────────────────────────────────────────
 
-@mixin rounded-range($base: "DEFAULT", $responsive...) {
+@mixin rounded-range($base, $responsive...) {
   border-radius: rounded($base);
 
   @each $breakpoint, $key in meta.keywords($responsive) {
@@ -128,7 +128,7 @@
   }
 }
 
-@mixin rounded-t-range($base: "DEFAULT", $responsive...) {
+@mixin rounded-t-range($base, $responsive...) {
   border-top-left-radius: rounded($base);
   border-top-right-radius: rounded($base);
 
@@ -140,7 +140,7 @@
   }
 }
 
-@mixin rounded-b-range($base: "DEFAULT", $responsive...) {
+@mixin rounded-b-range($base, $responsive...) {
   border-bottom-left-radius: rounded($base);
   border-bottom-right-radius: rounded($base);
 
@@ -152,7 +152,7 @@
   }
 }
 
-@mixin rounded-l-range($base: "DEFAULT", $responsive...) {
+@mixin rounded-l-range($base, $responsive...) {
   border-top-left-radius: rounded($base);
   border-bottom-left-radius: rounded($base);
 
@@ -164,7 +164,7 @@
   }
 }
 
-@mixin rounded-r-range($base: "DEFAULT", $responsive...) {
+@mixin rounded-r-range($base, $responsive...) {
   border-top-right-radius: rounded($base);
   border-bottom-right-radius: rounded($base);
 
