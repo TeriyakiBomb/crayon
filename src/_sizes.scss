@@ -285,6 +285,7 @@
 
 @mixin p-range($base, $responsive...) {
   padding: size($base);
+
   @each $breakpoint, $key in meta.keywords($responsive) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       padding: size($key);
@@ -372,10 +373,110 @@
 
 @mixin gap-range($base, $responsive...) {
   gap: size($base);
-  @each $breakpoint, $key in meta.keywords($responsive) {
 
+  @each $breakpoint, $key in meta.keywords($responsive) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       gap: size($key);
+    }
+  }
+}
+
+@mixin gap-x-range($base, $responsive...) {
+  column-gap: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      column-gap: size($key);
+    }
+  }
+}
+
+@mixin gap-y-range($base, $responsive...) {
+  row-gap: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      row-gap: size($key);
+    }
+  }
+}
+
+@mixin pt-range($base, $responsive...) {
+  padding-top: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-top: size($key);
+    }
+  }
+}
+
+@mixin pb-range($base, $responsive...) {
+  padding-bottom: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-bottom: size($key);
+    }
+  }
+}
+
+@mixin pl-range($base, $responsive...) {
+  padding-left: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-left: size($key);
+    }
+  }
+}
+
+@mixin pr-range($base, $responsive...) {
+  padding-right: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-right: size($key);
+    }
+  }
+}
+
+@mixin mt-range($base, $responsive...) {
+  margin-top: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-top: size($key);
+    }
+  }
+}
+
+@mixin mb-range($base, $responsive...) {
+  margin-bottom: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-bottom: size($key);
+    }
+  }
+}
+
+@mixin ml-range($base, $responsive...) {
+  margin-left: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-left: size($key);
+    }
+  }
+}
+
+@mixin mr-range($base, $responsive...) {
+  margin-right: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-right: size($key);
     }
   }
 }
