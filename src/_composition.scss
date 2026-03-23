@@ -1,5 +1,6 @@
 @use "sizes";
 @use "colors";
+@use "borders";
 
 // ─── Stack ─────────────────────────────────────────────────────────────
 
@@ -37,4 +38,17 @@
   @if $bg != null { background-color: colors.convert(colors.color("#{$family}-#{$bg}")); }
   @if $text != null { color: colors.convert(colors.color("#{$family}-#{$text}")); }
   @if $border != null { border-color: colors.convert(colors.color("#{$family}-#{$border}")); }
+}
+
+// ─── Box ─────────────────────────────────────────────────────────────────────
+
+// box — padding + radius + background + border in one call. All params optional.
+// $px / $py override $p for asymmetric padding (badges, buttons etc.)
+@mixin box($p: null, $px: null, $py: null, $rounded: null, $bg: null, $border: null) {
+  @if $p != null       { padding: sizes.size($p); }
+  @if $px != null      { padding-left: sizes.size($px); padding-right: sizes.size($px); }
+  @if $py != null      { padding-top: sizes.size($py); padding-bottom: sizes.size($py); }
+  @if $rounded != null { border-radius: borders.rounded($rounded); }
+  @if $bg != null      { background-color: colors.convert(colors.color($bg)); }
+  @if $border != null  { border: 1px solid colors.convert(colors.color($border)); }
 }
