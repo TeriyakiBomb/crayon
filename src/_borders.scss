@@ -1,6 +1,7 @@
 @use "config";
 @use "utility";
 @use "sass:map";
+@use "sass:meta";
 
 // ─── Lookups ──────────────────────────────────────────────────────────────────
 
@@ -10,6 +11,7 @@
 
 @function rounded($key: "DEFAULT") {
   $value: map.get(config.$border-radii, $key);
+
   @if $value == 0 or $value == 9999px { @return $value; }
   @return utility.px-to-rem($value);
 }
@@ -27,6 +29,7 @@
 
   @each $key, $value in config.$border-radii {
     $rem: if($value == 0 or $value == 9999px, $value, utility.px-to-rem($value));
+
     @if $key == "DEFAULT" {
       --rounded: #{$rem};
     } @else {
@@ -46,7 +49,9 @@
     .border-r             { border-right-width: $width; }
     .border-b             { border-bottom-width: $width; }
     .border-l             { border-left-width: $width; }
-  } @else {
+  }
+
+  @else {
     .border-#{$suffix}    { border-width: $width; }
     .border-x-#{$suffix}  { border-left-width: $width; border-right-width: $width; }
     .border-y-#{$suffix}  { border-top-width: $width; border-bottom-width: $width; }
@@ -61,7 +66,9 @@
   @each $key, $width in config.$border-widths {
     @if $key == "DEFAULT" {
       @include _border-width-classes("", $width);
-    } @else {
+    }
+
+    @else {
       @include _border-width-classes($key, $width);
     }
   }
@@ -80,7 +87,9 @@
       .rounded-tr { border-top-right-radius: $rem; }
       .rounded-bl { border-bottom-left-radius: $rem; }
       .rounded-br { border-bottom-right-radius: $rem; }
-    } @else {
+    }
+
+    @else {
       .rounded-#{$key} { border-radius: $rem; }
       .rounded-t-#{$key} { border-top-left-radius: $rem; border-top-right-radius: $rem; }
       .rounded-b-#{$key} { border-bottom-left-radius: $rem; border-bottom-right-radius: $rem; }
@@ -106,3 +115,63 @@
 @mixin rounded-bl($key: "DEFAULT") { border-bottom-left-radius: rounded($key); }
 @mixin rounded-br($key: "DEFAULT") { border-bottom-right-radius: rounded($key); }
 @mixin border($key: "DEFAULT") { border-width: border-width($key); }
+
+// ─── Range Mixins ─────────────────────────────────────────────────────────────
+
+@mixin rounded-range($base: "DEFAULT", $responsive...) {
+  border-radius: rounded($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      border-radius: rounded($key);
+    }
+  }
+}
+
+@mixin rounded-t-range($base: "DEFAULT", $responsive...) {
+  border-top-left-radius: rounded($base);
+  border-top-right-radius: rounded($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      border-top-left-radius: rounded($key);
+      border-top-right-radius: rounded($key);
+    }
+  }
+}
+
+@mixin rounded-b-range($base: "DEFAULT", $responsive...) {
+  border-bottom-left-radius: rounded($base);
+  border-bottom-right-radius: rounded($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      border-bottom-left-radius: rounded($key);
+      border-bottom-right-radius: rounded($key);
+    }
+  }
+}
+
+@mixin rounded-l-range($base: "DEFAULT", $responsive...) {
+  border-top-left-radius: rounded($base);
+  border-bottom-left-radius: rounded($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      border-top-left-radius: rounded($key);
+      border-bottom-left-radius: rounded($key);
+    }
+  }
+}
+
+@mixin rounded-r-range($base: "DEFAULT", $responsive...) {
+  border-top-right-radius: rounded($base);
+  border-bottom-right-radius: rounded($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      border-top-right-radius: rounded($key);
+      border-bottom-right-radius: rounded($key);
+    }
+  }
+}

@@ -50,6 +50,40 @@
   }
 }
 
+// Responsive visibility
+// show-from("md")    — hidden by default, visible at breakpoint and above
+// hide-from("md")    — visible by default, hidden at breakpoint and above
+// show-until("md")   — visible by default, hidden at breakpoint and above
+// hide-until("md")   — hidden by default, visible at breakpoint and above
+
+@mixin show-from($name) {
+  display: none;
+
+  @media (min-width: map.get(config.$breakpoints, $name)) {
+    display: revert;
+  }
+}
+
+@mixin hide-from($name) {
+  @media (min-width: map.get(config.$breakpoints, $name)) {
+    display: none;
+  }
+}
+
+@mixin show-until($name) {
+  @media (min-width: map.get(config.$breakpoints, $name)) {
+    display: none;
+  }
+}
+
+@mixin hide-until($name) {
+  display: none;
+
+  @media (min-width: map.get(config.$breakpoints, $name)) {
+    display: revert;
+  }
+}
+
 // States
 @mixin hover  { &:hover  { @content; } }
 @mixin focus  { &:focus  { @content; } }
