@@ -72,8 +72,24 @@
     $rem: if($radius == 0 or $radius == 9999px, $radius, utility.px-to-rem($radius));
     @if $key == "DEFAULT" {
       .rounded { border-radius: $rem; }
+      .rounded-t { border-top-left-radius: $rem; border-top-right-radius: $rem; }
+      .rounded-b { border-bottom-left-radius: $rem; border-bottom-right-radius: $rem; }
+      .rounded-l { border-top-left-radius: $rem; border-bottom-left-radius: $rem; }
+      .rounded-r { border-top-right-radius: $rem; border-bottom-right-radius: $rem; }
+      .rounded-tl { border-top-left-radius: $rem; }
+      .rounded-tr { border-top-right-radius: $rem; }
+      .rounded-bl { border-bottom-left-radius: $rem; }
+      .rounded-br { border-bottom-right-radius: $rem; }
     } @else {
       .rounded-#{$key} { border-radius: $rem; }
+      .rounded-t-#{$key} { border-top-left-radius: $rem; border-top-right-radius: $rem; }
+      .rounded-b-#{$key} { border-bottom-left-radius: $rem; border-bottom-right-radius: $rem; }
+      .rounded-l-#{$key} { border-top-left-radius: $rem; border-bottom-left-radius: $rem; }
+      .rounded-r-#{$key} { border-top-right-radius: $rem; border-bottom-right-radius: $rem; }
+      .rounded-tl-#{$key} { border-top-left-radius: $rem; }
+      .rounded-tr-#{$key} { border-top-right-radius: $rem; }
+      .rounded-bl-#{$key} { border-bottom-left-radius: $rem; }
+      .rounded-br-#{$key} { border-bottom-right-radius: $rem; }
     }
   }
 }
@@ -81,4 +97,12 @@
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
 @mixin rounded($key: "DEFAULT") { border-radius: rounded($key); }
+@mixin rounded-t($key: "DEFAULT") { border-top-left-radius: rounded($key); border-top-right-radius: rounded($key); }
+@mixin rounded-b($key: "DEFAULT") { border-bottom-left-radius: rounded($key); border-bottom-right-radius: rounded($key); }
+@mixin rounded-l($key: "DEFAULT") { border-top-left-radius: rounded($key); border-bottom-left-radius: rounded($key); }
+@mixin rounded-r($key: "DEFAULT") { border-top-right-radius: rounded($key); border-bottom-right-radius: rounded($key); }
+@mixin rounded-tl($key: "DEFAULT") { border-top-left-radius: rounded($key); }
+@mixin rounded-tr($key: "DEFAULT") { border-top-right-radius: rounded($key); }
+@mixin rounded-bl($key: "DEFAULT") { border-bottom-left-radius: rounded($key); }
+@mixin rounded-br($key: "DEFAULT") { border-bottom-right-radius: rounded($key); }
 @mixin border($key: "DEFAULT") { border-width: border-width($key); }
