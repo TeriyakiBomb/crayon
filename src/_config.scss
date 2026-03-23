@@ -26,6 +26,8 @@ $border-radii: (
 );
 
 // Breakpoints
+
+//Classes that start with a number are not allowed in CSS, these are generated without a prefix, so if you go beyond 'xxl', use a different name instead of '3xl'
 $breakpoints: (
   "sm": 640px,
   "md": 768px,
