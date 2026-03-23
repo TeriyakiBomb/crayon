@@ -1,0 +1,30 @@
+@use "sizes";
+
+// ─── Stack ─────────────────────────────────────────────────────────────
+
+// vstack — flex column with gap
+@mixin vstack($gap) {
+  display: flex;
+  flex-direction: column;
+  gap: sizes.size($gap);
+}
+
+// stack — alias for vstack
+@mixin stack($gap) {
+  @include vstack($gap);
+}
+
+// hstack — flex row with gap
+@mixin hstack($gap) {
+  display: flex;
+  flex-direction: row;
+  gap: sizes.size($gap);
+}
+
+// cluster — flex row with wrap and gap (tag lists, button groups etc.)
+@mixin cluster($gap) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: sizes.size($gap);
+}
