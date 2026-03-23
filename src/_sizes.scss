@@ -234,6 +234,14 @@
 @mixin my($key) { margin-top: size($key); margin-bottom: size($key); }
 @mixin mx-auto { margin-left: auto; margin-right: auto; }
 
+@mixin -m($key) { margin: -(size($key)); }
+@mixin -mt($key) { margin-top: -(size($key)); }
+@mixin -mb($key) { margin-bottom: -(size($key)); }
+@mixin -ml($key) { margin-left: -(size($key)); }
+@mixin -mr($key) { margin-right: -(size($key)); }
+@mixin -mx($key) { margin-left: -(size($key)); margin-right: -(size($key)); }
+@mixin -my($key) { margin-top: -(size($key)); margin-bottom: -(size($key)); }
+
 @mixin w($key) { width: size($key); }
 @mixin min-w($key) { min-width: size($key); }
 @mixin max-w($key) { max-width: size($key); }
@@ -242,6 +250,30 @@
 @mixin min-h($key) { min-height: size($key); }
 @mixin max-h($key) { max-height: size($key); }
 @mixin size($key) { width: size($key); height: size($key); }
+
+@mixin m-auto { margin: auto; }
+@mixin my-auto { margin-top: auto; margin-bottom: auto; }
+@mixin mt-auto { margin-top: auto; }
+@mixin mb-auto { margin-bottom: auto; }
+@mixin ml-auto { margin-left: auto; }
+@mixin mr-auto { margin-right: auto; }
+
+@mixin w-full { width: 100%; }
+@mixin w-screen { width: 100vw; }
+@mixin w-auto { width: auto; }
+@mixin w-fit { width: fit-content; }
+@mixin w-min { width: min-content; }
+@mixin w-max { width: max-content; }
+
+@mixin h-full { height: 100%; }
+@mixin h-screen { height: 100vh; }
+@mixin h-auto { height: auto; }
+@mixin h-fit { height: fit-content; }
+@mixin h-min { height: min-content; }
+@mixin h-max { height: max-content; }
+
+@mixin size-full { width: 100%; height: 100%; }
+@mixin size-auto { width: auto; height: auto; }
 
 @mixin gap($key) { gap: size($key); }
 @mixin gap-x($key) { column-gap: size($key); }
