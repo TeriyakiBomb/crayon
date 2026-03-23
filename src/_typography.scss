@@ -116,7 +116,10 @@ body {
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
-@mixin text($name) { font-size: font-size($name); }
+@mixin text($name) {
+  font-size: font-size($name);
+  line-height: list.nth(map.get(config.$font-sizes, $name), 2);
+}
 @mixin font($name) { font-weight: font-weight($name); }
 @mixin font-family($name) { font-family: font-family($name); }
 @mixin tracking($name) { letter-spacing: tracking($name); }
