@@ -1,4 +1,5 @@
 @use "sizes";
+@use "colors";
 
 // ─── Stack ─────────────────────────────────────────────────────────────
 
@@ -27,4 +28,13 @@
   flex-direction: row;
   flex-wrap: wrap;
   gap: sizes.size($gap);
+}
+
+// ─── Palette ────────────────────────────────────────────────────────────────
+
+// palette — apply bg, text, and border from a single colour family
+@mixin palette($family, $bg: null, $text: null, $border: null) {
+  @if $bg != null { background-color: colors.convert(colors.color("#{$family}-#{$bg}")); }
+  @if $text != null { color: colors.convert(colors.color("#{$family}-#{$text}")); }
+  @if $border != null { border-color: colors.convert(colors.color("#{$family}-#{$border}")); }
 }
