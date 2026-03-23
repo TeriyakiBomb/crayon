@@ -1,5 +1,6 @@
 @use "config";
 @use "sass:map";
+@use "sass:meta";
 
 // Custom media — for use in plain CSS / ERB <style> blocks
 // Requires postcss-custom-media in your pipeline for browser support
@@ -12,6 +13,40 @@
 @mixin screen($name) {
   @media (min-width: map.get(config.$breakpoints, $name)) {
     @content;
+  }
+}
+
+// Wrap content in multiple named viewport breakpoints
+// @include screens("md", "lg") { ... }
+@mixin screens($names...) {
+
+  @each $name in $names {
+    @media (min-width: map.get(config.$breakpoints, $name)) {
+      @content;
+    }
+  }
+}
+
+// Wrap content in multiple container query breakpoints (raw values, not config)
+// @include containers(400px, 600px) { ... }
+// @include containers(400px, 600px, $name: "sidebar") { ... }
+
+@mixin containers($sizes...) {
+  $kwargs: meta.keywords($sizes);
+  $container-name: map.get($kwargs, "name");
+
+  @each $size in $sizes {
+    @if $container-name {
+      @container #{$container-name} (min-width: #{$size}) {
+        @content;
+      }
+    }
+
+    @else {
+      @container (min-width: #{$size}) {
+        @content;
+      }
+    }
   }
 }
 
