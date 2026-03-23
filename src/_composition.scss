@@ -31,6 +31,20 @@
   gap: sizes.size($gap);
 }
 
+// ─── Center ──────────────────────────────────────────────────────────────────
+
+@mixin center($axis: null) {
+  display: flex;
+  @if $axis == x {
+    justify-content: center;
+  } @else if $axis == y {
+    align-items: center;
+  } @else {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
 // ─── Palette ────────────────────────────────────────────────────────────────
 
 // palette — apply bg, text, and border from a single colour family
@@ -45,7 +59,14 @@
 // box — padding + radius + background + border in one call. All params optional.
 // $px / $py override $p for asymmetric padding (badges, buttons etc.)
 @mixin box($p: null, $px: null, $py: null, $rounded: null, $bg: null, $border: null) {
-  @if $p != null       { padding: sizes.size($p); }
+  @if $p != null {
+    @if $px == null and $py == null {
+      padding: sizes.size($p);
+    } @else {
+      @if $py == null { padding-top: sizes.size($p); padding-bottom: sizes.size($p); }
+      @if $px == null { padding-left: sizes.size($p); padding-right: sizes.size($p); }
+    }
+  }
   @if $px != null      { padding-left: sizes.size($px); padding-right: sizes.size($px); }
   @if $py != null      { padding-top: sizes.size($py); padding-bottom: sizes.size($py); }
   @if $rounded != null { border-radius: borders.rounded($rounded); }
