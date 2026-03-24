@@ -351,6 +351,17 @@
   }
 }
 
+@mixin size-range($base, $responsive...) {
+  width: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      width: size($key);
+      height: size($key);
+    }
+  }
+}
+
 @mixin w-range($base, $responsive...) {
   width: size($base);
 
