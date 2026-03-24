@@ -19,6 +19,74 @@
   }
 }
 
+// Wrap content in multiple named viewport breakpoints
+// @include screens("md", "lg") { ... }
+@mixin screens($names...) {
+
+  @each $name in $names {
+    @media (min-width: map.get(config.$breakpoints, $name)) {
+      @content;
+    }
+  }
+}
+
+// Wrap content in multiple container query breakpoints (raw values, not config)
+// @include containers(400px, 600px) { ... }
+// @include containers(400px, 600px, $name: "sidebar") { ... }
+
+@mixin containers($sizes...) {
+  $kwargs: meta.keywords($sizes);
+  $container-name: map.get($kwargs, "name");
+
+  @each $size in $sizes {
+    @if $container-name {
+      @container #{$container-name} (min-width: #{$size}) {
+        @content;
+      }
+    }
+
+    @else {
+      @container (min-width: #{$size}) {
+        @content;
+      }
+    }
+  }
+}
+
+// Responsive visibility
+// show-from("md")    — hidden by default, visible at breakpoint and above
+// hide-from("md")    — visible by default, hidden at breakpoint and above
+// show-until("md")   — visible by default, hidden at breakpoint and above
+// hide-until("md")   — hidden by default, visible at breakpoint and above
+
+@mixin show-from($name) {
+  display: none;
+
+  @media (min-width: map.get(config.$breakpoints, $name)) {
+    display: revert;
+  }
+}
+
+@mixin hide-from($name) {
+  @media (min-width: map.get(config.$breakpoints, $name)) {
+    display: none;
+  }
+}
+
+@mixin show-until($name) {
+  @media (min-width: map.get(config.$breakpoints, $name)) {
+    display: none;
+  }
+}
+
+@mixin hide-until($name) {
+  display: none;
+
+  @media (min-width: map.get(config.$breakpoints, $name)) {
+    display: revert;
+  }
+}
+
 // States
 @mixin hover  { &:hover  { @content; } }
 @mixin focus  { &:focus  { @content; } }

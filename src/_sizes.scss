@@ -2,6 +2,7 @@
 @use "utility";
 @use "sass:math";
 @use "sass:map";
+@use "sass:meta";
 
 // ─── Lookup ───────────────────────────────────────────────────────────────────
 
@@ -278,3 +279,204 @@
 @mixin gap($key) { gap: size($key); }
 @mixin gap-x($key) { column-gap: size($key); }
 @mixin gap-y($key) { row-gap: size($key); }
+
+// ─── Range Mixins ─────────────────────────────────────────────────────────────
+// Usage: @include p-range(4, $md: 6, $lg: 8);
+
+@mixin p-range($base, $responsive...) {
+  padding: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding: size($key);
+    }
+  }
+}
+
+@mixin px-range($base, $responsive...) {
+  padding-left: size($base);
+  padding-right: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-left: size($key);
+      padding-right: size($key);
+    }
+  }
+}
+
+@mixin py-range($base, $responsive...) {
+  padding-top: size($base);
+  padding-bottom: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-top: size($key);
+      padding-bottom: size($key);
+    }
+  }
+}
+
+@mixin m-range($base, $responsive...) {
+  margin: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin: size($key);
+    }
+  }
+}
+
+@mixin mx-range($base, $responsive...) {
+  margin-left: size($base);
+  margin-right: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-left: size($key);
+      margin-right: size($key);
+    }
+  }
+}
+
+@mixin my-range($base, $responsive...) {
+  margin-top: size($base);
+  margin-bottom: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-top: size($key);
+      margin-bottom: size($key);
+    }
+  }
+}
+
+@mixin w-range($base, $responsive...) {
+  width: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      width: size($key);
+    }
+  }
+}
+
+@mixin h-range($base, $responsive...) {
+  height: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      height: size($key);
+    }
+  }
+}
+
+@mixin gap-range($base, $responsive...) {
+  gap: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      gap: size($key);
+    }
+  }
+}
+
+@mixin gap-x-range($base, $responsive...) {
+  column-gap: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      column-gap: size($key);
+    }
+  }
+}
+
+@mixin gap-y-range($base, $responsive...) {
+  row-gap: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      row-gap: size($key);
+    }
+  }
+}
+
+@mixin pt-range($base, $responsive...) {
+  padding-top: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-top: size($key);
+    }
+  }
+}
+
+@mixin pb-range($base, $responsive...) {
+  padding-bottom: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-bottom: size($key);
+    }
+  }
+}
+
+@mixin pl-range($base, $responsive...) {
+  padding-left: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-left: size($key);
+    }
+  }
+}
+
+@mixin pr-range($base, $responsive...) {
+  padding-right: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      padding-right: size($key);
+    }
+  }
+}
+
+@mixin mt-range($base, $responsive...) {
+  margin-top: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-top: size($key);
+    }
+  }
+}
+
+@mixin mb-range($base, $responsive...) {
+  margin-bottom: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-bottom: size($key);
+    }
+  }
+}
+
+@mixin ml-range($base, $responsive...) {
+  margin-left: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-left: size($key);
+    }
+  }
+}
+
+@mixin mr-range($base, $responsive...) {
+  margin-right: size($base);
+
+  @each $breakpoint, $key in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      margin-right: size($key);
+    }
+  }
+}
