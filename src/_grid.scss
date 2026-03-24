@@ -1,4 +1,6 @@
 @use "config";
+@use "sass:map";
+@use "sass:meta";
 
 @layer utilities {
 
@@ -73,3 +75,25 @@
 @mixin grid-flow-row { grid-auto-flow: row; }
 @mixin grid-flow-col { grid-auto-flow: column; }
 @mixin grid-flow-dense { grid-auto-flow: dense; }
+
+// ─── Range Mixins ─────────────────────────────────────────────────────────────
+
+@mixin grid-cols-range($base, $responsive...) {
+  grid-template-columns: repeat(#{$base}, minmax(0, 1fr));
+
+  @each $breakpoint, $n in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      grid-template-columns: repeat(#{$n}, minmax(0, 1fr));
+    }
+  }
+}
+
+@mixin grid-rows-range($base, $responsive...) {
+  grid-template-rows: repeat(#{$base}, minmax(0, 1fr));
+
+  @each $breakpoint, $n in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      grid-template-rows: repeat(#{$n}, minmax(0, 1fr));
+    }
+  }
+}

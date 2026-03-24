@@ -2,6 +2,7 @@
 @use "utility";
 @use "sass:list";
 @use "sass:map";
+@use "sass:meta";
 
 // ─── Lookups ──────────────────────────────────────────────────────────────────
 
@@ -126,3 +127,39 @@ body {
 @mixin leading($name) { line-height: leading($name); }
 @mixin italic { font-style: italic; }
 @mixin not-italic { font-style: normal; }
+
+@mixin text-size-range($base, $responsive...) {
+  @include text($base);
+  @each $breakpoint, $name in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      @include text($name);
+    }
+  }
+}
+
+@mixin text-weight-range($base, $responsive...) {
+  @include font($base);
+  @each $breakpoint, $name in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      @include font($name);
+    }
+  }
+}
+
+@mixin text-leading-range($base, $responsive...) {
+  @include leading($base);
+  @each $breakpoint, $name in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      @include leading($name);
+    }
+  }
+}
+
+@mixin text-tracking-range($base, $responsive...) {
+  @include tracking($base);
+  @each $breakpoint, $name in meta.keywords($responsive) {
+    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
+      @include tracking($name);
+    }
+  }
+}
