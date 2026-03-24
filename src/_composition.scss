@@ -1,0 +1,118 @@
+@use "sizes";
+@use "colors";
+@use "borders";
+
+// ─── Stack ─────────────────────────────────────────────────────────────
+
+/// Stack children vertically with a consistent gap from the sizing map in config.
+/// @param {Number} $gap -  size key (e.g. `4` )
+/// @example scss
+///   .card-list { @include vstack(4); }
+@mixin vstack($gap) {
+  display: flex;
+  flex-direction: column;
+  gap: sizes.size($gap);
+}
+
+/// Alias for `vstack`. Stack children vertically with a gap.
+/// @param {Number} $gap - size key (e.g. `4` )
+/// @example scss
+///   .sidebar { @include stack(6); }
+@mixin stack($gap) {
+  @include vstack($gap);
+}
+
+/// Lay children out in a horizontal row with a gap. Items do not wrap.
+/// Use `cluster` if you want items to wrap when space is tight.
+/// @param {Number} $gap - size key (e.g. `3` )
+/// @example scss
+///   .toolbar { @include hstack(3); }
+@mixin hstack($gap) {
+  display: flex;
+  flex-direction: row;
+  gap: sizes.size($gap);
+}
+
+/// Horizontal row with wrapping — items reflow onto new lines when space is tight.
+/// Ideal for tag lists, badge groups, and button groups.
+/// @param {Number} $gap - size key (e.g. `2` )
+/// @example scss
+///   .tags { @include cluster(2); }
+@mixin cluster($gap) {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: sizes.size($gap);
+}
+
+// ─── Center ──────────────────────────────────────────────────────────────────
+
+/// The solution to the hardest problem developers face. Centering a div.
+/// Pass `x` or `y` to constrain to one axis.
+/// Always sets `display: flex`.
+/// @param {String | null} $axis [`null`] - Axis to center on: `x`, `y`, or omit for both
+/// @example scss
+///   .hero    { @include center; }     // both axes
+///   .nav     { @include center(x); }  // horizontal only
+///   .sidebar { @include center(y); }  // vertical only
+@mixin center($axis: null) {
+  display: flex;
+  @if $axis == x {
+    justify-content: center;
+  } @else if $axis == y {
+    align-items: center;
+  } @else {
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// ─── Palette ────────────────────────────────────────────────────────────────
+
+/// Apply background, text, and border colours from a single colour family.
+/// All colour parameters are optional — pass only the ones you need.
+/// The shade number maps directly to the palette: `"red"` + `100` → `red-100`.
+/// @param {String} $family - Colour family prefix (e.g. `"blue"`, `"slate"`)
+/// @param {Number | null} $bg [null] - Background shade (e.g. `100`)
+/// @param {Number | null} $text [null] - Text colour shade (e.g. `900`)
+/// @param {Number | null} $border [null] - Border colour shade (e.g. `300`)
+/// @example scss
+///   .alert-error { @include palette("red", $bg: 100, $text: 900, $border: 300); }
+///   .badge       { @include palette("emerald", $bg: 50, $text: 700); }
+@mixin palette($family, $bg: null, $text: null, $border: null) {
+  @if $bg != null { background-color: colors.convert(colors.color("#{$family}-#{$bg}")); }
+  @if $text != null { color: colors.convert(colors.color("#{$family}-#{$text}")); }
+  @if $border != null { border-color: colors.convert(colors.color("#{$family}-#{$border}")); }
+}
+
+// ─── Box ─────────────────────────────────────────────────────────────────────
+
+/// Padding, border radius, background and border all at once.
+/// All parameters are optional
+/// `$px` / `$py` can be used alongside `$p` for asymmetric padding
+/// (e.g. badges and buttons that need wider horizontal padding than vertical).
+/// `$border` sets `1px solid <colour>`. For custom widths combine with `@include border("2")`.
+/// @param {Number | null} $p [null] - Uniform padding (size key)
+/// @param {Number | null} $px [null] - Horizontal padding override (size key)
+/// @param {Number | null} $py [null] - Vertical padding override (size key)
+/// @param {String | null} $rounded [null] - Border radius key (e.g. `"lg"`, `"full"`)
+/// @param {String | null} $bg [null] - Background colour name (e.g. `"white"`, `"slate-100"`)
+/// @param {String | null} $border [null] - Border colour name (e.g. `"slate-200"`)
+/// @example scss
+///   .panel { @include box($p: 6, $rounded: "xl", $bg: "white", $border: "slate-200"); }
+///   .badge { @include box($px: 3, $py: 1, $rounded: "full", $bg: "blue-100"); }
+@mixin box($p: null, $px: null, $py: null, $rounded: null, $bg: null, $border: null) {
+  @if $p != null {
+    @if $px == null and $py == null {
+      padding: sizes.size($p);
+    } @else {
+      @if $py == null { padding-top: sizes.size($p); padding-bottom: sizes.size($p); }
+      @if $px == null { padding-left: sizes.size($p); padding-right: sizes.size($p); }
+    }
+  }
+  @if $px != null      { padding-left: sizes.size($px); padding-right: sizes.size($px); }
+  @if $py != null      { padding-top: sizes.size($py); padding-bottom: sizes.size($py); }
+  @if $rounded != null { border-radius: borders.rounded($rounded); }
+  @if $bg != null      { background-color: colors.convert(colors.color($bg)); }
+  @if $border != null  { border: 1px solid colors.convert(colors.color($border)); }
+}

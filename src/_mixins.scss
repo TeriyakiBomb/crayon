@@ -1,6 +1,9 @@
 @use "config";
 @use "sass:map";
+@use "sass:math";
 @use "sass:meta";
+@use "sizes";
+@use "typography";
 
 // Custom media — for use in plain CSS / ERB <style> blocks
 // Requires postcss-custom-media in your pipeline for browser support
@@ -91,3 +94,53 @@
 
 // Dark
 @mixin dark { @media (prefers-color-scheme: dark) { @content; } }
+
+// ─── Fluid ────────────────────────────────────────────────────────────────────
+//
+// Generates a clamp() value that interpolates between two scale values
+// across a viewport range. inspired by https://utopia.fyi, I ain't smart enough to think of something like this
+//
+// $min-key / $max-key: numeric size key (4, 12) or string font-size key ("sm", "4xl")
+// $from / $to:         breakpoint names from $breakpoints (default: "sm" → "xl")
+//
+//   @include crayon.fluid("font-size", "base", "4xl");
+//   @include crayon.fluid("padding", 4, 12, "sm", "xl");
+
+@function -resolve-fluid-size($key) {
+  @if meta.type-of($key) == "number" {
+    @return sizes.size($key);
+  }
+  @return typography.font-size($key);
+}
+
+@mixin fluid($property, $min-key, $max-key, $from: "sm", $to: "xl") {
+  $min-size:  -resolve-fluid-size($min-key);
+  $max-size:  -resolve-fluid-size($max-key);
+  $min-width: map.get(config.$breakpoints, $from);
+  $max-width: map.get(config.$breakpoints, $to);
+
+  $base:        math.div(config.$base-font-size, 1px);    // e.g. 16
+  $min-val-px:  math.div($min-size, 1rem) * $base;
+  $max-val-px:  math.div($max-size, 1rem) * $base;
+  $min-bp-px:   math.div($min-width, 1px);
+  $max-bp-px:   math.div($max-width, 1px);
+
+  // slope = unitless px/px coefficient for vw
+  $slope:         math.div($max-val-px - $min-val-px, $max-bp-px - $min-bp-px) * 100;
+  $intercept-px:  $min-val-px - math.div($min-bp-px, 100) * $slope;
+  $intercept-rem: math.div($intercept-px, $base);
+
+  #{$property}: clamp(#{$min-size}, #{$intercept-rem}rem + #{$slope}vw, #{$max-size});
+}
+
+@mixin fluid-text($min, $max, $from: "sm", $to: "xl") {
+  @include fluid("font-size", $min, $max, $from, $to);
+}
+
+@mixin fluid-p($min, $max, $from: "sm", $to: "xl") {
+  @include fluid("padding", $min, $max, $from, $to);
+}
+
+@mixin fluid-gap($min, $max, $from: "sm", $to: "xl") {
+  @include fluid("gap", $min, $max, $from, $to);
+}
