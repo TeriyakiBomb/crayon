@@ -6,22 +6,37 @@
 
 // ─── Lookups ──────────────────────────────────────────────────────────────────
 
+/// Look up a font size from `$font-sizes`, returned in rem.
+/// @param {String} $name - Key from `$font-sizes` (e.g. `"lg"`, `"2xl"`)
+/// @return {Length}
 @function font-size($name) {
   @return utility.px-to-rem(list.nth(map.get(config.$font-sizes, $name), 1));
 }
 
+/// Look up a font weight from `$font-weights`.
+/// @param {String} $name - Key from `$font-weights` (e.g. `"bold"`)
+/// @return {Number}
 @function font-weight($name) {
   @return map.get(config.$font-weights, $name);
 }
 
+/// Look up a font family stack from `$font-families`.
+/// @param {String} $name - Key from `$font-families` (e.g. `"mono"`)
+/// @return {List}
 @function font-family($name) {
   @return map.get(config.$font-families, $name);
 }
 
+/// Look up a letter spacing from `$letter-spacings`.
+/// @param {String} $name - Key from `$letter-spacings` (e.g. `"tight"`)
+/// @return {Length}
 @function tracking($name) {
   @return map.get(config.$letter-spacings, $name);
 }
 
+/// Look up a line height from `$line-heights`.
+/// @param {String} $name - Key from `$line-heights` (e.g. `"relaxed"`)
+/// @return {Number}
 @function leading($name) {
   @return map.get(config.$line-heights, $name);
 }
@@ -117,17 +132,38 @@ body {
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
+/// Set `font-size` and `line-height` from the font size scale.
+/// @param {String} $name - Key from `$font-sizes`
 @mixin text($name) {
   font-size: font-size($name);
   line-height: list.nth(map.get(config.$font-sizes, $name), 2);
 }
+
+/// Set `font-weight` from the font weight scale.
+/// @param {String} $name - Key from `$font-weights`
 @mixin font($name) { font-weight: font-weight($name); }
+
+/// Set `font-family` from the font family map.
+/// @param {String} $name - Key from `$font-families`
 @mixin font-family($name) { font-family: font-family($name); }
+
+/// Set `letter-spacing` from the letter spacing scale.
+/// @param {String} $name - Key from `$letter-spacings`
 @mixin tracking($name) { letter-spacing: tracking($name); }
+
+/// Set `line-height` from the line height scale.
+/// @param {String} $name - Key from `$line-heights`
 @mixin leading($name) { line-height: leading($name); }
+
+/// Set `font-style: italic`.
 @mixin italic { font-style: italic; }
+
+/// Set `font-style: normal`.
 @mixin not-italic { font-style: normal; }
 
+/// Responsive `font-size` + `line-height`. Base value + overrides at named breakpoints.
+/// @param {String} $base - Font size key for default
+/// @param {ArgList} $responsive - Keyword args mapping breakpoint → font size key
 @mixin text-size-range($base, $responsive...) {
   @include text($base);
   @each $breakpoint, $name in meta.keywords($responsive) {
@@ -137,6 +173,9 @@ body {
   }
 }
 
+/// Responsive `font-weight`.
+/// @param {String} $base
+/// @param {ArgList} $responsive
 @mixin text-weight-range($base, $responsive...) {
   @include font($base);
   @each $breakpoint, $name in meta.keywords($responsive) {
@@ -146,6 +185,9 @@ body {
   }
 }
 
+/// Responsive `line-height`.
+/// @param {String} $base
+/// @param {ArgList} $responsive
 @mixin text-leading-range($base, $responsive...) {
   @include leading($base);
   @each $breakpoint, $name in meta.keywords($responsive) {
@@ -155,6 +197,9 @@ body {
   }
 }
 
+/// Responsive `letter-spacing`.
+/// @param {String} $base
+/// @param {ArgList} $responsive
 @mixin text-tracking-range($base, $responsive...) {
   @include tracking($base);
   @each $breakpoint, $name in meta.keywords($responsive) {
