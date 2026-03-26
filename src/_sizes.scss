@@ -6,6 +6,10 @@
 
 // ─── Lookup ───────────────────────────────────────────────────────────────────
 
+/// Look up a spacing value from `$sizes`, returned in rem.
+/// Falls back to `$base-size * $key` for keys not in the map.
+/// @param {Number} $key - Scale step (e.g. `4`, `12`)
+/// @return {Length}
 @function size($key) {
   $from-map: map.get(config.$sizes, $key);
 
@@ -17,6 +21,7 @@
   @return utility.px-to-rem(config.$base-size * $key);
 }
 
+/// @access private
 @mixin padding-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
@@ -38,6 +43,7 @@
   }
 }
 
+/// @access private
 @mixin margin-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
@@ -75,6 +81,7 @@
   }
 }
 
+/// @access private
 @mixin width-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
@@ -84,6 +91,7 @@
   .max-w-#{$escaped} { max-width: $converted-value; }
 }
 
+/// @access private
 @mixin height-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
@@ -93,6 +101,7 @@
   .max-h-#{$escaped} { max-height: $converted-value; }
 }
 
+/// @access private
 @mixin size-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
@@ -201,6 +210,7 @@
   }
 }
 
+/// @access private
 @mixin gap-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
@@ -217,39 +227,69 @@
 }
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
+// All `$key` params are size scale keys (e.g. `4`, `12`).
 
+/// @param {Number} $key - Size scale key
 @mixin p($key) { padding: size($key); }
+/// @param {Number} $key
 @mixin pt($key) { padding-top: size($key); }
+/// @param {Number} $key
 @mixin pb($key) { padding-bottom: size($key); }
+/// @param {Number} $key
 @mixin pl($key) { padding-left: size($key); }
+/// @param {Number} $key
 @mixin pr($key) { padding-right: size($key); }
+/// @param {Number} $key
 @mixin px($key) { padding-left: size($key); padding-right: size($key); }
+/// @param {Number} $key
 @mixin py($key) { padding-top: size($key); padding-bottom: size($key); }
 
+/// @param {Number} $key
 @mixin m($key) { margin: size($key); }
+/// @param {Number} $key
 @mixin mt($key) { margin-top: size($key); }
+/// @param {Number} $key
 @mixin mb($key) { margin-bottom: size($key); }
+/// @param {Number} $key
 @mixin ml($key) { margin-left: size($key); }
+/// @param {Number} $key
 @mixin mr($key) { margin-right: size($key); }
+/// @param {Number} $key
 @mixin mx($key) { margin-left: size($key); margin-right: size($key); }
+/// @param {Number} $key
 @mixin my($key) { margin-top: size($key); margin-bottom: size($key); }
 @mixin mx-auto { margin-left: auto; margin-right: auto; }
 
+/// @param {Number} $key
 @mixin -m($key) { margin: -(size($key)); }
+/// @param {Number} $key
 @mixin -mt($key) { margin-top: -(size($key)); }
+/// @param {Number} $key
 @mixin -mb($key) { margin-bottom: -(size($key)); }
+/// @param {Number} $key
 @mixin -ml($key) { margin-left: -(size($key)); }
+/// @param {Number} $key
 @mixin -mr($key) { margin-right: -(size($key)); }
+/// @param {Number} $key
 @mixin -mx($key) { margin-left: -(size($key)); margin-right: -(size($key)); }
+/// @param {Number} $key
 @mixin -my($key) { margin-top: -(size($key)); margin-bottom: -(size($key)); }
 
+/// @param {Number} $key
 @mixin w($key) { width: size($key); }
+/// @param {Number} $key
 @mixin min-w($key) { min-width: size($key); }
+/// @param {Number} $key
 @mixin max-w($key) { max-width: size($key); }
 
+/// @param {Number} $key
 @mixin h($key) { height: size($key); }
+/// @param {Number} $key
 @mixin min-h($key) { min-height: size($key); }
+/// @param {Number} $key
 @mixin max-h($key) { max-height: size($key); }
+/// Set both `width` and `height`.
+/// @param {Number} $key
 @mixin size($key) { width: size($key); height: size($key); }
 
 @mixin m-auto { margin: auto; }
@@ -276,28 +316,38 @@
 @mixin size-full { width: 100%; height: 100%; }
 @mixin size-auto { width: auto; height: auto; }
 
+/// @param {Number} $key
 @mixin gap($key) { gap: size($key); }
+/// @param {Number} $key
 @mixin gap-x($key) { column-gap: size($key); }
+/// @param {Number} $key
 @mixin gap-y($key) { row-gap: size($key); }
 
 // ─── Range Mixins ─────────────────────────────────────────────────────────────
-// Usage: @include p-range(4, $md: 6, $lg: 8);
 
-@mixin p-range($base, $responsive...) {
+/// Responsive `padding`. Base value + overrides at named breakpoints.
+/// @param {Number} $base - Size key for default
+/// @param {ArgList} $breakpoint-range - Keyword args mapping breakpoint → size key
+/// @example scss
+///   .hero { @include p-range(4, $md: 8, $lg: 12); }
+@mixin p-range($base, $breakpoint-range...) {
   padding: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       padding: size($key);
     }
   }
 }
 
-@mixin px-range($base, $responsive...) {
+/// Responsive horizontal `padding` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin px-range($base, $breakpoint-range...) {
   padding-left: size($base);
   padding-right: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       padding-left: size($key);
       padding-right: size($key);
@@ -305,11 +355,14 @@
   }
 }
 
-@mixin py-range($base, $responsive...) {
+/// Responsive vertical `padding` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin py-range($base, $breakpoint-range...) {
   padding-top: size($base);
   padding-bottom: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       padding-top: size($key);
       padding-bottom: size($key);
@@ -317,21 +370,27 @@
   }
 }
 
-@mixin m-range($base, $responsive...) {
+/// Responsive `margin` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin m-range($base, $breakpoint-range...) {
   margin: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       margin: size($key);
     }
   }
 }
 
-@mixin mx-range($base, $responsive...) {
+/// Responsive horizontal `margin` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin mx-range($base, $breakpoint-range...) {
   margin-left: size($base);
   margin-right: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       margin-left: size($key);
       margin-right: size($key);
@@ -339,11 +398,14 @@
   }
 }
 
-@mixin my-range($base, $responsive...) {
+/// Responsive vertical `margin` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin my-range($base, $breakpoint-range...) {
   margin-top: size($base);
   margin-bottom: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       margin-top: size($key);
       margin-bottom: size($key);
@@ -351,10 +413,13 @@
   }
 }
 
-@mixin size-range($base, $responsive...) {
+/// Responsive `width` + `height` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin size-range($base, $breakpoint-range...) {
   width: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       width: size($key);
       height: size($key);
@@ -362,130 +427,169 @@
   }
 }
 
-@mixin w-range($base, $responsive...) {
+/// Responsive `width` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin w-range($base, $breakpoint-range...) {
   width: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       width: size($key);
     }
   }
 }
 
-@mixin h-range($base, $responsive...) {
+/// Responsive `height` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin h-range($base, $breakpoint-range...) {
   height: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       height: size($key);
     }
   }
 }
 
-@mixin gap-range($base, $responsive...) {
+/// Responsive `gap` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin gap-range($base, $breakpoint-range...) {
   gap: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       gap: size($key);
     }
   }
 }
 
-@mixin gap-x-range($base, $responsive...) {
+/// Responsive `column-gap` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin gap-x-range($base, $breakpoint-range...) {
   column-gap: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       column-gap: size($key);
     }
   }
 }
 
-@mixin gap-y-range($base, $responsive...) {
+/// Responsive `row-gap` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin gap-y-range($base, $breakpoint-range...) {
   row-gap: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       row-gap: size($key);
     }
   }
 }
 
-@mixin pt-range($base, $responsive...) {
+/// Responsive `padding-top` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin pt-range($base, $breakpoint-range...) {
   padding-top: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       padding-top: size($key);
     }
   }
 }
 
-@mixin pb-range($base, $responsive...) {
+/// Responsive `padding-bottom` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin pb-range($base, $breakpoint-range...) {
   padding-bottom: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       padding-bottom: size($key);
     }
   }
 }
 
-@mixin pl-range($base, $responsive...) {
+/// Responsive `padding-left across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin pl-range($base, $breakpoint-range...) {
   padding-left: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       padding-left: size($key);
     }
   }
 }
 
-@mixin pr-range($base, $responsive...) {
+/// Responsive `padding-right` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin pr-range($base, $breakpoint-range...) {
   padding-right: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       padding-right: size($key);
     }
   }
 }
 
-@mixin mt-range($base, $responsive...) {
+/// Responsive `margin-top` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin mt-range($base, $breakpoint-range...) {
   margin-top: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       margin-top: size($key);
     }
   }
 }
 
-@mixin mb-range($base, $responsive...) {
+/// Responsive `margin-bottom` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin mb-range($base, $breakpoint-range...) {
   margin-bottom: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       margin-bottom: size($key);
     }
   }
 }
 
-@mixin ml-range($base, $responsive...) {
+/// Responsive `margin-left` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin ml-range($base, $breakpoint-range...) {
   margin-left: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       margin-left: size($key);
     }
   }
 }
 
-@mixin mr-range($base, $responsive...) {
+/// Responsive `margin-right` across breakpoint ranges.
+/// @param {Number} $base
+/// @param {ArgList} $breakpoint-range
+@mixin mr-range($base, $breakpoint-range...) {
   margin-right: size($base);
 
-  @each $breakpoint, $key in meta.keywords($responsive) {
+  @each $breakpoint, $key in meta.keywords($breakpoint-range) {
     @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
       margin-right: size($key);
     }
