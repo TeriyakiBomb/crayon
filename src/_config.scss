@@ -1,10 +1,15 @@
 @use "sass:math";
 
-// Layout columns — used to generate grid-cols-* and col/row-span-* classes
+/// Number of columns for grid-cols-* and col/row-span-* classes.
+/// @type Number
 $layout-columns: 12 !default;
-// Layout divisions — used to generate fractional width/height classes like w-1/3, h-3/4 etc
+
+/// Denominators used to generate fractional width/height classes (e.g. w-1/3, h-3/4).
+/// @type List
 $layout-divisions: (2, 3, 4, 5, 6, 12) !default;
 
+/// Border width scale. `"DEFAULT"` is used by `.border` with no suffix.
+/// @type Map
 $border-widths: (
   "DEFAULT": 1px,
   "0": 0px,
@@ -13,6 +18,8 @@ $border-widths: (
   "8": 8px,
 ) !default;
 
+/// Border radius scale. Keys map to `.rounded-{key}` classes and `rounded()` function.
+/// @type Map
 $border-radii: (
   "none": 0,
   "sm": 2px,
@@ -25,9 +32,11 @@ $border-radii: (
   "full": 9999px,
 ) !default;
 
-// Breakpoints
+// ─── Breakpoints ───────────────────────────────────────────────────────────────────
 
-//Classes that start with a number are not allowed in CSS, these are generated without a prefix, so if you go beyond 'xxl', use a different name instead of '3xl'
+/// Named breakpoints for responsive utilities and the `screen()` mixin.
+/// Keys must not start with a digit (CSS class restriction).
+/// @type Map
 $breakpoints: (
   "sm": 640px,
   "md": 768px,
@@ -36,18 +45,26 @@ $breakpoints: (
   "xxl": 1536px,
 ) !default;
 
-//Typography
-$base-font-size: 16px !default;
+// ─── Fonts ───────────────────────────────────────────────────────────────────
 
+/// Named font family stacks. The `$default-font` key is applied to `body`.
+/// @type Map
 $font-families: (
   "sans": ( sans-serif),
   "serif": ( Georgia, "Times New Roman", serif),
   "mono": ( ui-monospace, "Cascadia Mono", "Segoe UI Mono", "Liberation Mono", Menlo, Monaco, Consolas, monospace),
 ) !default;
 
-// Default font — must be a key from $font-families
+/// Which key from `$font-families` to use as the document default.
+/// @type String
 $default-font: "sans" !default;
 
+/// Base font size used to compute rem values.
+/// @type Length
+$base-font-size: 16px !default;
+
+/// Font size scale. Each entry is `(font-size, line-height)`.
+/// @type Map
 $font-sizes: (
   "xs": ( $base-font-size * 0.75, 1rem),
   "sm": ( $base-font-size * 0.875, 1.25rem),
@@ -64,6 +81,8 @@ $font-sizes: (
   "9xl": ( $base-font-size * 8, 1 ),
 ) !default;
 
+/// Font weight scale mapped to numeric CSS values.
+/// @type Map
 $font-weights: (
   "thin": 100,
   "extralight": 200,
@@ -76,6 +95,8 @@ $font-weights: (
   "black": 900,
 ) !default;
 
+/// Letter spacing scale.
+/// @type Map
 $letter-spacings: (
   "tighter": -0.05em,
   "tight": -0.025em,
@@ -85,6 +106,8 @@ $letter-spacings: (
   "widest": 0.1em,
 ) !default;
 
+/// Line height scale.
+/// @type Map
 $line-heights: (
   "none": 1,
   "tight": 1.25,
@@ -94,8 +117,15 @@ $line-heights: (
   "loose": 2,
 ) !default;
 
+// ─── Sizes (Scale and spacing) ───────────────────────────────────────────────────────────────────
+
+/// Base unit for the scale. All `$sizes` entries are multiples of this.
+/// Overriding this does **not** recompute `$sizes` — override both together.
+/// @type Length
 $base-size: 4px !default;
 
+/// Spacing scale keyed by step number. Values are `$base-size * key`.
+/// @type Map
 $sizes: (
   0.5: $base-size * 0.5,
   1: $base-size,
@@ -137,12 +167,19 @@ $sizes: (
   96: $base-size * 96,
 ) !default;
 
-// Colour output space — used by colors.convert() and to-<space>()
-// Options: srgb, hsl, oklch, oklab, display-p3
+// ─── Colors ───────────────────────────────────────────────────────────────────
+
+/// Whether to convert colour output to a different colour space.
+/// @type Bool
 $convert-colorspace: true !default;
+
+/// Target colour space for output. Options: `srgb`, `hsl`, `oklch`, `oklab`, `display-p3`.
+/// @type String
 $output-colorspace: oklch !default;
 
-/* The base color are the same as tailwind - it's all on you to extend etc */
+/// Colour palette. Keys map to `.bg-{name}`, `.text-{name}`, `.border-{name}` classes.
+/// Defaults to the Tailwind v3 palette.
+/// @type Map
 $colors: (
   // Slate
   "slate-50": #f8fafc,
@@ -435,6 +472,8 @@ $colors: (
   "black": #000000
 ) !default;
 
+/// Opacity scale for `.opacity-{n}` classes and `opacity()` function.
+/// @type Map
 $opacities: (
   "0": 0,
   "5": 0.05,
