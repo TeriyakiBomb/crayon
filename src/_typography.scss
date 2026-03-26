@@ -41,27 +41,29 @@
   @return map.get(config.$line-heights, $name);
 }
 
-:root {
-  --font-family: #{map.get(config.$font-families, config.$default-font)};
+@if config.$output-css-vars {
+  :root {
+    --font-family: #{map.get(config.$font-families, config.$default-font)};
 
-  @each $name, $stack in config.$font-families {
-    --font-#{$name}: #{$stack};
-  }
+    @each $name, $stack in config.$font-families {
+      --font-#{$name}: #{$stack};
+    }
 
-  @each $name, $value in config.$font-weights {
-    --font-weight-#{$name}: #{$value};
-  }
+    @each $name, $value in config.$font-weights {
+      --font-weight-#{$name}: #{$value};
+    }
 
-  @each $name, $values in config.$font-sizes {
-    --text-#{$name}: #{utility.px-to-rem(list.nth($values, 1))};
-  }
+    @each $name, $values in config.$font-sizes {
+      --text-#{$name}: #{utility.px-to-rem(list.nth($values, 1))};
+    }
 
-  @each $name, $value in config.$letter-spacings {
-    --tracking-#{$name}: #{$value};
-  }
+    @each $name, $value in config.$letter-spacings {
+      --tracking-#{$name}: #{$value};
+    }
 
-  @each $name, $value in config.$line-heights {
-    --leading-#{$name}: #{$value};
+    @each $name, $value in config.$line-heights {
+      --leading-#{$name}: #{$value};
+    }
   }
 }
 

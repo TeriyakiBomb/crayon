@@ -112,10 +112,12 @@
   }
 }
 
-:root {
-  @each $size, $value in config.$sizes {
-    $name: utility.str-replace("#{$size}", ".", "_");
-    --size-#{$name}: #{utility.px-to-rem($value)};
+@if config.$output-css-vars {
+  :root {
+    @each $size, $value in config.$sizes {
+      $name: utility.str-replace("#{$size}", ".", "_");
+      --size-#{$name}: #{utility.px-to-rem($value)};
+    }
   }
 }
 

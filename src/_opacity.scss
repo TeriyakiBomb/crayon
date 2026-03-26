@@ -12,9 +12,11 @@
 
 // ─── CSS Variables ───────────────────────────────────────────────────────────
 
-:root {
-  @each $name, $value in config.$opacities {
-    --opacity-#{$name}: #{$value};
+@if config.$output-css-vars {
+  :root {
+    @each $name, $value in config.$opacities {
+      --opacity-#{$name}: #{$value};
+    }
   }
 }
 

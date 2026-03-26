@@ -7,10 +7,12 @@
 
 // Custom media — for use in plain CSS / ERB <style> blocks
 // Requires postcss-custom-media in your pipeline for browser support
-@each $name, $value in config.$breakpoints {
-  @custom-media --#{$name} (min-width: #{$value});
+@if config.$output-css-vars {
+  @each $name, $value in config.$breakpoints {
+    @custom-media --#{$name} (min-width: #{$value});
+  }
+  @custom-media --dark (prefers-color-scheme: dark);
 }
-@custom-media --dark (prefers-color-scheme: dark);
 
 /// Wrap content in a `min-width` media query for a named breakpoint.
 /// @param {String} $name - Key from `$breakpoints`

@@ -89,9 +89,11 @@ $resolved-colors: config.$colors;
 }
 
 // generate them colours ------------------------------------------------------------
-:root {
-  @each $name, $value in $resolved-colors {
-    --color-#{$name}: #{convert($value)};
+@if config.$output-css-vars {
+  :root {
+    @each $name, $value in $resolved-colors {
+      --color-#{$name}: #{convert($value)};
+    }
   }
 }
 

@@ -24,22 +24,24 @@
 
 // ─── CSS Variables ────────────────────────────────────────────────────────────
 
-:root {
-  @each $key, $value in config.$border-widths {
-    @if $key == "DEFAULT" {
-      --border: #{$value};
-    } @else {
-      --border-#{$key}: #{$value};
+@if config.$output-css-vars {
+  :root {
+    @each $key, $value in config.$border-widths {
+      @if $key == "DEFAULT" {
+        --border: #{$value};
+      } @else {
+        --border-#{$key}: #{$value};
+      }
     }
-  }
 
-  @each $key, $value in config.$border-radii {
-    $rem: if($value == 0 or $value == 9999px, $value, utility.px-to-rem($value));
+    @each $key, $value in config.$border-radii {
+      $rem: if($value == 0 or $value == 9999px, $value, utility.px-to-rem($value));
 
-    @if $key == "DEFAULT" {
-      --rounded: #{$rem};
-    } @else {
-      --rounded-#{$key}: #{$rem};
+      @if $key == "DEFAULT" {
+        --rounded: #{$rem};
+      } @else {
+        --rounded-#{$key}: #{$rem};
+      }
     }
   }
 }
