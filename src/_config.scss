@@ -1,5 +1,10 @@
 @use "sass:math";
 
+/// When `true`, `$colors` defaults to the full Tailwind v3 palette.
+/// Set to `false` to start with an empty palette and define your own via `$colors`.
+/// @type Bool
+$use-tailwind-colors: true !default;
+
 /// Number of columns for grid-cols-* and col/row-span-* classes.
 /// @type Number
 $layout-columns: 12 !default;
@@ -178,9 +183,9 @@ $convert-colorspace: true !default;
 $output-colorspace: oklch !default;
 
 /// Colour palette. Keys map to `.bg-{name}`, `.text-{name}`, `.border-{name}` classes.
-/// Defaults to the Tailwind v3 palette.
+/// Defaults to the Tailwind v3 palette when `$use-tailwind-colors` is `true`, otherwise `()`.
 /// @type Map
-$colors: (
+$colors: if($use-tailwind-colors, (
   // Slate
   "slate-50": #f8fafc,
   "slate-100": #f1f5f9,
@@ -470,7 +475,8 @@ $colors: (
   // Base
   "white": #ffffff,
   "black": #000000
-) !default;
+), ()) !default;
+
 
 /// Opacity scale for `.opacity-{n}` classes and `opacity()` function.
 /// @type Map
