@@ -1,4 +1,5 @@
 @use "config";
+@use "colors";
 @use "sass:map";
 
 $-styles: solid, dashed, dotted, double, none;
@@ -37,7 +38,7 @@ $-styles: solid, dashed, dotted, double, none;
 
   // ─── Divide Color ─────────────────────────────────────────────────────────────
 
-  @each $name, $value in config.$colors {
+  @each $name, $value in colors.$resolved-colors {
     .divide-#{$name} > :not(:last-child) { border-color: $value; }
   }
 }

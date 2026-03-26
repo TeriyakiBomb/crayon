@@ -1,6 +1,13 @@
 @use "config";
 @use "sass:map";
 @use "sass:color" as sasscolor;
+@use "tailwind-colors" as tw;
+
+// Resolved palette — Tailwind base + user colours. User entries win on conflicts.
+$resolved-colors: config.$colors;
+@if config.$use-tailwind-colors {
+  $resolved-colors: map.merge(tw.$palette, config.$colors);
+}
 
 // ─── lookup ───────────────────────────────────────────────────────────
 
@@ -8,7 +15,7 @@
 /// @param {String} $name - Key from `$colors` (e.g. `"blue-500"`)
 /// @return {Color}
 @function color($name) {
-  @return map.get(config.$colors, $name);
+  @return map.get($resolved-colors, $name);
 }
 
 // ─── Colour space conversion ──────────────────────────────────────────────────
@@ -83,13 +90,13 @@
 
 // generate them colours ------------------------------------------------------------
 :root {
-  @each $name, $value in config.$colors {
+  @each $name, $value in $resolved-colors {
     --color-#{$name}: #{convert($value)};
   }
 }
 
 @layer utilities {
-  @each $name, $value in config.$colors {
+  @each $name, $value in $resolved-colors {
     .bg-#{$name} { background-color: convert($value); }
     .text-#{$name} { color: convert($value); }
     .border-#{$name} { border-color: convert($value); }
