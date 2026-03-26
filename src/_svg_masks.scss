@@ -1,0 +1,106 @@
+@use "sizes";
+
+// ─── SVG Masks ───────────────────────────────────────────────────────────────
+//
+// Each mask clips the element to a shape. The element's own background or colour fills it.
+// All masks are available as utility classes and as mixins.
+//
+// $size:   Optional spacing scale key — sets width and height together.
+// $rotate: Degrees to rotate the mask shape (e.g. 90, 180, -90).
+// $flip:   Mirror the shape: `x` (left↔right) or `y` (top↔bottom).
+
+@function _mask-transform($rotate, $flip) {
+  $t: "";
+  @if $rotate != null { $t: "rotate(#{$rotate}, 32, 32)"; }
+  @if $flip == x      { $t: "#{$t} scale(-1,1) translate(-64,0)"; }
+  @else if $flip == y { $t: "#{$t} scale(1,-1) translate(0,-64)"; }
+  @return $t;
+}
+
+@mixin _mask($path, $rotate: null, $flip: null) {
+  $t: _mask-transform($rotate, $flip);
+  $inner: if($t != "", "<g transform='#{$t}'>#{$path}</g>", $path);
+  mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>#{$inner}</svg>");
+  mask-size: 100% 100%;
+  mask-repeat: no-repeat;
+}
+
+// ─── Mesa ─────────────────────────────────────────────────────────────────────
+
+/// Clip to a square with a sharp top-left corner and rounded remaining corners.
+/// @param {Number | null} $size [null] - size key — sets width and height
+/// @param {Number | null} $rotate [null] - degrees to rotate the mask (e.g. `90`, `180`, `-90`)
+/// @param {String | null} $flip [null] - mirror the mask shape: `x` (left↔right) or `y` (top↔bottom)
+/// @example scss
+///   .avatar { @include mask-mesa(16); }
+///   .icon   { @include mask-mesa($rotate: 90); }
+///   .badge  { @include mask-mesa($flip: x); }
+@mixin mask-mesa($size: null, $rotate: null, $flip: null) {
+  @include _mask(
+    "<path d='M32,0 L54,0 C59.5228475,0 64,4.4771525 64,10 L64,32 C64,49.673112 49.673112,64 32,64 C14.326888,64 0,49.673112 0,32 C0,14.326888 14.326888,0 32,0 Z' fill='black'/>",
+    $rotate, $flip
+  );
+  @if $size != null { width: sizes.size($size); height: sizes.size($size); }
+}
+
+// ─── Squircle ─────────────────────────────────────────────────────────────────
+
+/// Clip to a superellipse — smoother than a rounded rectangle, rounder than a square.
+/// Symmetric, so rotate and flip have no visible effect.
+/// @param {Number | null} $size [null] - size key — sets width and height
+/// @param {Number | null} $rotate [null] - degrees to rotate the mask
+/// @param {String | null} $flip [null] - mirror the mask shape: `x` or `y`
+/// @example scss
+///   .avatar { @include mask-squircle(12); }
+@mixin mask-squircle($size: null, $rotate: null, $flip: null) {
+  @include _mask(
+    "<path d='M32,0 C46.0920843,0 53.1381265,0 57.8603957,3.92132249 C58.666614,4.59079769 59.4092023,5.33338597 60.0786775,6.1396043 C64,10.8618735 64,17.9079157 64,32 C64,46.0920843 64,53.1381265 60.0786775,57.8603957 C59.4092023,58.666614 58.666614,59.4092023 57.8603957,60.0786775 C53.1381265,64 46.0920843,64 32,64 C17.9079157,64 10.8618735,64 6.1396043,60.0786775 C5.33338597,59.4092023 4.59079769,58.666614 3.92132249,57.8603957 C0,53.1381265 0,46.0920843 0,32 C0,17.9079157 0,10.8618735 3.92132249,6.1396043 C4.59079769,5.33338597 5.33338597,4.59079769 6.1396043,3.92132249 C10.8618735,0 17.9079157,0 32,0 Z' fill='black'/>",
+    $rotate, $flip
+  );
+  @if $size != null { width: sizes.size($size); height: sizes.size($size); }
+}
+
+// ─── Swedge ───────────────────────────────────────────────────────────────────
+
+/// Clip to a shape with a sharp top-left corner, large circular arc on the bottom-left,
+/// and rounded corners top-right and bottom-right.
+/// @param {Number | null} $size [null] - size key — sets width and height
+/// @param {Number | null} $rotate [null] - degrees to rotate the mask (e.g. `90`, `180`)
+/// @param {String | null} $flip [null] - mirror the mask shape: `x` or `y`
+/// @example scss
+///   .avatar { @include mask-swedge(16); }
+///   .avatar { @include mask-swedge($rotate: 180); }
+///   .avatar { @include mask-swedge($flip: x); }
+@mixin mask-swedge($size: null, $rotate: null, $flip: null) {
+  @include _mask(
+    "<path d='M47,0 C53.3926611,0 59.2449035,3.58625871 62.1471109,9.2821615 C64,12.9186611 64,17.6791074 64,27.2 L64,36.8 C64,46.3208926 64,51.0813389 62.1471109,54.7178385 C60.5172635,57.9165941 57.9165941,60.5172635 54.7178385,62.1471109 C51.0813389,64 46.3208926,64 36.8,64 L27.2,64 C17.6791074,64 12.9186611,64 9.2821615,62.1471109 C3.58625871,59.2449035 0,53.3926611 0,47 C0,21.0426168 21.0426168,0 47,0 Z' fill='black'/>",
+    $rotate, $flip
+  );
+  @if $size != null { width: sizes.size($size); height: sizes.size($size); }
+}
+
+// ─── Pebble ───────────────────────────────────────────────────────────────────
+
+/// Clip to an asymmetric rounded square — heavier mass top-right, sweeping arc bottom-left.
+/// Flip `x` to shift the mass to the top-left instead.
+/// @param {Number | null} $size [null] - size key — sets width and height
+/// @param {Number | null} $rotate [null] - degrees to rotate the mask
+/// @param {String | null} $flip [null] - mirror the mask shape: `x` or `y`
+/// @example scss
+///   .avatar { @include mask-pebble(12); }
+///   .avatar { @include mask-pebble($flip: x); }
+///   .avatar { @include mask-pebble(12, $rotate: 90, $flip: y); }
+@mixin mask-pebble($size: null, $rotate: null, $flip: null) {
+  @include _mask(
+    "<path d='M38,0 L38.4,0 C47.3608401,0 51.8412601,0 55.263848,1.74389561 C58.2744415,3.27786961 60.7221304,5.72555852 62.2561044,8.736152 C64,12.1587399 64,16.6391599 64,25.6 L64,26 C64,35.301962 64,39.952943 62.905685,43.7513943 C60.2396945,53.005252 53.005252,60.2396945 43.7513943,62.905685 C39.952943,64 35.301962,64 26,64 L25.6,64 C16.6391599,64 12.1587399,64 8.736152,62.2561044 C5.72555852,60.7221304 3.27786961,58.2744415 1.74389561,55.263848 C0,51.8412601 0,47.3608401 0,38.4 L0,38 C0,28.698038 0,24.047057 1.09431499,20.2486057 C3.76030546,10.994748 10.994748,3.76030546 20.2486057,1.09431499 C24.047057,0 28.698038,0 38,0 Z' fill='black'/>",
+    $rotate, $flip
+  );
+  @if $size != null { width: sizes.size($size); height: sizes.size($size); }
+}
+
+@layer utilities {
+  .mask-mesa     { @include mask-mesa; }
+  .mask-squircle { @include mask-squircle; }
+  .mask-swedge   { @include mask-swedge; }
+  .mask-pebble   { @include mask-pebble; }
+}
