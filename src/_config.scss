@@ -5,6 +5,11 @@
 /// @type Bool
 $use-tailwind-colors: true !default;
 
+/// Output CSS custom properties (`--color-*`, `--size-*`, `--text-*`, etc.) on `:root`.
+/// Disable if you're using Crayon purely via Sass functions and utility classes.
+/// @type Bool
+$output-css-vars: true !default;
+
 /// Number of columns for grid-cols-* and col/row-span-* classes.
 /// @type Number
 $layout-columns: 12 !default;
@@ -187,7 +192,6 @@ $output-colorspace: oklch !default;
 /// Keys map to `.bg-{name}`, `.text-{name}`, `.border-{name}` classes and the `color()` function.
 /// @type Map
 $colors: () !default;
-
 
 /// Opacity scale for `.opacity-{n}` classes and `opacity()` function.
 /// @type Map
