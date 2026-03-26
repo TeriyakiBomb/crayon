@@ -3,6 +3,9 @@
 
 // ─── Lookup ──────────────────────────────────────────────────────────────────
 
+/// Look up an opacity value from `$opacities`.
+/// @param {String} $name - Key from `$opacities` (e.g. `"50"`)
+/// @return {Number}
 @function opacity($name) {
   @return map.get(config.$opacities, $name);
 }
@@ -25,4 +28,6 @@
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
+/// Set `opacity` from the opacity scale.
+/// @param {String} $name - Key from `$opacities`
 @mixin opacity($name) { opacity: opacity($name); }
