@@ -10,6 +10,11 @@ $use-tailwind-colors: true !default;
 /// @type Bool
 $output-css-vars: true !default;
 
+/// Generate opacity modifier classes for colours (e.g. `.bg-red-500\/50`).
+/// Uses the `$opacities` map for available stops.
+/// @type Bool
+$use-color-opacity-modifiers: true !default;
+
 /// Number of columns for grid-cols-* and col/row-span-* classes.
 /// @type Number
 $layout-columns: 12 !default;

@@ -102,6 +102,14 @@ $resolved-colors: config.$colors;
     .bg-#{$name} { background-color: convert($value); }
     .text-#{$name} { color: convert($value); }
     .border-#{$name} { border-color: convert($value); }
+
+    @if config.$use-color-opacity-modifiers {
+      @each $opacity-name, $opacity-value in config.$opacities {
+        .bg-#{$name}\/#{$opacity-name} { background-color: convert(sasscolor.adjust($value, $alpha: -1 + $opacity-value)); }
+        .text-#{$name}\/#{$opacity-name} { color: convert(sasscolor.adjust($value, $alpha: -1 + $opacity-value)); }
+        .border-#{$name}\/#{$opacity-name} { border-color: convert(sasscolor.adjust($value, $alpha: -1 + $opacity-value)); }
+      }
+    }
   }
 }
 
