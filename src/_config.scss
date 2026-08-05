@@ -1,17 +1,8 @@
-/// Include the full Tailwind v3 colour palette by default.
-/// Set to `false` to start with no colours and define your own via `$colors`.
-/// @type Bool
-$use-tailwind-colors: true !default;
 
 /// Output CSS custom properties (`--color-*`, `--size-*`, `--text-*`, etc.) on `:root`.
 /// Disable if you're using Crayon purely via Sass functions and utility classes.
 /// @type Bool
 $output-css-vars: true !default;
-
-/// Generate opacity modifier classes for colours (e.g. `.bg-red-500\/50`).
-/// Uses the `$opacities` map for available stops.
-/// @type Bool
-$use-color-opacity-modifiers: true !default;
 
 /// Number of columns for grid-cols-* and col/row-span-* classes.
 /// @type Number
@@ -146,6 +137,11 @@ $sizes: (
 
 // ─── Colors ───────────────────────────────────────────────────────────────────
 
+/// Include the full Tailwind v3 colour palette by default.
+/// Set to `false` to start with no colours and define your own via `$colors`.
+/// @type Bool
+$use-tailwind-colors: true !default;
+
 /// Whether to convert colour output to a different colour space.
 /// @type Bool
 $convert-colorspace: true !default;
@@ -153,6 +149,11 @@ $convert-colorspace: true !default;
 /// Target colour space for output. Options: `srgb`, `hsl`, `oklch`, `oklab`, `display-p3`.
 /// @type String
 $output-colorspace: oklch !default;
+
+/// Generate opacity modifier classes for colours (e.g. `.bg-red-500\/50`).
+/// Uses the `$opacities` map for available stops.
+/// @type Bool
+$use-color-opacity-modifiers: true !default;
 
 /// Your custom colours, merged on top of the Tailwind palette when `$use-tailwind-colors` is `true`.
 /// To replace the palette entirely, set `$use-tailwind-colors: false` and define all your colours with this.
