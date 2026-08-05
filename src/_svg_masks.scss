@@ -5,7 +5,7 @@
 // Each mask clips the element to a shape. The element's own background or colour fills it.
 // All masks are available as utility classes and as mixins.
 //
-// $size:   Optional spacing scale key — sets width and height together.
+// $size:   Optional spacing scale sets width and height together.
 // $rotate: Degrees to rotate the mask shape (e.g. 90, 180, -90).
 // $flip:   Mirror the shape: `x` (left↔right) or `y` (top↔bottom).
 
@@ -28,7 +28,7 @@
 // ─── Mesa ─────────────────────────────────────────────────────────────────────
 
 /// Clip to a square with a sharp top-left corner and rounded remaining corners.
-/// @param {Number | null} $size [null] - size key — sets width and height
+/// @param {Number | null} $size [null] - sets both width and height
 /// @param {Number | null} $rotate [null] - degrees to rotate the mask (e.g. `90`, `180`, `-90`)
 /// @param {String | null} $flip [null] - mirror the mask shape: `x` (left↔right) or `y` (top↔bottom)
 /// @example scss
@@ -45,9 +45,8 @@
 
 // ─── Squircle ─────────────────────────────────────────────────────────────────
 
-/// Clip to a superellipse — smoother than a rounded rectangle, rounder than a square.
-/// Symmetric, so rotate and flip have no visible effect.
-/// @param {Number | null} $size [null] - size key — sets width and height
+// A squircle
+/// @param {Number | null} $size [null] - sets width and height
 /// @param {Number | null} $rotate [null] - degrees to rotate the mask
 /// @param {String | null} $flip [null] - mirror the mask shape: `x` or `y`
 /// @example scss
@@ -64,7 +63,7 @@
 
 /// Clip to a shape with a sharp top-left corner, large circular arc on the bottom-left,
 /// and rounded corners top-right and bottom-right.
-/// @param {Number | null} $size [null] - size key — sets width and height
+/// @param {Number | null} $size [null] - sets width and height
 /// @param {Number | null} $rotate [null] - degrees to rotate the mask (e.g. `90`, `180`)
 /// @param {String | null} $flip [null] - mirror the mask shape: `x` or `y`
 /// @example scss
@@ -81,9 +80,8 @@
 
 // ─── Pebble ───────────────────────────────────────────────────────────────────
 
-/// Clip to an asymmetric rounded square — heavier mass top-right, sweeping arc bottom-left.
 /// Flip `x` to shift the mass to the top-left instead.
-/// @param {Number | null} $size [null] - size key — sets width and height
+/// @param {Number | null} $size [null] - sets width and height
 /// @param {Number | null} $rotate [null] - degrees to rotate the mask
 /// @param {String | null} $flip [null] - mirror the mask shape: `x` or `y`
 /// @example scss

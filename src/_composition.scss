@@ -33,8 +33,8 @@
   gap: sizes.size($gap);
 }
 
-/// Horizontal row with wrapping — items reflow onto new lines when space is tight.
-/// Ideal for tag lists, badge groups, and button groups.
+/// Horizontal row with wrapping. Reflows when space is tight.
+/// Good for tag lists, badge groups, and button groups.
 /// @param {Number} $gap - size key (e.g. `2` )
 /// @example scss
 ///   .tags { @include cluster(2); }
@@ -70,7 +70,7 @@
 // ─── Palette ────────────────────────────────────────────────────────────────
 
 /// Apply background, text, and border colours from a single colour family.
-/// All colour parameters are optional — pass only the ones you need.
+/// All colour parameters are optional.
 /// The shade number maps directly to the palette: `"red"` + `100` → `red-100`.
 /// @param {String} $family - Colour family prefix (e.g. `"blue"`, `"slate"`)
 /// @param {Number | null} $bg [null] - Background shade (e.g. `100`)

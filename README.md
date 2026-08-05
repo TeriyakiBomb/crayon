@@ -1,6 +1,7 @@
 # Crayon
 
 A Sass utility CSS toolkit. Familiar tailwind-flavoured utility classes with some stronger opinions - docs are WIP.
+full docs are here: https://crayon.craft.me/73WtRO1gK3U9aN
 
 ## Install
 

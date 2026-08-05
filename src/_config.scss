@@ -63,6 +63,7 @@ $breakpoints: (
 // ─── Fonts ───────────────────────────────────────────────────────────────────
 
 /// Named font family stacks. The `$default-font` key is applied to `body`.
+// Custom fonts should be specified with standard font-face
 /// @type Map
 $font-families: (
   "sans": ( sans-serif),
@@ -96,7 +97,7 @@ $font-sizes: (
   "9xl": ( $base-font-size * 8, 1 ),
 ) !default;
 
-/// Font weight scale mapped to numeric CSS values.
+/// Font weight scale.
 /// @type Map
 $font-weights: (
   "thin": 100,
@@ -135,7 +136,6 @@ $line-heights: (
 // ─── Sizes (Scale and spacing) ───────────────────────────────────────────────────────────────────
 
 /// Base unit for the scale. All `$sizes` entries are multiples of this.
-/// Overriding this does **not** recompute `$sizes` — override both together.
 /// @type Length
 $base-size: 4px !default;
 
@@ -193,8 +193,7 @@ $convert-colorspace: true !default;
 $output-colorspace: oklch !default;
 
 /// Your custom colours, merged on top of the Tailwind palette when `$use-tailwind-colors` is `true`.
-/// To replace the palette entirely, set `$use-tailwind-colors: false` and define all your colours here.
-/// Keys map to `.bg-{name}`, `.text-{name}`, `.border-{name}` classes and the `color()` function.
+/// To replace the palette entirely, set `$use-tailwind-colors: false` and define all your colours with this.
 /// @type Map
 $colors: () !default;
 

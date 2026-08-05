@@ -5,8 +5,7 @@
 @use "sizes";
 @use "typography";
 
-// Custom media — for use in plain CSS / ERB <style> blocks
-// Requires postcss-custom-media in your pipeline for browser support
+// Requires postcss-custom-media in your pipeline for browser support, probably not worth using anytime soon
 @if config.$output-css-vars {
   @each $name, $value in config.$breakpoints {
     @custom-media --#{$name} (min-width: #{$value});
@@ -111,6 +110,7 @@
 @mixin dark { @media (prefers-color-scheme: dark) { @content; } }
 
 // ─── Fluid ────────────────────────────────────────────────────────────────────
+// Inspired (copied basically wholesale from https://utopia.fyi), it's very cool
 
 /// @access private
 @function -resolve-fluid-size($key) {

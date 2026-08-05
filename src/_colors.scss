@@ -3,7 +3,7 @@
 @use "sass:color" as sasscolor;
 @use "tailwind-colors" as tw;
 
-// Resolved palette — Tailwind base + user colours. User entries win on conflicts.
+//Merged tailwind and custom palettes
 $resolved-colors: config.$colors;
 @if config.$use-tailwind-colors {
   $resolved-colors: map.merge(tw.$palette, config.$colors);
