@@ -27,10 +27,10 @@ $layout-divisions: (2, 3, 4, 5, 6, 12) !default;
 /// @type Map
 $border-widths: (
   "DEFAULT": 1px,
-  "0": 0px,
-  "2": 2px,
-  "4": 4px,
-  "8": 8px,
+  0: 0px,
+  2: 2px,
+  4: 4px,
+  8: 8px,
 ) !default;
 
 /// Border radius scale. Keys map to `.rounded-{key}` classes and `rounded()` function.

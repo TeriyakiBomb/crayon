@@ -9,7 +9,9 @@
 /// @param {String} $key ['DEFAULT'] - Key from `$border-widths`
 /// @return {Length}
 @function border-width($key: "DEFAULT") {
-  @return map.get(config.$border-widths, $key);
+  $value: map.get(config.$border-widths, $key);
+  @if $value != null { @return $value; }
+  @return map.get(config.$border-widths, "#{$key}");
 }
 
 /// Look up a border radius from `$border-radii`, returned in rem.
@@ -17,9 +19,13 @@
 /// @return {Length}
 @function rounded($key: "DEFAULT") {
   $value: map.get(config.$border-radii, $key);
+  @if $value == null {
+    $value: map.get(config.$border-radii, "#{$key}");
+  }
 
   @if $value == 0 or $value == 9999px { @return $value; }
-  @return utility.px-to-rem($value);
+  @if $value != null { @return utility.px-to-rem($value); }
+  @return null;
 }
 
 // ─── CSS Variables ────────────────────────────────────────────────────────────
