@@ -4,6 +4,23 @@
 @use "sass:map";
 @use "sass:meta";
 
+// ─── Size Map Generation ──────────────────────────────────────────────────────
+
+/// Internal helper to calculate sizes map from `config.$sizes` and `config.$base-size`.
+@function _get-sizes-map() {
+  @if meta.type-of(config.$sizes) == "map" {
+    @return config.$sizes;
+  }
+
+  $result: ();
+  @each $step in config.$sizes {
+    $result: map.set($result, $step, config.$base-size * $step);
+  }
+  @return $result;
+}
+
+$sizes: _get-sizes-map();
+
 // ─── Lookup ───────────────────────────────────────────────────────────────────
 
 /// Look up a spacing value from `$sizes`, returned in rem.
@@ -11,7 +28,7 @@
 /// @param {Number} $key - Scale step (e.g. `4`, `12`)
 /// @return {Length}
 @function size($key) {
-  $from-map: map.get(config.$sizes, $key);
+  $from-map: map.get($sizes, $key);
 
   @if $from-map {
     @return utility.px-to-rem($from-map);
@@ -114,7 +131,7 @@
 
 @if config.$output-css-vars {
   :root {
-    @each $size, $value in config.$sizes {
+    @each $size, $value in $sizes {
       $name: utility.str-replace("#{$size}", ".", "_");
       --size-#{$name}: #{utility.px-to-rem($value)};
     }
@@ -122,7 +139,7 @@
 }
 
 @layer utilities {
-  @each $size, $value in config.$sizes {
+  @each $size, $value in $sizes {
     @include padding-classes($size, $value);
     @include margin-classes($size, $value);
     @include width-classes($size, $value);
@@ -223,7 +240,7 @@
 }
 
 @layer utilities {
-  @each $size, $value in config.$sizes {
+  @each $size, $value in $sizes {
     @include gap-classes($size, $value);
   }
 }

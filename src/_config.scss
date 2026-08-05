@@ -139,47 +139,11 @@ $line-heights: (
 /// @type Length
 $base-size: 4px !default;
 
-/// Spacing scale keyed by step number. Values are `$base-size * key`.
-/// @type Map
+/// Spacing scale steps. Values are multiplied by `$base-size`.
+/// @type List | Map
 $sizes: (
-  0.5: $base-size * 0.5,
-  1: $base-size,
-  1.5: $base-size * 1.5,
-  2: $base-size * 2,
-  2.5: $base-size * 2.5,
-  3: $base-size * 3,
-  3.5: $base-size * 3.5,
-  4: $base-size * 4,
-  4.5: $base-size * 4.5,
-  5: $base-size * 5,
-  5.5: $base-size * 5.5,
-  6: $base-size * 6,
-  6.5: $base-size * 6.5,
-  7: $base-size * 7,
-  7.5: $base-size * 7.5,
-  8: $base-size * 8,
-  8.5: $base-size * 8.5,
-  9: $base-size * 9,
-  9.5: $base-size * 9.5,
-  10: $base-size * 10,
-  12: $base-size * 12,
-  14: $base-size * 14,
-  16: $base-size * 16,
-  20: $base-size * 20,
-  24: $base-size * 24,
-  28: $base-size * 28,
-  32: $base-size * 32,
-  36: $base-size * 36,
-  40: $base-size * 40,
-  44: $base-size * 44,
-  48: $base-size * 48,
-  52: $base-size * 52,
-  56: $base-size * 56,
-  60: $base-size * 60,
-  64: $base-size * 64,
-  72: $base-size * 72,
-  80: $base-size * 80,
-  96: $base-size * 96,
+  0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10,
+  12, 14, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 72, 80, 96
 ) !default;
 
 // ─── Colors ───────────────────────────────────────────────────────────────────
