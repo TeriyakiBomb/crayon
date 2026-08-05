@@ -3,6 +3,27 @@
 @use "sass:list";
 @use "sass:map";
 @use "sass:meta";
+@use "sass:math";
+
+// ─── Font Size Map Generation ──────────────────────────────────────────────────
+
+/// Internal helper to calculate font size values from `config.$font-sizes`.
+@function _get-font-sizes-map() {
+  $result: ();
+  @each $name, $values in config.$font-sizes {
+    $size-val: list.nth($values, 1);
+    $lh-val: list.nth($values, 2);
+
+    @if math.is-unitless($size-val) {
+      $size-val: config.$base-font-size * $size-val;
+    }
+
+    $result: map.set($result, $name, ($size-val, $lh-val));
+  }
+  @return $result;
+}
+
+$font-sizes: _get-font-sizes-map();
 
 // ─── Lookups ──────────────────────────────────────────────────────────────────
 
@@ -10,7 +31,7 @@
 /// @param {String} $name - Key from `$font-sizes` (e.g. `"lg"`, `"2xl"`)
 /// @return {Length}
 @function font-size($name) {
-  @return utility.px-to-rem(list.nth(map.get(config.$font-sizes, $name), 1));
+  @return utility.px-to-rem(list.nth(map.get($font-sizes, $name), 1));
 }
 
 /// Look up a font weight from `$font-weights`.
@@ -53,7 +74,7 @@
       --font-weight-#{$name}: #{$value};
     }
 
-    @each $name, $values in config.$font-sizes {
+    @each $name, $values in $font-sizes {
       --text-#{$name}: #{utility.px-to-rem(list.nth($values, 1))};
     }
 
@@ -104,7 +125,7 @@ body {
   }
 
   // Font sizes
-  @each $size, $value in config.$font-sizes {
+  @each $size, $value in $font-sizes {
     .text-#{$size} {
       font-size: utility.px-to-rem(list.nth($value, 1));
       line-height: list.nth($value, 2);
@@ -138,7 +159,7 @@ body {
 /// @param {String} $name - Key from `$font-sizes`
 @mixin text($name) {
   font-size: font-size($name);
-  line-height: list.nth(map.get(config.$font-sizes, $name), 2);
+  line-height: list.nth(map.get($font-sizes, $name), 2);
 }
 
 /// Set `font-weight` from the font weight scale.

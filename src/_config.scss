@@ -79,22 +79,22 @@ $default-font: "sans" !default;
 /// @type Length
 $base-font-size: 16px !default;
 
-/// Font size scale. Each entry is `(font-size, line-height)`.
+/// Font size scale. Each entry is `(multiplier, line-height)`.
 /// @type Map
 $font-sizes: (
-  "xs": ( $base-font-size * 0.75, 1rem),
-  "sm": ( $base-font-size * 0.875, 1.25rem),
-  "base": ( $base-font-size * 1, 1.5rem),
-  "lg": ( $base-font-size * 1.125, 1.75rem ),
-  "xl": ( $base-font-size * 1.25, 1.75rem ),
-  "2xl": ( $base-font-size * 1.5, 2rem ),
-  "3xl": ( $base-font-size * 1.875, 2.25rem ),
-  "4xl": ( $base-font-size * 2.25, 2.5rem ),
-  "5xl": ( $base-font-size * 3, 1 ),
-  "6xl": ( $base-font-size * 3.75, 1 ),
-  "7xl": ( $base-font-size * 4.5, 1 ),
-  "8xl": ( $base-font-size * 6, 1 ),
-  "9xl": ( $base-font-size * 8, 1 ),
+  "xs": (0.75, 1rem),
+  "sm": (0.875, 1.25rem),
+  "base": (1, 1.5rem),
+  "lg": (1.125, 1.75rem),
+  "xl": (1.25, 1.75rem),
+  "2xl": (1.5, 2rem),
+  "3xl": (1.875, 2.25rem),
+  "4xl": (2.25, 2.5rem),
+  "5xl": (3, 1),
+  "6xl": (3.75, 1),
+  "7xl": (4.5, 1),
+  "8xl": (6, 1),
+  "9xl": (8, 1),
 ) !default;
 
 /// Font weight scale.
