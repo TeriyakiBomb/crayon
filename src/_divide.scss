@@ -2,7 +2,7 @@
 @use "colors";
 @use "sass:map";
 
-$-styles: solid, dashed, dotted, double, none;
+$_styles: solid, dashed, dotted, double, none;
 
 @layer utilities {
   // ─── Divide Width ─────────────────────────────────────────────────────────────
@@ -32,7 +32,7 @@ $-styles: solid, dashed, dotted, double, none;
 
   // ─── Divide Style ─────────────────────────────────────────────────────────────
 
-  @each $style in $-styles {
+  @each $style in $_styles {
     .divide-#{$style} > :not(:last-child) { border-style: $style; }
   }
 
@@ -41,4 +41,66 @@ $-styles: solid, dashed, dotted, double, none;
   @each $name, $value in colors.$palette {
     .divide-#{$name} > :not(:last-child) { border-color: $value; }
   }
+}
+
+// ─── Mixins ──────────────────────────────────────────────────────────────────
+
+/// Add vertical dividers between an element's children.
+/// @param {String | Number} $width ["DEFAULT"]: Key from `$border-widths`
+/// @group divide
+/// @example scss
+///   .columns { @include crayon.divide-x(2); }
+/// @example sass
+///   .columns
+///     +crayon.divide-x(2)
+@mixin divide-x($width: "DEFAULT") {
+  > :not(:last-child) {
+    border-right-width: map.get(config.$border-widths, $width);
+    border-top-width: 0;
+    border-bottom-width: 0;
+    border-left-width: 0;
+    border-style: solid;
+  }
+}
+
+/// Add horizontal dividers between an element's children.
+/// @param {String | Number} $width ["DEFAULT"]: Key from `$border-widths`
+/// @group divide
+/// @example scss
+///   .stack { @include crayon.divide-y(2); }
+/// @example sass
+///   .stack
+///     +crayon.divide-y(2)
+@mixin divide-y($width: "DEFAULT") {
+  > :not(:last-child) {
+    border-bottom-width: map.get(config.$border-widths, $width);
+    border-top-width: 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-style: solid;
+  }
+}
+
+/// Set the border style between an element's children.
+/// @param {String} $style: Border style (e.g. `dashed`, `dotted`)
+/// @group divide
+/// @example scss
+///   .stack { @include crayon.divide-style(dashed); }
+/// @example sass
+///   .stack
+///     +crayon.divide-style(dashed)
+@mixin divide-style($style) {
+  > :not(:last-child) { border-style: $style; }
+}
+
+/// Set the border colour between an element's children.
+/// @param {String} $name: Colour by name
+/// @group divide
+/// @example scss
+///   .stack { @include crayon.divide-color("slate-200"); }
+/// @example sass
+///   .stack
+///     +crayon.divide-color("slate-200")
+@mixin divide-color($name) {
+  > :not(:last-child) { border-color: colors.convert(colors.color($name)); }
 }
