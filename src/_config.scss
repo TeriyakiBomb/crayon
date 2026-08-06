@@ -1,18 +1,21 @@
-
 /// Output CSS custom properties (`--color-*`, `--size-*`, `--text-*`, etc.) on `:root`.
 /// Disable if you're using Crayon purely via Sass functions and utility classes.
+/// @group configuration
 /// @type Bool
 $output-css-vars: true !default;
 
 /// Number of columns for grid-cols-* and col/row-span-* classes.
+/// @group configuration
 /// @type Number
 $layout-columns: 12 !default;
 
 /// Denominators used to generate fractional width/height classes (e.g. w-1/3, h-3/4).
+/// @group configuration
 /// @type List
 $layout-divisions: (2, 3, 4, 5, 6, 12) !default;
 
 /// Border width scale. `"DEFAULT"` is used by `.border` with no suffix.
+/// @group configuration
 /// @type Map
 $border-widths: (
   "DEFAULT": 1px,
@@ -23,6 +26,7 @@ $border-widths: (
 ) !default;
 
 /// Border radius scale. Keys map to `.rounded-{key}` classes and `rounded()` function.
+/// @group configuration
 /// @type Map
 $border-radii: (
   "none": 0,
@@ -40,6 +44,7 @@ $border-radii: (
 
 /// Named breakpoints for responsive utilities and the `screen()` mixin.
 /// Keys must not start with a digit (CSS class restriction).
+/// @group configuration
 /// @type Map
 $breakpoints: (
   "sm": 640px,
@@ -53,6 +58,7 @@ $breakpoints: (
 
 /// Named font family stacks. The `$default-font` key is applied to `body`.
 /// Custom fonts should be specified with standard font-face
+/// @group configuration
 /// @type Map
 $font-families: (
   "sans": ( sans-serif),
@@ -61,14 +67,17 @@ $font-families: (
 ) !default;
 
 /// Which key from `$font-families` to use as the document default.
+/// @group configuration
 /// @type String
 $default-font: "sans" !default;
 
 /// Base font size used to compute rem values.
+/// @group configuration
 /// @type Length
 $base-font-size: 16px !default;
 
 /// Font size scale. Each entry is `(multiplier, line-height)`.
+/// @group configuration
 /// @type Map
 $font-sizes: (
   "xs": (0.75, 1rem),
@@ -88,6 +97,7 @@ $font-sizes: (
 
 /// Font weight scale.
 /// @type Map
+/// @group configuration
 $font-weights: (
   "thin": 100,
   "extralight": 200,
@@ -101,6 +111,7 @@ $font-weights: (
 ) !default;
 
 /// Letter spacing scale.
+/// @group configuration
 /// @type Map
 $letter-spacings: (
   "tighter": -0.05em,
@@ -112,6 +123,7 @@ $letter-spacings: (
 ) !default;
 
 /// Line height scale.
+/// @group configuration
 /// @type Map
 $line-heights: (
   "none": 1,
@@ -124,11 +136,13 @@ $line-heights: (
 
 // ─── Sizes (Scale and spacing) ───────────────────────────────────────────────────────────────────
 
-/// Base unit for the scale. All `$sizes` entries are multiples of this.
+/// Base unit for the sizing scale. All `$sizes` entries are multiples of this.
+/// @group configuration
 /// @type Length
 $base-size: 4px !default;
 
 /// Spacing scale steps. Values are multiplied by `$base-size`.
+/// @group configuration
 /// @type List | Map
 $sizes: (
   0.5, 1, 1.5, 2, 2.5, 3, 3.5, 4, 4.5, 5, 5.5, 6, 6.5, 7, 7.5, 8, 8.5, 9, 9.5, 10,
@@ -139,28 +153,34 @@ $sizes: (
 
 /// Include the full Tailwind v3 colour palette by default.
 /// Set to `false` to start with no colours and define your own via `$colors`.
+/// @group configuration
 /// @type Bool
 $use-tailwind-colors: true !default;
 
 /// Whether to convert colour output to a different colour space.
+/// @group configuration
 /// @type Bool
 $convert-colorspace: true !default;
 
 /// Target colour space for output. Options: `srgb`, `hsl`, `oklch`, `oklab`, `display-p3`.
+/// @group configuration
 /// @type String
 $output-colorspace: oklch !default;
 
 /// Generate opacity modifier classes for colours (e.g. `.bg-red-500\/50`).
 /// Uses the `$opacities` map for available stops.
+/// @group configuration
 /// @type Bool
 $use-color-opacity-modifiers: true !default;
 
 /// Your custom colours, merged on top of the Tailwind palette when `$use-tailwind-colors` is `true`.
 /// To replace the palette entirely, set `$use-tailwind-colors: false` and define all your colours with this.
+/// @group configuration
 /// @type Map
 $colors: () !default;
 
 /// Opacity scale for `.opacity-{n}` classes and `opacity()` function.
+/// @group configuration
 /// @type Map
 $opacities: (
   0: 0,
