@@ -113,7 +113,7 @@
 // Inspired (copied basically wholesale from https://utopia.fyi), it's very cool
 
 /// @access private
-@function -resolve-fluid-size($key) {
+@function _resolve-fluid-size($key) {
   @if meta.type-of($key) == "number" {
     @return sizes.size($key);
   }
@@ -128,8 +128,8 @@
 /// @param {String} $from ['sm'] - Breakpoint where scaling starts
 /// @param {String} $to ['xl'] - Breakpoint where scaling stops
 @mixin fluid($property, $min-key, $max-key, $from: "sm", $to: "xl") {
-  $min-size:  -resolve-fluid-size($min-key);
-  $max-size:  -resolve-fluid-size($max-key);
+  $min-size:  _resolve-fluid-size($min-key);
+  $max-size:  _resolve-fluid-size($max-key);
   $min-width: map.get(config.$breakpoints, $from);
   $max-width: map.get(config.$breakpoints, $to);
 
