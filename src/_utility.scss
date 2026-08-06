@@ -13,6 +13,7 @@
 /// @param {String} $search - Substring to find
 /// @param {String} $replace [''] - Replacement
 /// @return {String}
+/// @access private
 @function str-replace($string, $search, $replace: "") {
   // Coerce the input to a string, just in case it is a raw number like 2.5
   $string: $string + "";
