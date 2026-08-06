@@ -593,10 +593,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range - Keyword args mapping breakpoint → size key
 /// @group sizing
 /// @example scss
-///   .hero { @include p-range(4, $md: 8, $lg: 12); }
+///   .hero { @include crayon.p-range(4, $md: 8, $lg: 12); }
 /// @example sass
 ///   .hero
-///     +p-range(4, $md: 8, $lg: 12)
+///     +crayon.p-range(4, $md: 8, $lg: 12)
 @mixin p-range($base, $breakpoint-range...) {
   padding: size($base);
 
@@ -612,10 +612,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .card { @include px-range(4, $md: 6, $lg: 8); }
+///   .card { @include crayon.px-range(4, $md: 6, $lg: 8); }
 /// @example sass
 ///   .card
-///     +px-range(4, $md: 6, $lg: 8)
+///     +crayon.px-range(4, $md: 6, $lg: 8)
 @mixin px-range($base, $breakpoint-range...) {
   padding-left: size($base);
   padding-right: size($base);
@@ -633,10 +633,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .section { @include py-range(6, $md: 10, $lg: 16); }
+///   .section { @include crayon.py-range(6, $md: 10, $lg: 16); }
 /// @example sass
 ///   .section
-///     +py-range(6, $md: 10, $lg: 16)
+///     +crayon.py-range(6, $md: 10, $lg: 16)
 @mixin py-range($base, $breakpoint-range...) {
   padding-top: size($base);
   padding-bottom: size($base);
@@ -654,10 +654,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .card { @include m-range(2, $md: 4, $lg: 6); }
+///   .card { @include crayon.m-range(2, $md: 4, $lg: 6); }
 /// @example sass
 ///   .card
-///     +m-range(2, $md: 4, $lg: 6)
+///     +crayon.m-range(2, $md: 4, $lg: 6)
 @mixin m-range($base, $breakpoint-range...) {
   margin: size($base);
 
@@ -673,10 +673,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .container { @include mx-range(4, $md: 8, $lg: 12); }
+///   .container { @include crayon.mx-range(4, $md: 8, $lg: 12); }
 /// @example sass
 ///   .container
-///     +mx-range(4, $md: 8, $lg: 12)
+///     +crayon.mx-range(4, $md: 8, $lg: 12)
 @mixin mx-range($base, $breakpoint-range...) {
   margin-left: size($base);
   margin-right: size($base);
@@ -694,10 +694,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .section { @include my-range(6, $md: 10, $lg: 16); }
+///   .section { @include crayon.my-range(6, $md: 10, $lg: 16); }
 /// @example sass
 ///   .section
-///     +my-range(6, $md: 10, $lg: 16)
+///     +crayon.my-range(6, $md: 10, $lg: 16)
 @mixin my-range($base, $breakpoint-range...) {
   margin-top: size($base);
   margin-bottom: size($base);
@@ -715,10 +715,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .avatar { @include size-range(10, $md: 12, $lg: 16); }
+///   .avatar { @include crayon.size-range(10, $md: 12, $lg: 16); }
 /// @example sass
 ///   .avatar
-///     +size-range(10, $md: 12, $lg: 16)
+///     +crayon.size-range(10, $md: 12, $lg: 16)
 @mixin size-range($base, $breakpoint-range...) {
   width: size($base);
 
@@ -735,10 +735,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .panel { @include w-range(64, $md: 80, $lg: 96); }
+///   .panel { @include crayon.w-range(64, $md: 80, $lg: 96); }
 /// @example sass
 ///   .panel
-///     +w-range(64, $md: 80, $lg: 96)
+///     +crayon.w-range(64, $md: 80, $lg: 96)
 @mixin w-range($base, $breakpoint-range...) {
   width: size($base);
 
@@ -754,10 +754,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .hero { @include h-range(64, $md: 80, $lg: 96); }
+///   .hero { @include crayon.h-range(64, $md: 80, $lg: 96); }
 /// @example sass
 ///   .hero
-///     +h-range(64, $md: 80, $lg: 96)
+///     +crayon.h-range(64, $md: 80, $lg: 96)
 @mixin h-range($base, $breakpoint-range...) {
   height: size($base);
 
@@ -773,10 +773,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .grid { @include gap-range(4, $md: 6, $lg: 8); }
+///   .grid { @include crayon.gap-range(4, $md: 6, $lg: 8); }
 /// @example sass
 ///   .grid
-///     +gap-range(4, $md: 6, $lg: 8)
+///     +crayon.gap-range(4, $md: 6, $lg: 8)
 @mixin gap-range($base, $breakpoint-range...) {
   gap: size($base);
 
@@ -792,10 +792,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .grid { @include gap-x-range(4, $md: 6, $lg: 8); }
+///   .grid { @include crayon.gap-x-range(4, $md: 6, $lg: 8); }
 /// @example sass
 ///   .grid
-///     +gap-x-range(4, $md: 6, $lg: 8)
+///     +crayon.gap-x-range(4, $md: 6, $lg: 8)
 @mixin gap-x-range($base, $breakpoint-range...) {
   column-gap: size($base);
 
@@ -811,10 +811,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .grid { @include gap-y-range(4, $md: 6, $lg: 8); }
+///   .grid { @include crayon.gap-y-range(4, $md: 6, $lg: 8); }
 /// @example sass
 ///   .grid
-///     +gap-y-range(4, $md: 6, $lg: 8)
+///     +crayon.gap-y-range(4, $md: 6, $lg: 8)
 @mixin gap-y-range($base, $breakpoint-range...) {
   row-gap: size($base);
 
@@ -830,10 +830,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .section { @include pt-range(6, $md: 10, $lg: 16); }
+///   .section { @include crayon.pt-range(6, $md: 10, $lg: 16); }
 /// @example sass
 ///   .section
-///     +pt-range(6, $md: 10, $lg: 16)
+///     +crayon.pt-range(6, $md: 10, $lg: 16)
 @mixin pt-range($base, $breakpoint-range...) {
   padding-top: size($base);
 
@@ -849,10 +849,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .section { @include pb-range(6, $md: 10, $lg: 16); }
+///   .section { @include crayon.pb-range(6, $md: 10, $lg: 16); }
 /// @example sass
 ///   .section
-///     +pb-range(6, $md: 10, $lg: 16)
+///     +crayon.pb-range(6, $md: 10, $lg: 16)
 @mixin pb-range($base, $breakpoint-range...) {
   padding-bottom: size($base);
 
@@ -868,10 +868,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .card { @include pl-range(4, $md: 6, $lg: 8); }
+///   .card { @include crayon.pl-range(4, $md: 6, $lg: 8); }
 /// @example sass
 ///   .card
-///     +pl-range(4, $md: 6, $lg: 8)
+///     +crayon.pl-range(4, $md: 6, $lg: 8)
 @mixin pl-range($base, $breakpoint-range...) {
   padding-left: size($base);
 
@@ -887,10 +887,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .card { @include pr-range(4, $md: 6, $lg: 8); }
+///   .card { @include crayon.pr-range(4, $md: 6, $lg: 8); }
 /// @example sass
 ///   .card
-///     +pr-range(4, $md: 6, $lg: 8)
+///     +crayon.pr-range(4, $md: 6, $lg: 8)
 @mixin pr-range($base, $breakpoint-range...) {
   padding-right: size($base);
 
@@ -906,10 +906,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .section { @include mt-range(6, $md: 10, $lg: 16); }
+///   .section { @include crayon.mt-range(6, $md: 10, $lg: 16); }
 /// @example sass
 ///   .section
-///     +mt-range(6, $md: 10, $lg: 16)
+///     +crayon.mt-range(6, $md: 10, $lg: 16)
 @mixin mt-range($base, $breakpoint-range...) {
   margin-top: size($base);
 
@@ -925,10 +925,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .section { @include mb-range(6, $md: 10, $lg: 16); }
+///   .section { @include crayon.mb-range(6, $md: 10, $lg: 16); }
 /// @example sass
 ///   .section
-///     +mb-range(6, $md: 10, $lg: 16)
+///     +crayon.mb-range(6, $md: 10, $lg: 16)
 @mixin mb-range($base, $breakpoint-range...) {
   margin-bottom: size($base);
 
@@ -944,10 +944,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .card { @include ml-range(4, $md: 6, $lg: 8); }
+///   .card { @include crayon.ml-range(4, $md: 6, $lg: 8); }
 /// @example sass
 ///   .card
-///     +ml-range(4, $md: 6, $lg: 8)
+///     +crayon.ml-range(4, $md: 6, $lg: 8)
 @mixin ml-range($base, $breakpoint-range...) {
   margin-left: size($base);
 
@@ -963,10 +963,10 @@ $_sizes: _get-sizes-map();
 /// @param {ArgList} $breakpoint-range
 /// @group sizing
 /// @example scss
-///   .card { @include mr-range(4, $md: 6, $lg: 8); }
+///   .card { @include crayon.mr-range(4, $md: 6, $lg: 8); }
 /// @example sass
 ///   .card
-///     +mr-range(4, $md: 6, $lg: 8)
+///     +crayon.mr-range(4, $md: 6, $lg: 8)
 @mixin mr-range($base, $breakpoint-range...) {
   margin-right: size($base);
 
