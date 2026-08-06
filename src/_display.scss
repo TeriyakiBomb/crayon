@@ -28,7 +28,18 @@
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
+/// Display an element as a block.
+/// @group display
 @mixin block { display: block; }
+
+/// Display an element inline.
+/// @group display
 @mixin inline { display: inline; }
+
+/// Display an element as an inline block.
+/// @group display
 @mixin inline-block { display: inline-block; }
+
+/// Hide an element.
+/// @group display
 @mixin hidden { display: none; }
