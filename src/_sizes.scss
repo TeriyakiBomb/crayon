@@ -139,6 +139,16 @@ $_sizes: _get-sizes-map();
     width: $converted-value;
     height: $converted-value;
   }
+
+  .min-size-#{$escaped} {
+    min-width: $converted-value;
+    min-height: $converted-value;
+  }
+
+  .max-size-#{$escaped} {
+    max-width: $converted-value;
+    max-height: $converted-value;
+  }
 }
 
 @if config.$output-css-vars {
@@ -329,6 +339,12 @@ $_sizes: _get-sizes-map();
 /// Set both `width` and `height`.
 /// @param {Number | String} $key: Size scale key or breakpoint name
 @mixin size($key) { width: _dimension($key); height: _dimension($key); }
+/// Set both `min-width` and `min-height`.
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin min-size($key) { min-width: _dimension($key); min-height: _dimension($key); }
+/// Set both `max-width` and `max-height`.
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin max-size($key) { max-width: _dimension($key); max-height: _dimension($key); }
 
 @mixin m-auto { margin: auto; }
 @mixin my-auto { margin-top: auto; margin-bottom: auto; }
