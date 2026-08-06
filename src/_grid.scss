@@ -63,37 +63,94 @@
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
+/// Create a grid container.
+/// @group grid
 @mixin grid { display: grid; }
-@mixin grid-cols($n) { grid-template-columns: repeat(#{$n}, minmax(0, 1fr)); }
+
+/// Split a grid into columns.
+/// @param {Number} $num - Number of columns
+/// @group grid
+@mixin grid-cols($num) { grid-template-columns: repeat(#{$num}, minmax(0, 1fr)); }
+
+/// Remove grid column template.
+/// @group grid
 @mixin grid-cols-none { grid-template-columns: none; }
-@mixin grid-rows($n) { grid-template-rows: repeat(#{$n}, minmax(0, 1fr)); }
+
+/// Split a grid into rows.
+/// @param {Number} $num - Number of rows
+/// @group grid
+@mixin grid-rows($num) { grid-template-rows: repeat(#{$num}, minmax(0, 1fr)); }
+
+/// Remove any grid row template.
+/// @group grid
 @mixin grid-rows-none { grid-template-rows: none; }
-@mixin col-span($n) { grid-column: span #{$n} / span #{$n}; }
+
+/// Make an item span a number of columns.
+/// @param {Number} $num - Number of columns to span
+/// @group grid
+@mixin col-span($num) { grid-column: span #{$num} / span #{$num}; }
+
+/// Make an item span every column.
+/// @group grid
 @mixin col-span-full { grid-column: 1 / -1; }
-@mixin row-span($n) { grid-row: span #{$n} / span #{$n}; }
+
+/// Make an item span a number of rows.
+/// @param {Number} $num - Number of rows to span
+/// @group grid
+@mixin row-span($num) { grid-row: span #{$num} / span #{$num}; }
+
+/// Make an item span every row.
+/// @group grid
 @mixin row-span-full { grid-row: 1 / -1; }
+
+/// Add new grid items by row.
+/// @group grid
 @mixin grid-flow-row { grid-auto-flow: row; }
+
+/// Add new grid items by column.
+/// @group grid
 @mixin grid-flow-col { grid-auto-flow: column; }
+
+/// Fill gaps with smaller grid items when they fit.
+/// @group grid
 @mixin grid-flow-dense { grid-auto-flow: dense; }
 
 // ─── Range Mixins ─────────────────────────────────────────────────────────────
 
-@mixin grid-cols-range($base, $responsive...) {
+/// Change the number of grid columns at different breakpoints.
+/// @param {Number} $base - Number of columns by default
+/// @param {ArgList} $breakpoints - Keyword args mapping breakpoints to column counts
+/// @group grid
+/// @example scss
+///   .gallery { @include grid-cols-range(1, $md: 2, $lg: 4); }
+/// @example sass
+///   .gallery
+///     +grid-cols-range(1, $md: 2, $lg: 4)
+@mixin grid-cols-range($base, $breakpoints...) {
   grid-template-columns: repeat(#{$base}, minmax(0, 1fr));
 
-  @each $breakpoint, $n in meta.keywords($responsive) {
-    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
-      grid-template-columns: repeat(#{$n}, minmax(0, 1fr));
+  @each $bp, $num in meta.keywords($breakpoints) {
+    @media (min-width: map.get(config.$breakpoints, $bp)) {
+      grid-template-columns: repeat(#{$num}, minmax(0, 1fr));
     }
   }
 }
 
-@mixin grid-rows-range($base, $responsive...) {
+/// Change the number of grid rows at different breakpoints.
+/// @param {Number} $base - Number of rows by default
+/// @param {ArgList} $breakpoints - Keyword args mapping breakpoints to row counts
+/// @group grid
+/// @example scss
+///   .dashboard { @include grid-rows-range(1, $md: 2, $lg: 3); }
+/// @example sass
+///   .dashboard
+///     +grid-rows-range(1, $md: 2, $lg: 3)
+@mixin grid-rows-range($base, $breakpoints...) {
   grid-template-rows: repeat(#{$base}, minmax(0, 1fr));
 
-  @each $breakpoint, $n in meta.keywords($responsive) {
-    @media (min-width: map.get(config.$breakpoints, $breakpoint)) {
-      grid-template-rows: repeat(#{$n}, minmax(0, 1fr));
+  @each $bp, $num in meta.keywords($breakpoints) {
+    @media (min-width: map.get(config.$breakpoints, $bp)) {
+      grid-template-rows: repeat(#{$num}, minmax(0, 1fr));
     }
   }
 }
