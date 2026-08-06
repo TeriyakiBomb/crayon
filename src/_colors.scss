@@ -12,6 +12,7 @@ $resolved-colors: config.$colors;
 // ─── lookup ───────────────────────────────────────────────────────────
 
 /// Look up a colour from `$colors` by name.
+/// @group color
 /// @param {String} $name - Key from `$colors` (e.g. `"blue-500"`)
 /// @return {Color}
 @function color($name) {
@@ -22,6 +23,7 @@ $resolved-colors: config.$colors;
 
 /// Convert a colour to the configured `$output-colorspace`.
 /// Returns unchanged if `$convert-colorspace` is `false`.
+/// @group color
 /// @param {Color} $color
 /// @param {String} $space [$output-colorspace]
 /// @return {Color}
@@ -34,6 +36,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to OKLCH.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-oklch($color) {
@@ -45,6 +48,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to OKLab.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-oklab($color) {
@@ -56,6 +60,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to HSL.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-hsl($color) {
@@ -67,6 +72,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to sRGB.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-rgb($color) {
@@ -78,6 +84,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to Display P3.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-p3($color) {
@@ -116,13 +123,16 @@ $resolved-colors: config.$colors;
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
 /// Set `background-color` to a named colour, converted to output space.
+/// @group color
 /// @param {String} $name - Key from `$colors`
 @mixin bg($name) { background-color: convert(color($name)); }
 
 /// Set `color` to a named colour, converted to output space.
+/// @group color
 /// @param {String} $name - Key from `$colors`
 @mixin text-color($name) { color: convert(color($name)); }
 
 /// Set `border-color` to a named colour, converted to output space.
+/// @group color
 /// @param {String} $name - Key from `$colors`
 @mixin border-color($name) { border-color: convert(color($name)); }
