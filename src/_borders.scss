@@ -6,6 +6,7 @@
 // ─── Lookups ──────────────────────────────────────────────────────────────────
 
 /// Look up a border width from `$border-widths`.
+/// @group borders
 /// @param {String} $key ['DEFAULT'] - Key from `$border-widths`
 /// @return {Length}
 @function border-width($key: "DEFAULT") {
@@ -16,6 +17,7 @@
 }
 
 /// Look up a border radius from `$border-radii`, returned in rem.
+/// @group borders
 /// @param {String} $key ['DEFAULT'] - Key from `$border-radii`
 /// @return {Length}
 @function rounded($key: "DEFAULT") {
@@ -123,48 +125,59 @@
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
 /// Set `border-radius` on all corners.
+/// @group borders
 /// @param {String} $key ['DEFAULT'] - Key from `$border-radii`
 @mixin rounded($key: "DEFAULT") { border-radius: rounded($key); }
 
 /// Set `border-radius` on top corners.
+/// @group borders
 /// @param {String} $key ['DEFAULT']
 @mixin rounded-t($key: "DEFAULT") { border-top-left-radius: rounded($key); border-top-right-radius: rounded($key); }
 
 /// Set `border-radius` on bottom corners.
+/// @group borders
 /// @param {String} $key ['DEFAULT']
 @mixin rounded-b($key: "DEFAULT") { border-bottom-left-radius: rounded($key); border-bottom-right-radius: rounded($key); }
 
 /// Set `border-radius` on left corners.
+/// @group borders
 /// @param {String} $key ['DEFAULT']
 @mixin rounded-l($key: "DEFAULT") { border-top-left-radius: rounded($key); border-bottom-left-radius: rounded($key); }
 
 /// Set `border-radius` on right corners.
+/// @group borders
 /// @param {String} $key ['DEFAULT']
 @mixin rounded-r($key: "DEFAULT") { border-top-right-radius: rounded($key); border-bottom-right-radius: rounded($key); }
 
 /// Set `border-top-left-radius`.
+/// @group borders
 /// @param {String} $key ['DEFAULT']
 @mixin rounded-tl($key: "DEFAULT") { border-top-left-radius: rounded($key); }
 
 /// Set `border-top-right-radius`.
+/// @group borders
 /// @param {String} $key ['DEFAULT']
 @mixin rounded-tr($key: "DEFAULT") { border-top-right-radius: rounded($key); }
 
 /// Set `border-bottom-left-radius`.
+/// @group borders
 /// @param {String} $key ['DEFAULT']
 @mixin rounded-bl($key: "DEFAULT") { border-bottom-left-radius: rounded($key); }
 
 /// Set `border-bottom-right-radius`.
+/// @group borders
 /// @param {String} $key ['DEFAULT']
 @mixin rounded-br($key: "DEFAULT") { border-bottom-right-radius: rounded($key); }
 
 /// Set `border-width` from the border width scale.
+/// @group borders
 /// @param {String} $key ['DEFAULT']
 @mixin border($key: "DEFAULT") { border-width: border-width($key); }
 
 // ─── Range Mixins ─────────────────────────────────────────────────────────────
 
 /// Responsive `border-radius`. Base value + overrides at named breakpoints.
+/// @group borders
 /// @param {String} $base - Radius key for default
 /// @param {ArgList} $breakpoint-range - Keyword args mapping breakpoint → radius key
 @mixin rounded-range($base, $breakpoint-range...) {
@@ -178,6 +191,7 @@
 }
 
 /// Responsive top `border-radius` across breakpoint ranges.
+/// @group borders
 /// @param {String} $base
 /// @param {ArgList} $breakpoint-range
 @mixin rounded-t-range($base, $breakpoint-range...) {
@@ -193,6 +207,7 @@
 }
 
 /// Responsive bottom `border-radius` across breakpoint ranges.
+/// @group borders
 /// @param {String} $base
 /// @param {ArgList} $breakpoint-range
 @mixin rounded-b-range($base, $breakpoint-range...) {
@@ -208,6 +223,7 @@
 }
 
 /// Responsive left `border-radius` across breakpoint ranges.
+/// @group borders
 /// @param {String} $base
 /// @param {ArgList} $breakpoint-range
 @mixin rounded-l-range($base, $breakpoint-range...) {
@@ -223,6 +239,7 @@
 }
 
 /// Responsive right `border-radius` across breakpoint ranges.
+/// @group borders
 /// @param {String} $base
 /// @param {ArgList} $breakpoint-range
 @mixin rounded-r-range($base, $breakpoint-range...) {
