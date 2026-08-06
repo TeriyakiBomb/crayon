@@ -51,7 +51,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin padding-classes($size-name, $value) {
+@mixin _padding-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -73,7 +73,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin margin-classes($size-name, $value) {
+@mixin _margin-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -111,7 +111,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin width-classes($size-name, $value) {
+@mixin _width-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -121,7 +121,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin height-classes($size-name, $value) {
+@mixin _height-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -131,7 +131,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin size-classes($size-name, $value) {
+@mixin _size-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -162,18 +162,18 @@ $_sizes: _get-sizes-map();
 
 @layer utilities {
   @each $size, $value in $_sizes {
-    @include padding-classes($size, $value);
-    @include margin-classes($size, $value);
-    @include width-classes($size, $value);
-    @include height-classes($size, $value);
-    @include size-classes($size, $value);
+    @include _padding-classes($size, $value);
+    @include _margin-classes($size, $value);
+    @include _width-classes($size, $value);
+    @include _height-classes($size, $value);
+    @include _size-classes($size, $value);
   }
 
   // Breakpoint widths for size utilities.
   @each $breakpoint, $value in config.$breakpoints {
-    @include width-classes($breakpoint, $value);
-    @include height-classes($breakpoint, $value);
-    @include size-classes($breakpoint, $value);
+    @include _width-classes($breakpoint, $value);
+    @include _height-classes($breakpoint, $value);
+    @include _size-classes($breakpoint, $value);
   }
 
   .m-auto { margin: auto; }
@@ -259,7 +259,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin gap-classes($size-name, $value) {
+@mixin _gap-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -270,7 +270,7 @@ $_sizes: _get-sizes-map();
 
 @layer utilities {
   @each $size, $value in $_sizes {
-    @include gap-classes($size, $value);
+    @include _gap-classes($size, $value);
   }
 }
 
