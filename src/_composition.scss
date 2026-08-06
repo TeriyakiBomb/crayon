@@ -6,6 +6,7 @@
 
 /// Stack children vertically with a consistent gap from the sizing map in config.
 /// @param {Number} $gap -  size key (e.g. `4` )
+/// @group composition
 /// @example scss
 ///   .card-list { @include vstack(4); }
 @mixin vstack($gap) {
@@ -16,6 +17,7 @@
 
 /// Alias for `vstack`. Stack children vertically with a gap.
 /// @param {Number} $gap - size key (e.g. `4` )
+/// @group composition
 /// @example scss
 ///   .sidebar { @include stack(6); }
 @mixin stack($gap) {
@@ -25,6 +27,7 @@
 /// Lay children out in a horizontal row with a gap. Items do not wrap.
 /// Use `cluster` if you want items to wrap when space is tight.
 /// @param {Number} $gap - size key (e.g. `3` )
+/// @group composition
 /// @example scss
 ///   .toolbar { @include hstack(3); }
 @mixin hstack($gap) {
@@ -36,6 +39,7 @@
 /// Horizontal row with wrapping. Reflows when space is tight.
 /// Good for tag lists, badge groups, and button groups.
 /// @param {Number} $gap - size key (e.g. `2` )
+/// @group composition
 /// @example scss
 ///   .tags { @include cluster(2); }
 @mixin cluster($gap) {
@@ -51,6 +55,7 @@
 /// Pass `x` or `y` to constrain to one axis.
 /// Always sets `display: flex`.
 /// @param {String | null} $axis [`null`] - Axis to center on: `x`, `y`, or omit for both
+/// @group composition
 /// @example scss
 ///   .hero    { @include center; }     // both axes
 ///   .nav     { @include center(x); }  // horizontal only
@@ -76,6 +81,7 @@
 /// @param {Number | null} $bg [null] - Background shade (e.g. `100`)
 /// @param {Number | null} $text [null] - Text colour shade (e.g. `900`)
 /// @param {Number | null} $border [null] - Border colour shade (e.g. `300`)
+/// @group composition
 /// @example scss
 ///   .alert-error { @include palette("red", $bg: 100, $text: 900, $border: 300); }
 ///   .badge       { @include palette("emerald", $bg: 50, $text: 700); }
@@ -98,6 +104,7 @@
 /// @param {String | null} $rounded [null] - Border radius key (e.g. `"lg"`, `"full"`)
 /// @param {String | null} $bg [null] - Background colour name (e.g. `"white"`, `"slate-100"`)
 /// @param {String | null} $border [null] - Border colour name (e.g. `"slate-200"`)
+/// @group composition
 /// @example scss
 ///   .panel { @include box($p: 6, $rounded: "xl", $bg: "white", $border: "slate-200"); }
 ///   .badge { @include box($px: 3, $py: 1, $rounded: "full", $bg: "blue-100"); }
