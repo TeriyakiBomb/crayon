@@ -7,6 +7,8 @@
 // ─── Size Map Generation ──────────────────────────────────────────────────────
 
 /// Internal helper to calculate sizes map from `config.$sizes` and `config.$base-size`.
+/// @return {Map} The calculated size scale
+/// @access private
 @function _get-sizes-map() {
   @if meta.type-of(config.$sizes) == "map" {
     @return config.$sizes;
@@ -27,6 +29,7 @@ $_sizes: _get-sizes-map();
 /// Falls back to `$base-size * $key` for keys not in the map.
 /// @param {Number} $key - Scale step (e.g. `4`, `12`)
 /// @return {Length}
+/// @group sizing
 @function size($key) {
   $from-map: map.get($_sizes, $key);
 
@@ -39,6 +42,8 @@ $_sizes: _get-sizes-map();
 }
 
 /// Check breakpoint widths first, then the spacing scale.
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @return {Length}
 /// @access private
 @function _dimension($key) {
   $breakpoint: map.get(config.$breakpoints, $key);
@@ -50,6 +55,9 @@ $_sizes: _get-sizes-map();
   @return size($key);
 }
 
+/// Generate padding utilities for a size.
+/// @param {Number | String} $size-name - Name used in the class
+/// @param {Length} $value - Padding value
 /// @access private
 @mixin _padding-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
@@ -72,6 +80,9 @@ $_sizes: _get-sizes-map();
   }
 }
 
+/// Generate positive and negative margin utilities for a size.
+/// @param {Number | String} $size-name - Name used in the class
+/// @param {Length} $value - Margin value
 /// @access private
 @mixin _margin-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
@@ -110,6 +121,9 @@ $_sizes: _get-sizes-map();
   }
 }
 
+/// Generate width utilities for a size.
+/// @param {Number | String} $size-name - Name used in the class
+/// @param {Length} $value - Width value
 /// @access private
 @mixin _width-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
@@ -120,6 +134,9 @@ $_sizes: _get-sizes-map();
   .max-w-#{$escaped} { max-width: $converted-value; }
 }
 
+/// Generate height utilities for a size.
+/// @param {Number | String} $size-name - Name used in the class
+/// @param {Length} $value - Height value
 /// @access private
 @mixin _height-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
@@ -130,6 +147,9 @@ $_sizes: _get-sizes-map();
   .max-h-#{$escaped} { max-height: $converted-value; }
 }
 
+/// Generate width and height utilities for a size.
+/// @param {Number | String} $size-name - Name used in the class
+/// @param {Length} $value - Width and height value
 /// @access private
 @mixin _size-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
@@ -258,6 +278,9 @@ $_sizes: _get-sizes-map();
   }
 }
 
+/// Generate gap utilities for a size.
+/// @param {Number | String} $size-name - Name used in the class
+/// @param {Length} $value - Gap value
 /// @access private
 @mixin _gap-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
@@ -277,104 +300,290 @@ $_sizes: _get-sizes-map();
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 // All `$key` params are size scale keys (e.g. `4`, `12`).
 
+/// Add padding on every side.
 /// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin p($key) { padding: size($key); }
-/// @param {Number} $key
+
+/// Add padding to the top.
+/// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin pt($key) { padding-top: size($key); }
-/// @param {Number} $key
+
+/// Add padding to the bottom.
+/// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin pb($key) { padding-bottom: size($key); }
-/// @param {Number} $key
+
+/// Add padding to the left.
+/// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin pl($key) { padding-left: size($key); }
-/// @param {Number} $key
+
+/// Add padding to the right.
+/// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin pr($key) { padding-right: size($key); }
-/// @param {Number} $key
+
+/// Add padding to the left and right.
+/// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin px($key) { padding-left: size($key); padding-right: size($key); }
-/// @param {Number} $key
+
+/// Add padding to the top and bottom.
+/// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin py($key) { padding-top: size($key); padding-bottom: size($key); }
 
-/// @param {Number} $key
-@mixin m($key) { margin: size($key); }
-/// @param {Number} $key
-@mixin mt($key) { margin-top: size($key); }
-/// @param {Number} $key
-@mixin mb($key) { margin-bottom: size($key); }
-/// @param {Number} $key
-@mixin ml($key) { margin-left: size($key); }
-/// @param {Number} $key
-@mixin mr($key) { margin-right: size($key); }
-/// @param {Number} $key
-@mixin mx($key) { margin-left: size($key); margin-right: size($key); }
-/// @param {Number} $key
-@mixin my($key) { margin-top: size($key); margin-bottom: size($key); }
+/// Add margin on every side.
+/// @param {Number} $key - Size scale key
+/// @param {Bool} $negative [false] - Use a negative margin
+/// @group sizing
+@mixin m($key, $negative: false) {
+  $value: size($key);
+  @if $negative { $value: -$value; }
+  margin: $value;
+}
+
+/// Add margin to the top.
+/// @param {Number} $key - Size scale key
+/// @param {Bool} $negative [false] - Use a negative margin
+/// @group sizing
+@mixin mt($key, $negative: false) {
+  $value: size($key);
+  @if $negative { $value: -$value; }
+  margin-top: $value;
+}
+
+/// Add margin to the bottom.
+/// @param {Number} $key - Size scale key
+/// @param {Bool} $negative [false] - Use a negative margin
+/// @group sizing
+@mixin mb($key, $negative: false) {
+  $value: size($key);
+  @if $negative { $value: -$value; }
+  margin-bottom: $value;
+}
+
+/// Add margin to the left.
+/// @param {Number} $key - Size scale key
+/// @param {Bool} $negative [false] - Use a negative margin
+/// @group sizing
+@mixin ml($key, $negative: false) {
+  $value: size($key);
+  @if $negative { $value: -$value; }
+  margin-left: $value;
+}
+
+/// Add margin on the right.
+/// @param {Number} $key - Size scale key
+/// @param {Bool} $negative [false] - Use a negative margin
+/// @group sizing
+@mixin mr($key, $negative: false) {
+  $value: size($key);
+  @if $negative { $value: -$value; }
+  margin-right: $value;
+}
+
+/// Add margin left and right.
+/// @param {Number} $key - Size scale key
+/// @param {Bool} $negative [false] - Use a negative margin
+/// @group sizing
+@mixin mx($key, $negative: false) {
+  $value: size($key);
+  @if $negative { $value: -$value; }
+  margin-left: $value;
+  margin-right: $value;
+}
+
+/// Add margin to the top and bottom.
+/// @param {Number} $key - Size scale key
+/// @param {Bool} $negative [false] - Use a negative margin
+/// @group sizing
+@mixin my($key, $negative: false) {
+  $value: size($key);
+  @if $negative { $value: -$value; }
+  margin-top: $value;
+  margin-bottom: $value;
+}
+
+/// Center an item horizontally with auto margins.
+/// @group sizing
 @mixin mx-auto { margin-left: auto; margin-right: auto; }
 
-/// @param {Number} $key
-@mixin -m($key) { margin: -(size($key)); }
-/// @param {Number} $key
-@mixin -mt($key) { margin-top: -(size($key)); }
-/// @param {Number} $key
-@mixin -mb($key) { margin-bottom: -(size($key)); }
-/// @param {Number} $key
-@mixin -ml($key) { margin-left: -(size($key)); }
-/// @param {Number} $key
-@mixin -mr($key) { margin-right: -(size($key)); }
-/// @param {Number} $key
-@mixin -mx($key) { margin-left: -(size($key)); margin-right: -(size($key)); }
-/// @param {Number} $key
-@mixin -my($key) { margin-top: -(size($key)); margin-bottom: -(size($key)); }
+/// Add negative margin on all sides.
+/// @param {Number} $key - Size scale key
+/// @group sizing
+@mixin minus-m($key) { @include m($key, true); }
 
-/// @param {Number | String} $key: Size scale key or breakpoint name
+/// Add negative margin to the top.
+/// @param {Number} $key - Size scale key
+/// @group sizing
+@mixin minus-mt($key) { @include mt($key, true); }
+
+/// Add negative margin to the bottom.
+/// @param {Number} $key - Size scale key
+/// @group sizing
+@mixin minus-mb($key) { @include mb($key, true); }
+
+/// Add negative margin left.
+/// @param {Number} $key - Size scale key
+/// @group sizing
+@mixin minus-ml($key) { @include ml($key, true); }
+
+/// Add negative margin right.
+/// @param {Number} $key - Size scale key
+/// @group sizing
+@mixin minus-mr($key) { @include mr($key, true); }
+
+/// Add negative margin left and right.
+/// @param {Number} $key - Size scale key
+/// @group sizing
+@mixin minus-mx($key) { @include mx($key, true); }
+
+/// Add negative margin top and bottom.
+/// @param {Number} $key - Size scale key
+/// @group sizing
+@mixin minus-my($key) { @include my($key, true); }
+
+/// Set the width from the size scale or a breakpoint.
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @group sizing
 @mixin w($key) { width: _dimension($key); }
-/// @param {Number | String} $key: Size scale key or breakpoint name
+
+/// Set the minimum width from the size scale or a breakpoint.
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @group sizing
 @mixin min-w($key) { min-width: _dimension($key); }
-/// @param {Number | String} $key: Size scale key or breakpoint name
+
+/// Set the maximum width from the size scale or a breakpoint.
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @group sizing
 @mixin max-w($key) { max-width: _dimension($key); }
 
-/// @param {Number | String} $key: Size scale key or breakpoint name
+/// Set the height from the size scale or a breakpoint.
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @group sizing
 @mixin h($key) { height: _dimension($key); }
-/// @param {Number | String} $key: Size scale key or breakpoint name
+
+/// Set the minimum height from the size scale or a breakpoint.
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @group sizing
 @mixin min-h($key) { min-height: _dimension($key); }
-/// @param {Number | String} $key: Size scale key or breakpoint name
+
+/// Set the maximum height from the size scale or a breakpoint.
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @group sizing
 @mixin max-h($key) { max-height: _dimension($key); }
+
 /// Set both `width` and `height`.
-/// @param {Number | String} $key: Size scale key or breakpoint name
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @group sizing
 @mixin size($key) { width: _dimension($key); height: _dimension($key); }
+
 /// Set both `min-width` and `min-height`.
-/// @param {Number | String} $key: Size scale key or breakpoint name
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @group sizing
 @mixin min-size($key) { min-width: _dimension($key); min-height: _dimension($key); }
+
 /// Set both `max-width` and `max-height`.
-/// @param {Number | String} $key: Size scale key or breakpoint name
+/// @param {Number | String} $key - Size scale key or breakpoint name
+/// @group sizing
 @mixin max-size($key) { max-width: _dimension($key); max-height: _dimension($key); }
 
+/// Add auto margin on every side.
+/// @group sizing
 @mixin m-auto { margin: auto; }
+
+/// Add auto margin to the top and bottom.
+/// @group sizing
 @mixin my-auto { margin-top: auto; margin-bottom: auto; }
+
+/// Add auto margin to the top.
+/// @group sizing
 @mixin mt-auto { margin-top: auto; }
+
+/// Add auto margin to the bottom.
+/// @group sizing
 @mixin mb-auto { margin-bottom: auto; }
+
+/// Add auto margin to the left.
+/// @group sizing
 @mixin ml-auto { margin-left: auto; }
+
+/// Add auto margin to the right.
+/// @group sizing
 @mixin mr-auto { margin-right: auto; }
 
+/// Fill the available width.
+/// @group sizing
 @mixin w-full { width: 100%; }
+
+/// Match the viewport width.
+/// @group sizing
 @mixin w-screen { width: 100vw; }
+
+/// Let the browser choose the width.
+/// @group sizing
 @mixin w-auto { width: auto; }
+
+/// Fit the width to its content.
+/// @group sizing
 @mixin w-fit { width: fit-content; }
+
+/// Use the smallest possible content width.
+/// @group sizing
 @mixin w-min { width: min-content; }
+
+/// Use the largest needed content width.
+/// @group sizing
 @mixin w-max { width: max-content; }
 
+/// Fill the available height.
+/// @group sizing
 @mixin h-full { height: 100%; }
+
+/// Match the viewport height.
+/// @group sizing
 @mixin h-screen { height: 100vh; }
+
+/// Let the browser choose the height.
+/// @group sizing
 @mixin h-auto { height: auto; }
+
+/// Fit the height to its content.
+/// @group sizing
 @mixin h-fit { height: fit-content; }
+
+/// Use the smallest possible content height.
+/// @group sizing
 @mixin h-min { height: min-content; }
+
+/// Use the largest needed content height.
+/// @group sizing
 @mixin h-max { height: max-content; }
 
+/// Fill the available width and height.
+/// @group sizing
 @mixin size-full { width: 100%; height: 100%; }
+
+/// Let the browser choose the width and height.
+/// @group sizing
 @mixin size-auto { width: auto; height: auto; }
 
-/// @param {Number} $key
+/// Add space between rows and columns.
+/// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin gap($key) { gap: size($key); }
-/// @param {Number} $key
+
+/// Add space between columns.
+/// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin gap-x($key) { column-gap: size($key); }
-/// @param {Number} $key
+
+/// Add space between rows.
+/// @param {Number} $key - Size scale key
+/// @group sizing
 @mixin gap-y($key) { row-gap: size($key); }
 
 // ─── Range Mixins ─────────────────────────────────────────────────────────────
@@ -382,8 +591,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `padding`. Base value + overrides at named breakpoints.
 /// @param {Number} $base - Size key for default
 /// @param {ArgList} $breakpoint-range - Keyword args mapping breakpoint → size key
+/// @group sizing
 /// @example scss
 ///   .hero { @include p-range(4, $md: 8, $lg: 12); }
+/// @example sass
+///   .hero
+///     +p-range(4, $md: 8, $lg: 12)
 @mixin p-range($base, $breakpoint-range...) {
   padding: size($base);
 
@@ -397,6 +610,12 @@ $_sizes: _get-sizes-map();
 /// Responsive horizontal `padding` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .card { @include px-range(4, $md: 6, $lg: 8); }
+/// @example sass
+///   .card
+///     +px-range(4, $md: 6, $lg: 8)
 @mixin px-range($base, $breakpoint-range...) {
   padding-left: size($base);
   padding-right: size($base);
@@ -412,6 +631,12 @@ $_sizes: _get-sizes-map();
 /// Responsive vertical `padding` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .section { @include py-range(6, $md: 10, $lg: 16); }
+/// @example sass
+///   .section
+///     +py-range(6, $md: 10, $lg: 16)
 @mixin py-range($base, $breakpoint-range...) {
   padding-top: size($base);
   padding-bottom: size($base);
@@ -427,6 +652,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `margin` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .card { @include m-range(2, $md: 4, $lg: 6); }
+/// @example sass
+///   .card
+///     +m-range(2, $md: 4, $lg: 6)
 @mixin m-range($base, $breakpoint-range...) {
   margin: size($base);
 
@@ -440,6 +671,12 @@ $_sizes: _get-sizes-map();
 /// Responsive horizontal `margin` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .container { @include mx-range(4, $md: 8, $lg: 12); }
+/// @example sass
+///   .container
+///     +mx-range(4, $md: 8, $lg: 12)
 @mixin mx-range($base, $breakpoint-range...) {
   margin-left: size($base);
   margin-right: size($base);
@@ -455,6 +692,12 @@ $_sizes: _get-sizes-map();
 /// Responsive vertical `margin` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .section { @include my-range(6, $md: 10, $lg: 16); }
+/// @example sass
+///   .section
+///     +my-range(6, $md: 10, $lg: 16)
 @mixin my-range($base, $breakpoint-range...) {
   margin-top: size($base);
   margin-bottom: size($base);
@@ -470,6 +713,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `width` + `height` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .avatar { @include size-range(10, $md: 12, $lg: 16); }
+/// @example sass
+///   .avatar
+///     +size-range(10, $md: 12, $lg: 16)
 @mixin size-range($base, $breakpoint-range...) {
   width: size($base);
 
@@ -484,6 +733,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `width` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .panel { @include w-range(64, $md: 80, $lg: 96); }
+/// @example sass
+///   .panel
+///     +w-range(64, $md: 80, $lg: 96)
 @mixin w-range($base, $breakpoint-range...) {
   width: size($base);
 
@@ -497,6 +752,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `height` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .hero { @include h-range(64, $md: 80, $lg: 96); }
+/// @example sass
+///   .hero
+///     +h-range(64, $md: 80, $lg: 96)
 @mixin h-range($base, $breakpoint-range...) {
   height: size($base);
 
@@ -510,6 +771,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `gap` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .grid { @include gap-range(4, $md: 6, $lg: 8); }
+/// @example sass
+///   .grid
+///     +gap-range(4, $md: 6, $lg: 8)
 @mixin gap-range($base, $breakpoint-range...) {
   gap: size($base);
 
@@ -523,6 +790,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `column-gap` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .grid { @include gap-x-range(4, $md: 6, $lg: 8); }
+/// @example sass
+///   .grid
+///     +gap-x-range(4, $md: 6, $lg: 8)
 @mixin gap-x-range($base, $breakpoint-range...) {
   column-gap: size($base);
 
@@ -536,6 +809,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `row-gap` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .grid { @include gap-y-range(4, $md: 6, $lg: 8); }
+/// @example sass
+///   .grid
+///     +gap-y-range(4, $md: 6, $lg: 8)
 @mixin gap-y-range($base, $breakpoint-range...) {
   row-gap: size($base);
 
@@ -549,6 +828,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `padding-top` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .section { @include pt-range(6, $md: 10, $lg: 16); }
+/// @example sass
+///   .section
+///     +pt-range(6, $md: 10, $lg: 16)
 @mixin pt-range($base, $breakpoint-range...) {
   padding-top: size($base);
 
@@ -562,6 +847,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `padding-bottom` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .section { @include pb-range(6, $md: 10, $lg: 16); }
+/// @example sass
+///   .section
+///     +pb-range(6, $md: 10, $lg: 16)
 @mixin pb-range($base, $breakpoint-range...) {
   padding-bottom: size($base);
 
@@ -572,9 +863,15 @@ $_sizes: _get-sizes-map();
   }
 }
 
-/// Responsive `padding-left across breakpoint ranges.
+/// Responsive `padding-left` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .card { @include pl-range(4, $md: 6, $lg: 8); }
+/// @example sass
+///   .card
+///     +pl-range(4, $md: 6, $lg: 8)
 @mixin pl-range($base, $breakpoint-range...) {
   padding-left: size($base);
 
@@ -588,6 +885,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `padding-right` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .card { @include pr-range(4, $md: 6, $lg: 8); }
+/// @example sass
+///   .card
+///     +pr-range(4, $md: 6, $lg: 8)
 @mixin pr-range($base, $breakpoint-range...) {
   padding-right: size($base);
 
@@ -601,6 +904,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `margin-top` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .section { @include mt-range(6, $md: 10, $lg: 16); }
+/// @example sass
+///   .section
+///     +mt-range(6, $md: 10, $lg: 16)
 @mixin mt-range($base, $breakpoint-range...) {
   margin-top: size($base);
 
@@ -614,6 +923,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `margin-bottom` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .section { @include mb-range(6, $md: 10, $lg: 16); }
+/// @example sass
+///   .section
+///     +mb-range(6, $md: 10, $lg: 16)
 @mixin mb-range($base, $breakpoint-range...) {
   margin-bottom: size($base);
 
@@ -627,6 +942,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `margin-left` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .card { @include ml-range(4, $md: 6, $lg: 8); }
+/// @example sass
+///   .card
+///     +ml-range(4, $md: 6, $lg: 8)
 @mixin ml-range($base, $breakpoint-range...) {
   margin-left: size($base);
 
@@ -640,6 +961,12 @@ $_sizes: _get-sizes-map();
 /// Responsive `margin-right` across breakpoint ranges.
 /// @param {Number} $base
 /// @param {ArgList} $breakpoint-range
+/// @group sizing
+/// @example scss
+///   .card { @include mr-range(4, $md: 6, $lg: 8); }
+/// @example sass
+///   .card
+///     +mr-range(4, $md: 6, $lg: 8)
 @mixin mr-range($base, $breakpoint-range...) {
   margin-right: size($base);
 
