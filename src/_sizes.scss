@@ -38,6 +38,18 @@ $_sizes: _get-sizes-map();
   @return utility.px-to-rem(config.$base-size * $key);
 }
 
+/// Check breakpoint widths first, then the spacing scale.
+/// @access private
+@function _dimension($key) {
+  $breakpoint: map.get(config.$breakpoints, $key);
+
+  @if $breakpoint != null {
+    @return utility.px-to-rem($breakpoint);
+  }
+
+  @return size($key);
+}
+
 /// @access private
 @mixin padding-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
@@ -145,6 +157,13 @@ $_sizes: _get-sizes-map();
     @include width-classes($size, $value);
     @include height-classes($size, $value);
     @include size-classes($size, $value);
+  }
+
+  // Breakpoint widths for size utilities.
+  @each $breakpoint, $value in config.$breakpoints {
+    @include width-classes($breakpoint, $value);
+    @include height-classes($breakpoint, $value);
+    @include size-classes($breakpoint, $value);
   }
 
   .m-auto { margin: auto; }
@@ -294,22 +313,22 @@ $_sizes: _get-sizes-map();
 /// @param {Number} $key
 @mixin -my($key) { margin-top: -(size($key)); margin-bottom: -(size($key)); }
 
-/// @param {Number} $key
-@mixin w($key) { width: size($key); }
-/// @param {Number} $key
-@mixin min-w($key) { min-width: size($key); }
-/// @param {Number} $key
-@mixin max-w($key) { max-width: size($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin w($key) { width: _dimension($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin min-w($key) { min-width: _dimension($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin max-w($key) { max-width: _dimension($key); }
 
-/// @param {Number} $key
-@mixin h($key) { height: size($key); }
-/// @param {Number} $key
-@mixin min-h($key) { min-height: size($key); }
-/// @param {Number} $key
-@mixin max-h($key) { max-height: size($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin h($key) { height: _dimension($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin min-h($key) { min-height: _dimension($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin max-h($key) { max-height: _dimension($key); }
 /// Set both `width` and `height`.
-/// @param {Number} $key
-@mixin size($key) { width: size($key); height: size($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin size($key) { width: _dimension($key); height: _dimension($key); }
 
 @mixin m-auto { margin: auto; }
 @mixin my-auto { margin-top: auto; margin-bottom: auto; }
