@@ -52,7 +52,7 @@ $breakpoints: (
 // ─── Fonts ───────────────────────────────────────────────────────────────────
 
 /// Named font family stacks. The `$default-font` key is applied to `body`.
-// Custom fonts should be specified with standard font-face
+/// Custom fonts should be specified with standard font-face
 /// @type Map
 $font-families: (
   "sans": ( sans-serif),
