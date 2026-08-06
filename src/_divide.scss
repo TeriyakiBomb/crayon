@@ -38,7 +38,7 @@ $-styles: solid, dashed, dotted, double, none;
 
   // ─── Divide Color ─────────────────────────────────────────────────────────────
 
-  @each $name, $value in colors.$resolved-colors {
+  @each $name, $value in colors.$palette {
     .divide-#{$name} > :not(:last-child) { border-color: $value; }
   }
 }
