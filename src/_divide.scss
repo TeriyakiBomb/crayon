@@ -47,7 +47,7 @@ $_styles: solid, dashed, dotted, double, none;
 
 /// Add vertical dividers between an element's children.
 /// @param {String | Number} $width ["DEFAULT"]: Key from `$border-widths`
-/// @group divide
+/// @group borders
 /// @example scss
 ///   .columns { @include crayon.divide-x(2); }
 /// @example sass
@@ -65,7 +65,7 @@ $_styles: solid, dashed, dotted, double, none;
 
 /// Add horizontal dividers between an element's children.
 /// @param {String | Number} $width ["DEFAULT"]: Key from `$border-widths`
-/// @group divide
+/// @group borders
 /// @example scss
 ///   .stack { @include crayon.divide-y(2); }
 /// @example sass
@@ -83,7 +83,7 @@ $_styles: solid, dashed, dotted, double, none;
 
 /// Set the border style between an element's children.
 /// @param {String} $style: Border style (e.g. `dashed`, `dotted`)
-/// @group divide
+/// @group borders
 /// @example scss
 ///   .stack { @include crayon.divide-style(dashed); }
 /// @example sass
@@ -95,7 +95,7 @@ $_styles: solid, dashed, dotted, double, none;
 
 /// Set the border colour between an element's children.
 /// @param {String} $name: Colour by name
-/// @group divide
+/// @group borders
 /// @example scss
 ///   .stack { @include crayon.divide-color("slate-200"); }
 /// @example sass
