@@ -166,6 +166,17 @@ body {
 /// @param {String} $name - Key from `$font-weights`
 @mixin font($name) { font-weight: font-weight($name); }
 
+/// Set `font-weight` from the font weight scale.
+/// @param {String} $name - Key from `$font-weights`
+@mixin font-weight($name) { font-weight: font-weight($name); }
+
+/// Set `font-size` and `line-height` from the font size scale.
+/// @param {String} $name - Key from `$font-sizes`
+@mixin font-size($name) {
+  font-size: font-size($name);
+  line-height: list.nth(map.get($_font-sizes, $name), 2);
+}
+
 /// Set `font-family` from the font family map.
 /// @param {String} $name - Key from `$font-families`
 @mixin font-family($name) { font-family: font-family($name); }
