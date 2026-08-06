@@ -19,7 +19,7 @@
   @return $result;
 }
 
-$sizes: _get-sizes-map();
+$_sizes: _get-sizes-map();
 
 // ─── Lookup ───────────────────────────────────────────────────────────────────
 
@@ -28,7 +28,7 @@ $sizes: _get-sizes-map();
 /// @param {Number} $key - Scale step (e.g. `4`, `12`)
 /// @return {Length}
 @function size($key) {
-  $from-map: map.get($sizes, $key);
+  $from-map: map.get($_sizes, $key);
 
   @if $from-map {
     @return utility.px-to-rem($from-map);
@@ -131,7 +131,7 @@ $sizes: _get-sizes-map();
 
 @if config.$output-css-vars {
   :root {
-    @each $size, $value in $sizes {
+    @each $size, $value in $_sizes {
       $name: utility.str-replace("#{$size}", ".", "_");
       --size-#{$name}: #{utility.px-to-rem($value)};
     }
@@ -139,7 +139,7 @@ $sizes: _get-sizes-map();
 }
 
 @layer utilities {
-  @each $size, $value in $sizes {
+  @each $size, $value in $_sizes {
     @include padding-classes($size, $value);
     @include margin-classes($size, $value);
     @include width-classes($size, $value);
@@ -240,7 +240,7 @@ $sizes: _get-sizes-map();
 }
 
 @layer utilities {
-  @each $size, $value in $sizes {
+  @each $size, $value in $_sizes {
     @include gap-classes($size, $value);
   }
 }
