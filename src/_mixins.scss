@@ -41,6 +41,7 @@
 /// @param {ArgList} $sizes - One or more min-width values (e.g. `400px, 600px`)
 /// @content Styles applied at each container width
 /// @group responsive
+/// @deprecated this is fluff, just use regular container queries
 @mixin containers($sizes...) {
   $kwargs: meta.keywords($sizes);
   $container-name: map.get($kwargs, "name");
