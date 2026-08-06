@@ -16,6 +16,7 @@
 /// Wrap content in a `min-width` media query for a named breakpoint.
 /// @param {String} $name - Key from `$breakpoints`
 /// @content Styles applied at and above the breakpoint
+/// @group responsive
 @mixin screen($name) {
   @media (min-width: map.get(config.$breakpoints, $name)) {
     @content;
@@ -25,6 +26,7 @@
 /// Wrap content in multiple `min-width` media queries at once.
 /// @param {ArgList} $names - One or more breakpoint keys
 /// @content Styles applied at each breakpoint
+/// @group responsive
 @mixin screens($names...) {
 
   @each $name in $names {
@@ -38,6 +40,7 @@
 /// Pass `$name` as a keyword argument for named containers.
 /// @param {ArgList} $sizes - One or more min-width values (e.g. `400px, 600px`)
 /// @content Styles applied at each container width
+/// @group responsive
 @mixin containers($sizes...) {
   $kwargs: meta.keywords($sizes);
   $container-name: map.get($kwargs, "name");
@@ -59,6 +62,7 @@
 
 /// Hidden by default, visible at breakpoint and above.
 /// @param {String} $name - Key from `$breakpoints`
+/// @group responsive
 @mixin show-from($name) {
   display: none;
 
@@ -69,6 +73,7 @@
 
 /// Visible by default, hidden at breakpoint and above.
 /// @param {String} $name - Key from `$breakpoints`
+/// @group responsive
 @mixin hide-from($name) {
   @media (min-width: map.get(config.$breakpoints, $name)) {
     display: none;
@@ -77,6 +82,7 @@
 
 /// Alias for `hide-from`. Visible by default, hidden at breakpoint and above.
 /// @param {String} $name - Key from `$breakpoints`
+/// @group responsive
 @mixin show-until($name) {
   @media (min-width: map.get(config.$breakpoints, $name)) {
     display: none;
@@ -85,6 +91,7 @@
 
 /// Alias for `show-from`. Hidden by default, visible at breakpoint and above.
 /// @param {String} $name - Key from `$breakpoints`
+/// @group responsive
 @mixin hide-until($name) {
   display: none;
 
@@ -95,14 +102,17 @@
 
 /// Wrap content in `:hover`.
 /// @content
+///@group state
 @mixin hover  { &:hover  { @content; } }
 
 /// Wrap content in `:focus`.
 /// @content
+///@group state
 @mixin focus  { &:focus  { @content; } }
 
 /// Wrap content in `:active`.
 /// @content
+///@group state
 @mixin active { &:active { @content; } }
 
 /// Wrap content in `prefers-color-scheme: dark`.
@@ -113,7 +123,7 @@
 // Inspired (copied basically wholesale from https://utopia.fyi), it's very cool
 
 /// @access private
-@function -resolve-fluid-size($key) {
+@function _resolve-fluid-size($key) {
   @if meta.type-of($key) == "number" {
     @return sizes.size($key);
   }
@@ -127,9 +137,10 @@
 /// @param {Number | String} $max-key - Upper bound, same types as `$min-key`
 /// @param {String} $from ['sm'] - Breakpoint where scaling starts
 /// @param {String} $to ['xl'] - Breakpoint where scaling stops
+/// @group composition
 @mixin fluid($property, $min-key, $max-key, $from: "sm", $to: "xl") {
-  $min-size:  -resolve-fluid-size($min-key);
-  $max-size:  -resolve-fluid-size($max-key);
+  $min-size:  _resolve-fluid-size($min-key);
+  $max-size:  _resolve-fluid-size($max-key);
   $min-width: map.get(config.$breakpoints, $from);
   $max-width: map.get(config.$breakpoints, $to);
 
@@ -152,6 +163,7 @@
 /// @param {Number | String} $max - Maximum font-size key
 /// @param {String} $from ['sm']
 /// @param {String} $to ['xl']
+/// @group composition
 @mixin fluid-text($min, $max, $from: "sm", $to: "xl") {
   @include fluid("font-size", $min, $max, $from, $to);
 }
@@ -161,6 +173,7 @@
 /// @param {Number | String} $max
 /// @param {String} $from ['sm']
 /// @param {String} $to ['xl']
+/// @group composition
 @mixin fluid-p($min, $max, $from: "sm", $to: "xl") {
   @include fluid("padding", $min, $max, $from, $to);
 }
@@ -170,6 +183,7 @@
 /// @param {Number | String} $max
 /// @param {String} $from ['sm']
 /// @param {String} $to ['xl']
+/// @group composition
 @mixin fluid-gap($min, $max, $from: "sm", $to: "xl") {
   @include fluid("gap", $min, $max, $from, $to);
 }

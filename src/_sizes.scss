@@ -38,8 +38,20 @@ $_sizes: _get-sizes-map();
   @return utility.px-to-rem(config.$base-size * $key);
 }
 
+/// Check breakpoint widths first, then the spacing scale.
 /// @access private
-@mixin padding-classes($size-name, $value) {
+@function _dimension($key) {
+  $breakpoint: map.get(config.$breakpoints, $key);
+
+  @if $breakpoint != null {
+    @return utility.px-to-rem($breakpoint);
+  }
+
+  @return size($key);
+}
+
+/// @access private
+@mixin _padding-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -61,7 +73,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin margin-classes($size-name, $value) {
+@mixin _margin-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -99,7 +111,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin width-classes($size-name, $value) {
+@mixin _width-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -109,7 +121,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin height-classes($size-name, $value) {
+@mixin _height-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -119,13 +131,23 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin size-classes($size-name, $value) {
+@mixin _size-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
   .size-#{$escaped} {
     width: $converted-value;
     height: $converted-value;
+  }
+
+  .min-size-#{$escaped} {
+    min-width: $converted-value;
+    min-height: $converted-value;
+  }
+
+  .max-size-#{$escaped} {
+    max-width: $converted-value;
+    max-height: $converted-value;
   }
 }
 
@@ -140,11 +162,18 @@ $_sizes: _get-sizes-map();
 
 @layer utilities {
   @each $size, $value in $_sizes {
-    @include padding-classes($size, $value);
-    @include margin-classes($size, $value);
-    @include width-classes($size, $value);
-    @include height-classes($size, $value);
-    @include size-classes($size, $value);
+    @include _padding-classes($size, $value);
+    @include _margin-classes($size, $value);
+    @include _width-classes($size, $value);
+    @include _height-classes($size, $value);
+    @include _size-classes($size, $value);
+  }
+
+  // Breakpoint widths for size utilities.
+  @each $breakpoint, $value in config.$breakpoints {
+    @include _width-classes($breakpoint, $value);
+    @include _height-classes($breakpoint, $value);
+    @include _size-classes($breakpoint, $value);
   }
 
   .m-auto { margin: auto; }
@@ -230,7 +259,7 @@ $_sizes: _get-sizes-map();
 }
 
 /// @access private
-@mixin gap-classes($size-name, $value) {
+@mixin _gap-classes($size-name, $value) {
   $converted-value: utility.px-to-rem($value);
   $escaped: utility.str-replace($size-name, ".", "\\.");
 
@@ -241,7 +270,7 @@ $_sizes: _get-sizes-map();
 
 @layer utilities {
   @each $size, $value in $_sizes {
-    @include gap-classes($size, $value);
+    @include _gap-classes($size, $value);
   }
 }
 
@@ -294,22 +323,28 @@ $_sizes: _get-sizes-map();
 /// @param {Number} $key
 @mixin -my($key) { margin-top: -(size($key)); margin-bottom: -(size($key)); }
 
-/// @param {Number} $key
-@mixin w($key) { width: size($key); }
-/// @param {Number} $key
-@mixin min-w($key) { min-width: size($key); }
-/// @param {Number} $key
-@mixin max-w($key) { max-width: size($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin w($key) { width: _dimension($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin min-w($key) { min-width: _dimension($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin max-w($key) { max-width: _dimension($key); }
 
-/// @param {Number} $key
-@mixin h($key) { height: size($key); }
-/// @param {Number} $key
-@mixin min-h($key) { min-height: size($key); }
-/// @param {Number} $key
-@mixin max-h($key) { max-height: size($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin h($key) { height: _dimension($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin min-h($key) { min-height: _dimension($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin max-h($key) { max-height: _dimension($key); }
 /// Set both `width` and `height`.
-/// @param {Number} $key
-@mixin size($key) { width: size($key); height: size($key); }
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin size($key) { width: _dimension($key); height: _dimension($key); }
+/// Set both `min-width` and `min-height`.
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin min-size($key) { min-width: _dimension($key); min-height: _dimension($key); }
+/// Set both `max-width` and `max-height`.
+/// @param {Number | String} $key: Size scale key or breakpoint name
+@mixin max-size($key) { max-width: _dimension($key); max-height: _dimension($key); }
 
 @mixin m-auto { margin: auto; }
 @mixin my-auto { margin-top: auto; margin-bottom: auto; }

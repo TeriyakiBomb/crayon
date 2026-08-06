@@ -107,48 +107,146 @@ $flex: (
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
+/// Create a flex container.
+/// @group flexbox
 @mixin flex { display: flex; }
+
+/// Create an inline flex container.
+/// @group flexbox
 @mixin inline-flex { display: inline-flex; }
 
+/// Order flex items horizontally.
+/// @group flexbox
 @mixin flex-row { flex-direction: row; }
+
+/// Order flex items vertically.
+/// @group flexbox
 @mixin flex-col { flex-direction: column; }
+
+/// Lay out flex items horizontally in reverse order.
+/// @group flexbox
 @mixin flex-row-reverse { flex-direction: row-reverse; }
+
+/// Lay out flex items vertically in reverse order.
+/// @group flexbox
 @mixin flex-col-reverse { flex-direction: column-reverse; }
-
 @mixin order($value) { order: $value; }
-
+/// Allow a flex item to grow and fill available space.
+/// @group flexbox
 @mixin grow { flex-grow: 1; }
+
+/// Prevent a flex item from growing.
+/// @group flexbox
 @mixin no-grow { flex-grow: 0; }
+
+/// Allow a flex item to shrink when necessary.
+/// @group flexbox
 @mixin shrink { flex-shrink: 1; }
+
+/// Prevent a flex item from shrinking.
+/// @group flexbox
 @mixin no-shrink { flex-shrink: 0; }
 
+/// Allow flex items to wrap onto multiple lines.
+/// @group flexbox
 @mixin flex-wrap { flex-wrap: wrap; }
+
+/// Keep flex items on a single line.
+/// @group flexbox
 @mixin flex-nowrap { flex-wrap: nowrap; }
+
+/// Wrap flex items onto multiple lines in reverse order.
+/// @group flexbox
 @mixin flex-wrap-reverse { flex-wrap: wrap-reverse; }
 
+/// Pack flex items at the start.
+/// @group flexbox
 @mixin justify-start { justify-content: flex-start; }
+
+/// Pack flex items at the end.
+/// @group flexbox
 @mixin justify-end { justify-content: flex-end; }
+
+/// Center flex items.
+/// @group flexbox
 @mixin justify-center { justify-content: center; }
+
+/// Distribute flex items with equal space between.
+/// @group flexbox
 @mixin justify-between { justify-content: space-between; }
+
+/// Distribute flex items with equal space around them.
+/// @group flexbox
 @mixin justify-around { justify-content: space-around; }
+
+/// Distribute flex items with equal space between and around them.
+/// @group flexbox
 @mixin justify-evenly { justify-content: space-evenly; }
 
+/// Align flex items at the start.
+/// @group flexbox
 @mixin items-start { align-items: flex-start; }
+
+/// Align flex items at the end.
+/// @group flexbox
 @mixin items-end { align-items: flex-end; }
+
+/// Center flex items along.
+/// @group flexbox
 @mixin items-center { align-items: center; }
+
+/// Align flex items along their baselines.
+/// @group flexbox
 @mixin items-baseline { align-items: baseline; }
+
+/// Stretch flex items.
+/// @group flexbox
 @mixin items-stretch { align-items: stretch; }
 
+/// Use the flex container's `align-items` value for an item.
+/// @group flexbox
 @mixin self-auto { align-self: auto; }
+
+/// Align a flex item at the start of the cross axis.
+/// @group flexbox
 @mixin self-start { align-self: flex-start; }
+
+/// Align a flex item at the end of the cross axis.
+/// @group flexbox
 @mixin self-end { align-self: flex-end; }
+
+/// Center a flex item along the cross axis.
+/// @group flexbox
 @mixin self-center { align-self: center; }
+
+/// Align a flex item along the container's baseline.
+/// @group flexbox
 @mixin self-baseline { align-self: baseline; }
+
+/// Stretch a flex item across the cross axis.
+/// @group flexbox
 @mixin self-stretch { align-self: stretch; }
 
+/// Pack flex lines at the start of the cross axis.
+/// @group flexbox
 @mixin content-start { align-content: flex-start; }
+
+/// Pack flex lines at the end of the cross axis.
+/// @group flexbox
 @mixin content-end { align-content: flex-end; }
+
+/// Center flex lines along the cross axis.
+/// @group flexbox
 @mixin content-center { align-content: center; }
+
+/// Distribute flex lines with equal space between them.
+/// @group flexbox
 @mixin content-between { align-content: space-between; }
+
+/// Distribute flex lines with equal space around them.
+/// @group flexbox
 @mixin content-around { align-content: space-around; }
+
+/// Distribute flex lines with equal space between and around them.
+/// @group flexbox
 @mixin content-evenly { align-content: space-evenly; }

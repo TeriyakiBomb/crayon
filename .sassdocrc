@@ -1,0 +1,4 @@
+display:
+    access:
+      - public
+

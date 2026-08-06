@@ -9,18 +9,20 @@
 /// @param {String} $key ['DEFAULT'] - Key from `$border-widths`
 /// @return {Length}
 @function border-width($key: "DEFAULT") {
-  $value: map.get(config.$border-widths, $key);
+  $widths: config.$border-widths;
+  $value: map.get($widths, $key);
   @if $value != null { @return $value; }
-  @return map.get(config.$border-widths, "#{$key}");
+  @return map.get($widths, "#{$key}");
 }
 
 /// Look up a border radius from `$border-radii`, returned in rem.
 /// @param {String} $key ['DEFAULT'] - Key from `$border-radii`
 /// @return {Length}
 @function rounded($key: "DEFAULT") {
-  $value: map.get(config.$border-radii, $key);
+  $radii: config.$border-radii;
+  $value: map.get($radii, $key);
   @if $value == null {
-    $value: map.get(config.$border-radii, "#{$key}");
+    $value: map.get($radii, "#{$key}");
   }
 
   @if $value == 0 or $value == 9999px { @return $value; }
