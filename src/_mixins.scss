@@ -111,10 +111,85 @@
 ///@group state
 @mixin focus  { &:focus  { @content; } }
 
+/// Wrap content in `:focus-visible`.
+/// @content
+/// @group state
+/// @example scss
+///   .button {
+///     @include crayon.focus-visible {
+///       outline: 2px solid currentColor;
+///     }
+///   }
+/// @example sass
+///   .button
+///     +crayon.focus-visible
+///       outline: 2px solid currentColor
+@mixin focus-visible { &:focus-visible { @content; } }
+
+/// Wrap content in `:focus-within`.
+/// @content
+/// @group state
+/// @example scss
+///   .field {
+///     @include crayon.focus-within {
+///       border-color: currentColor;
+///     }
+///   }
+/// @example sass
+///   .field
+///     +crayon.focus-within
+///       border-color: currentColor
+@mixin focus-within { &:focus-within { @content; } }
+
 /// Wrap content in `:active`.
 /// @content
 ///@group state
 @mixin active { &:active { @content; } }
+
+/// Wrap content in `:enabled`.
+/// @content
+/// @group state
+/// @example scss
+///   .button {
+///     @include crayon.enabled {
+///       cursor: pointer;
+///     }
+///   }
+/// @example sass
+///   .button
+///     +crayon.enabled
+///       cursor: pointer
+@mixin enabled { &:enabled { @content; } }
+
+/// Wrap content in `:disabled`.
+/// @content
+/// @group state
+/// @example scss
+///   .button {
+///     @include crayon.disabled {
+///       cursor: not-allowed;
+///     }
+///   }
+/// @example sass
+///   .button
+///     +crayon.disabled
+///       cursor: not-allowed
+@mixin disabled { &:disabled { @content; } }
+
+/// Wrap content in `:checked`.
+/// @content
+/// @group state
+/// @example scss
+///   .checkbox {
+///     @include crayon.checked {
+///       accent-color: currentColor;
+///     }
+///   }
+/// @example sass
+///   .checkbox
+///     +crayon.checked
+///       accent-color: currentColor
+@mixin checked { &:checked { @content; } }
 
 /// Wrap content in `prefers-color-scheme: dark`.
 /// @content
