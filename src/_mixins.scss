@@ -120,6 +120,14 @@
 /// @content
 @mixin dark { @media (prefers-color-scheme: dark) { @content; } }
 
+/// Wrap content in `orientation: portrait`.
+/// @content
+@mixin portrait { @media (orientation: portrait) { @content; } }
+
+/// Wrap content in `orientation: landscape`.
+/// @content
+@mixin landscape { @media (orientation: landscape) { @content; } }
+
 // ─── Fluid ────────────────────────────────────────────────────────────────────
 // Inspired (copied basically wholesale from https://utopia.fyi), it's very cool
 
