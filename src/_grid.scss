@@ -122,10 +122,10 @@
 /// @param {ArgList} $breakpoints - Keyword args mapping breakpoints to column counts
 /// @group grid
 /// @example scss
-///   .gallery { @include grid-cols-range(1, $md: 2, $lg: 4); }
+///   .gallery { @include crayon.grid-cols-range(1, $md: 2, $lg: 4); }
 /// @example sass
 ///   .gallery
-///     +grid-cols-range(1, $md: 2, $lg: 4)
+///     +crayon.grid-cols-range(1, $md: 2, $lg: 4)
 @mixin grid-cols-range($base, $breakpoints...) {
   grid-template-columns: repeat(#{$base}, minmax(0, 1fr));
 
@@ -141,10 +141,10 @@
 /// @param {ArgList} $breakpoints - Keyword args mapping breakpoints to row counts
 /// @group grid
 /// @example scss
-///   .dashboard { @include grid-rows-range(1, $md: 2, $lg: 3); }
+///   .dashboard { @include crayon.grid-rows-range(1, $md: 2, $lg: 3); }
 /// @example sass
 ///   .dashboard
-///     +grid-rows-range(1, $md: 2, $lg: 3)
+///     +crayon.grid-rows-range(1, $md: 2, $lg: 3)
 @mixin grid-rows-range($base, $breakpoints...) {
   grid-template-rows: repeat(#{$base}, minmax(0, 1fr));
 

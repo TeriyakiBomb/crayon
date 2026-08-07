@@ -5,6 +5,7 @@
 
 /// Look up an opacity value from `$opacities`.
 /// @param {String | Number} $name - Key from `$opacities` (e.g. `"50"` or `50`)
+/// @group color
 /// @return {Number}
 @function opacity($name) {
   $value: map.get(config.$opacities, $name);
@@ -33,5 +34,6 @@
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
 /// Set `opacity` from the opacity scale.
+/// @group color
 /// @param {String} $name - Key from `$opacities`
 @mixin opacity($name) { opacity: opacity($name); }

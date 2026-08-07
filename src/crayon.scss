@@ -1,6 +1,6 @@
 @forward "config";
 @forward "reset";
-@forward "utility";
+@forward "utility" hide str-replace;
 @forward "accessibility";
 @forward "display";
 @forward "flex";

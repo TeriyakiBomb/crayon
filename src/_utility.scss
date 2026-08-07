@@ -4,6 +4,7 @@
 @use "sass:map";
 
 /// Convert a px value to rem using `$base-font-size`.
+/// @group  sass utilities
 /// @param {Length} $px - Value in px
 /// @return {Length} Value in rem
 @function px-to-rem($px) { @return math.div($px, config.$base-font-size) * 1rem; }
@@ -13,6 +14,7 @@
 /// @param {String} $search - Substring to find
 /// @param {String} $replace [''] - Replacement
 /// @return {String}
+/// @access private
 @function str-replace($string, $search, $replace: "") {
   // Coerce the input to a string, just in case it is a raw number like 2.5
   $string: $string + "";

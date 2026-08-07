@@ -3,27 +3,31 @@
 @use "sass:color" as sasscolor;
 @use "tailwind-colors" as tw;
 
-//Merged tailwind and custom palettes
-$resolved-colors: config.$colors;
+/// Palette includes Tailwind colours when enabled, with custom colours merged on top.
+/// @type Map
+/// @group color
+$palette: config.$colors;
 @if config.$use-tailwind-colors {
-  $resolved-colors: map.merge(tw.$palette, config.$colors);
+  $palette: map.merge(tw.$palette, config.$colors);
 }
 
-// ─── lookup ───────────────────────────────────────────────────────────
+// ─── lookup ───────────────────────────────────────────────────────────────────
 
-/// Look up a colour from `$colors` by name.
-/// @param {String} $name - Key from `$colors` (e.g. `"blue-500"`)
+/// Look up a colour from the palette by name.
+/// @group color
+/// @param {String} $name - Colour name (e.g. `"blue-500"`)
 /// @return {Color}
 @function color($name) {
-  @return map.get($resolved-colors, $name);
+  @return map.get($palette, $name);
 }
 
 // ─── Colour space conversion ──────────────────────────────────────────────────
 
-/// Convert a colour to the configured `$output-colorspace`.
+/// Convert a colour to the selected  `$output-colorspace`.
 /// Returns unchanged if `$convert-colorspace` is `false`.
+/// @group color
 /// @param {Color} $color
-/// @param {String} $space [$output-colorspace]
+/// @param {String} $space [config.$output-colorspace]
 /// @return {Color}
 @function convert($color, $space: config.$output-colorspace) {
   @if config.$convert-colorspace {
@@ -34,6 +38,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to OKLCH.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-oklch($color) {
@@ -45,6 +50,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to OKLab.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-oklab($color) {
@@ -56,6 +62,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to HSL.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-hsl($color) {
@@ -67,6 +74,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to sRGB.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-rgb($color) {
@@ -78,6 +86,7 @@ $resolved-colors: config.$colors;
 }
 
 /// Convert a colour to Display P3.
+/// @group color
 /// @param {Color} $color
 /// @return {Color}
 @function to-p3($color) {
@@ -91,14 +100,14 @@ $resolved-colors: config.$colors;
 // generate them colours ------------------------------------------------------------
 @if config.$output-css-vars {
   :root {
-    @each $name, $value in $resolved-colors {
+    @each $name, $value in $palette {
       --color-#{$name}: #{convert($value)};
     }
   }
 }
 
 @layer utilities {
-  @each $name, $value in $resolved-colors {
+  @each $name, $value in $palette {
     .bg-#{$name} { background-color: convert($value); }
     .text-#{$name} { color: convert($value); }
     .border-#{$name} { border-color: convert($value); }
@@ -115,14 +124,32 @@ $resolved-colors: config.$colors;
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
-/// Set `background-color` to a named colour, converted to output space.
-/// @param {String} $name - Key from `$colors`
+/// Set `background-color` from the  colour palette.
+/// @group color
+/// @param {String} $name - Colour name
+/// @example scss
+///   .card { @include crayon.bg("blue-500"); }
+/// @example sass
+///   .card
+///     +crayon.bg("blue-500")
 @mixin bg($name) { background-color: convert(color($name)); }
 
-/// Set `color` to a named colour, converted to output space.
-/// @param {String} $name - Key from `$colors`
+/// Set `color` from the colour palette.
+/// @group color
+/// @param {String} $name - Colour name
+/// @example scss
+///   .title { @include crayon.text-color("slate-900"); }
+/// @example sass
+///   .title
+///     +crayon.text-color("slate-900")
 @mixin text-color($name) { color: convert(color($name)); }
 
-/// Set `border-color` to a named colour, converted to output space.
-/// @param {String} $name - Key from `$colors`
+/// Set `border-color` from the colour palette.
+/// @group color
+/// @param {String} $name - Colour name
+/// @example scss
+///   .panel { @include crayon.border-color("slate-200"); }
+/// @example sass
+///   .panel
+///     +crayon.border-color("slate-200")
 @mixin border-color($name) { border-color: convert(color($name)); }
