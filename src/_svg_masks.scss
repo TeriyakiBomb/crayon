@@ -33,9 +33,9 @@
 // ─── Mesa ─────────────────────────────────────────────────────────────────────
 
 /// "They're waiting for you Gordon...in the test chamberrrrrr."
-/// @param {Number | null} $size [null] - sets both width and height
-/// @param {Number | null} $rotate [null] - degrees to rotate the mask (e.g. `90`, `180`, `-90`)
-/// @param {String | null} $flip [null] - mirror the mask shape: `x` (left↔right) or `y` (top↔bottom)
+/// @param {Number | null} $size [null] - sets the size
+/// @param {Number | null} $rotate [null] - degrees to rotate the shape (e.g. `90`, `180`, `-90`)
+/// @param {String | null} $flip [null] - mirror the shape: `x`  or `y` 
 /// @group decorative
 /// @example scss
 ///   .avatar { @include crayon.mask-mesa(16); }

@@ -2,13 +2,18 @@
 @use "colors";
 @use "borders";
 
+@use "sass:map";
+
 // ─── Stack ─────────────────────────────────────────────────────────────
 
-/// Stack children vertically with a consistent gap from the sizing map in config.
+/// Stack children vertically(flex) with an option for a gap.
 /// @param {Number} $gap -  size key (e.g. `4` )
 /// @group composition
 /// @example scss
-///   .card-list { @include vstack(4); }
+///   .card-list { @include crayon.vstack(4); }
+/// @example sass
+///   .card-list
+///     +crayon.vstack(4)
 @mixin vstack($gap) {
   display: flex;
   flex-direction: column;
@@ -19,7 +24,10 @@
 /// @param {Number} $gap - size key (e.g. `4` )
 /// @group composition
 /// @example scss
-///   .sidebar { @include stack(6); }
+///   .sidebar { @include crayon.stack(6); }
+/// @example sass
+///   .sidebar
+///     +crayon.stack(6)
 @mixin stack($gap) {
   @include vstack($gap);
 }
@@ -29,7 +37,10 @@
 /// @param {Number} $gap - size key (e.g. `3` )
 /// @group composition
 /// @example scss
-///   .toolbar { @include hstack(3); }
+///   .toolbar { @include crayon.hstack(3); }
+/// @example sass
+///   .toolbar
+///     +crayon.hstack(3)
 @mixin hstack($gap) {
   display: flex;
   flex-direction: row;
@@ -41,7 +52,10 @@
 /// @param {Number} $gap - size key (e.g. `2` )
 /// @group composition
 /// @example scss
-///   .tags { @include cluster(2); }
+///   .tags { @include crayon.cluster(2); }
+/// @example sass
+///   .tags
+///     +crayon.cluster(2)
 @mixin cluster($gap) {
   display: flex;
   flex-direction: row;
@@ -57,9 +71,16 @@
 /// @param {String | null} $axis [`null`] - Axis to center on: `x`, `y`, or omit for both
 /// @group composition
 /// @example scss
-///   .hero    { @include center; }     // both axes
-///   .nav     { @include center(x); }  // horizontal only
-///   .sidebar { @include center(y); }  // vertical only
+///   .hero    { @include crayon.center; }     // both axes
+///   .nav     { @include crayon.center(x); }  // horizontal only
+///   .sidebar { @include crayon.center(y); }  // vertical only
+/// @example sass
+///   .hero
+///     +crayon.center
+///   .nav
+///     +crayon.center(x)
+///   .sidebar
+///     +crayon.center(y)
 @mixin center($axis: null) {
   display: flex;
   @if $axis == x {
@@ -74,26 +95,39 @@
 
 // ─── Palette ────────────────────────────────────────────────────────────────
 
-/// Apply background, text, and border colours from a single colour family.
+/// Apply background, text, and border colours in a single colour from the palette.
 /// All colour parameters are optional.
 /// The shade number maps directly to the palette: `"red"` + `100` → `red-100`.
-/// @param {String} $family - Colour family prefix (e.g. `"blue"`, `"slate"`)
+/// @param {String} $color - Colour family prefix (e.g. `"blue"`, `"slate"`)
 /// @param {Number | null} $bg [null] - Background shade (e.g. `100`)
 /// @param {Number | null} $text [null] - Text colour shade (e.g. `900`)
 /// @param {Number | null} $border [null] - Border colour shade (e.g. `300`)
 /// @group composition
 /// @example scss
-///   .alert-error { @include palette("red", $bg: 100, $text: 900, $border: 300); }
-///   .badge       { @include palette("emerald", $bg: 50, $text: 700); }
-@mixin palette($family, $bg: null, $text: null, $border: null) {
-  @if $bg != null { background-color: colors.convert(colors.color("#{$family}-#{$bg}")); }
-  @if $text != null { color: colors.convert(colors.color("#{$family}-#{$text}")); }
-  @if $border != null { border-color: colors.convert(colors.color("#{$family}-#{$border}")); }
+///   .alert-error { @include crayon.palette("red", $bg: 100, $text: 900, $border: 300); }
+///   .badge       { @include crayon.palette("emerald", $bg: 50, $text: 700); }
+/// @example sass
+///   .alert-error
+///     +crayon.palette("red", $bg: 100, $text: 900, $border: 300)
+///   .badge
+///     +crayon.palette("emerald", $bg: 50, $text: 700)
+@mixin palette($color, $bg: null, $text: null, $border: null) {
+  $shades: (
+    background-color: $bg,
+    color: $text,
+    border-color: $border,
+  );
+
+  @each $property, $shade in $shades {
+    @if $shade != null {
+      #{$property}: colors.convert(colors.color("#{$color}-#{$shade}"));
+    }
+  }
 }
 
 // ─── Box ─────────────────────────────────────────────────────────────────────
 
-/// Padding, border radius, background and border all at once.
+/// Padding, border radius, background color and border all at once.
 /// All parameters are optional
 /// `$px` / `$py` can be used alongside `$p` for asymmetric padding
 /// (e.g. badges and buttons that need wider horizontal padding than vertical).
@@ -106,20 +140,59 @@
 /// @param {String | null} $border [null] - Border colour name (e.g. `"slate-200"`)
 /// @group composition
 /// @example scss
-///   .panel { @include box($p: 6, $rounded: "xl", $bg: "white", $border: "slate-200"); }
-///   .badge { @include box($px: 3, $py: 1, $rounded: "full", $bg: "blue-100"); }
+///   .panel { @include crayon.box($p: 6, $rounded: "xl", $bg: "white", $border: "slate-200"); }
+///   .badge { @include crayon.box($px: 3, $py: 1, $rounded: "full", $bg: "blue-100"); }
+/// @example sass
+///   .panel
+///     +crayon.box($p: 6, $rounded: "xl", $bg: "white", $border: "slate-200")
+///   .badge
+///     +crayon.box($px: 3, $py: 1, $rounded: "full", $bg: "blue-100")
 @mixin box($p: null, $px: null, $py: null, $rounded: null, $bg: null, $border: null) {
+  $spacing: ();
+
   @if $p != null {
     @if $px == null and $py == null {
-      padding: sizes.size($p);
+      $spacing: map.set($spacing, padding, $p);
     } @else {
-      @if $py == null { padding-top: sizes.size($p); padding-bottom: sizes.size($p); }
-      @if $px == null { padding-left: sizes.size($p); padding-right: sizes.size($p); }
+      @if $py == null {
+        $spacing: map.set($spacing, padding-top, $p);
+        $spacing: map.set($spacing, padding-bottom, $p);
+      }
+      @if $px == null {
+        $spacing: map.set($spacing, padding-left, $p);
+        $spacing: map.set($spacing, padding-right, $p);
+      }
     }
   }
-  @if $px != null      { padding-left: sizes.size($px); padding-right: sizes.size($px); }
-  @if $py != null      { padding-top: sizes.size($py); padding-bottom: sizes.size($py); }
+
+  @if $px != null {
+    $spacing: map.set($spacing, padding-left, $px);
+    $spacing: map.set($spacing, padding-right, $px);
+  }
+  @if $py != null {
+    $spacing: map.set($spacing, padding-top, $py);
+    $spacing: map.set($spacing, padding-bottom, $py);
+  }
+
+  @each $property, $key in $spacing {
+    #{$property}: sizes.size($key);
+  }
+
   @if $rounded != null { border-radius: borders.rounded($rounded); }
-  @if $bg != null      { background-color: colors.convert(colors.color($bg)); }
-  @if $border != null  { border: 1px solid colors.convert(colors.color($border)); }
+
+  $colours: (
+    background-color: $bg,
+    border: $border,
+  );
+
+  @each $property, $name in $colours {
+    @if $name != null {
+      $colour: colors.convert(colors.color($name));
+      @if $property == border {
+        border: 1px solid $colour;
+      } @else {
+        #{$property}: $colour;
+      }
+    }
+  }
 }
