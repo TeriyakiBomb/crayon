@@ -4,6 +4,7 @@
 @use "sass:map";
 
 /// Convert a px value to rem using `$base-font-size`.
+/// @group  sass utilities
 /// @param {Length} $px - Value in px
 /// @return {Length} Value in rem
 @function px-to-rem($px) { @return math.div($px, config.$base-font-size) * 1rem; }
