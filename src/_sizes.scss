@@ -61,6 +61,16 @@ $_sizes: _get-sizes-map();
     @if $key == "dvh" { @return 100dvh; }
   }
 
+  @if meta.type-of($key) == "string" {
+    @each $columns in config.$layout-divisions {
+      @for $span from 1 through ($columns - 1) {
+        @if $key == "#{$span}/#{$columns}" {
+          @return math.percentage(math.div($span, $columns));
+        }
+      }
+    }
+  }
+
   $breakpoint: map.get(config.$breakpoints, $key);
   @if $breakpoint != null {
     @return utility.px-to-rem($breakpoint);
@@ -72,10 +82,10 @@ $_sizes: _get-sizes-map();
 
   @if meta.type-of($key) == "string" {
     @if $axis == width {
-      @error 'Unknown width key "#{$key}". Use a size key, breakpoint, or screen, vw, svw, lvw, or dvw.';
+      @error 'Unknown width key "#{$key}". Use a size key, breakpoint, configured fraction, or screen, vw, svw, lvw, or dvw.';
     }
     @if $axis == height {
-      @error 'Unknown height key "#{$key}". Use a size key, breakpoint, or screen, vh, svh, lvh, or dvh.';
+      @error 'Unknown height key "#{$key}". Use a size key, breakpoint, configured fraction, or screen, vh, svh, lvh, or dvh.';
     }
     @error 'Unknown dimension key "#{$key}". Use a size key or breakpoint.';
   }
@@ -308,7 +318,11 @@ $_sizes: _get-sizes-map();
       $size: math.percentage(math.div($span, $columns));
 
       .w-#{$span}\/#{$columns} { width: $size; }
+      .min-w-#{$span}\/#{$columns} { min-width: $size; }
+      .max-w-#{$span}\/#{$columns} { max-width: $size; }
       .h-#{$span}\/#{$columns} { height: $size; }
+      .min-h-#{$span}\/#{$columns} { min-height: $size; }
+      .max-h-#{$span}\/#{$columns} { max-height: $size; }
     }
   }
 
