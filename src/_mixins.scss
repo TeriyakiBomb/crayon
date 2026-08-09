@@ -122,10 +122,12 @@
 
 /// Wrap content in `orientation: portrait`.
 /// @content
+/// @group Responsive
 @mixin portrait { @media (orientation: portrait) { @content; } }
 
 /// Wrap content in `orientation: landscape`.
 /// @content
+/// @group Responsive
 @mixin landscape { @media (orientation: landscape) { @content; } }
 
 // ─── Fluid ────────────────────────────────────────────────────────────────────
