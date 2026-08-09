@@ -286,12 +286,12 @@ $_sizes: _get-sizes-map();
 
   .m-auto { margin: auto; }
 
-  .mx-auto {
+  .mx-auto, .center, .center-x {
     margin-left: auto;
     margin-right: auto;
   }
 
-  .my-auto {
+  .my-auto, .center-y {
     margin-top: auto;
     margin-bottom: auto;
   }
