@@ -8,42 +8,62 @@
 
 /// Stack children vertically(flex) with an option for a gap.
 /// @param {Number} $gap -  size key (e.g. `4` )
+/// @param {Bool} $reverse [false] - Reverse the stacking direction
 /// @group composition
 /// @example scss
 ///   .card-list { @include crayon.vstack(4); }
+///   .card-list-reversed { @include crayon.vstack(4, $reverse: true); }
 /// @example sass
 ///   .card-list
 ///     +crayon.vstack(4)
-@mixin vstack($gap) {
+///   .card-list-reversed
+///     +crayon.vstack(4, $reverse: true)
+@mixin vstack($gap, $reverse: false) {
   display: flex;
-  flex-direction: column;
+  @if $reverse {
+    flex-direction: column-reverse;
+  } @else {
+    flex-direction: column;
+  }
   gap: sizes.size($gap);
 }
 
 /// Alias for `vstack`. Stack children vertically with a gap.
 /// @param {Number} $gap - size key (e.g. `4` )
+/// @param {Bool} $reverse [false] - Reverse the stacking direction
 /// @group composition
 /// @example scss
 ///   .sidebar { @include crayon.stack(6); }
+///   .sidebar-reversed { @include crayon.stack(6, $reverse: true); }
 /// @example sass
 ///   .sidebar
 ///     +crayon.stack(6)
-@mixin stack($gap) {
-  @include vstack($gap);
+///   .sidebar-reversed
+///     +crayon.stack(6, $reverse: true)
+@mixin stack($gap, $reverse: false) {
+  @include vstack($gap, $reverse);
 }
 
 /// Lay children out in a horizontal row with a gap. Items do not wrap.
 /// Use `cluster` if you want items to wrap when space is tight.
 /// @param {Number} $gap - size key (e.g. `3` )
+/// @param {Bool} $reverse [false] - Reverse the stacking direction
 /// @group composition
 /// @example scss
 ///   .toolbar { @include crayon.hstack(3); }
+///   .toolbar-reversed { @include crayon.hstack(3, $reverse: true); }
 /// @example sass
 ///   .toolbar
 ///     +crayon.hstack(3)
-@mixin hstack($gap) {
+///   .toolbar-reversed
+///     +crayon.hstack(3, $reverse: true)
+@mixin hstack($gap, $reverse: false) {
   display: flex;
-  flex-direction: row;
+  @if $reverse {
+    flex-direction: row-reverse;
+  } @else {
+    flex-direction: row;
+  }
   gap: sizes.size($gap);
 }
 
