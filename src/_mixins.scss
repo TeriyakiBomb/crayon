@@ -16,7 +16,7 @@
 /// Wrap content in a `min-width` media query for a named breakpoint.
 /// @param {String} $name - Key from `$breakpoints`
 /// @content Styles applied at and above the breakpoint
-/// @group responsive
+/// @group Responsive
 @mixin screen($name) {
   @media (min-width: map.get(config.$breakpoints, $name)) {
     @content;
@@ -26,7 +26,7 @@
 /// Wrap content in multiple `min-width` media queries at once.
 /// @param {ArgList} $names - One or more breakpoint keys
 /// @content Styles applied at each breakpoint
-/// @group responsive
+/// @group Responsive
 @mixin screens($names...) {
 
   @each $name in $names {
@@ -40,7 +40,7 @@
 /// Pass `$name` as a keyword argument for named containers.
 /// @param {ArgList} $sizes - One or more min-width values (e.g. `400px, 600px`)
 /// @content Styles applied at each container width
-/// @group responsive
+/// @group Responsive
 /// @deprecated this is fluff, just use regular container queries
 @mixin containers($sizes...) {
   $kwargs: meta.keywords($sizes);
@@ -63,7 +63,7 @@
 
 /// Hidden by default, visible at breakpoint and above.
 /// @param {String} $name - Key from `$breakpoints`
-/// @group responsive
+/// @group Responsive
 @mixin show-from($name) {
   display: none;
 
@@ -74,7 +74,7 @@
 
 /// Visible by default, hidden at breakpoint and above.
 /// @param {String} $name - Key from `$breakpoints`
-/// @group responsive
+/// @group Responsive
 @mixin hide-from($name) {
   @media (min-width: map.get(config.$breakpoints, $name)) {
     display: none;
@@ -83,7 +83,7 @@
 
 /// Alias for `hide-from`. Visible by default, hidden at breakpoint and above.
 /// @param {String} $name - Key from `$breakpoints`
-/// @group responsive
+/// @group Responsive
 @mixin show-until($name) {
   @media (min-width: map.get(config.$breakpoints, $name)) {
     display: none;
@@ -92,7 +92,7 @@
 
 /// Alias for `show-from`. Hidden by default, visible at breakpoint and above.
 /// @param {String} $name - Key from `$breakpoints`
-/// @group responsive
+/// @group Responsive
 @mixin hide-until($name) {
   display: none;
 

@@ -45,7 +45,10 @@
     }
 
     @each $key, $value in config.$border-radii {
-      $rem: if($value == 0 or $value == 9999px, $value, utility.px-to-rem($value));
+      $rem: $value;
+      @if $value != 0 and $value != 9999px {
+        $rem: utility.px-to-rem($value);
+      }
 
       @if $key == "DEFAULT" {
         --rounded: #{$rem};
@@ -95,7 +98,11 @@
   // ─── Border Radius ────────────────────────────────────────────────────────────
 
   @each $key, $radius in config.$border-radii {
-    $rem: if($radius == 0 or $radius == 9999px, $radius, utility.px-to-rem($radius));
+    $rem: $radius;
+    @if $radius != 0 and $radius != 9999px {
+      $rem: utility.px-to-rem($radius);
+    }
+
     @if $key == "DEFAULT" {
       .rounded { border-radius: $rem; }
       .rounded-t { border-top-left-radius: $rem; border-top-right-radius: $rem; }

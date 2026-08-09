@@ -24,7 +24,11 @@
 /// @access private
 @mixin _mask($path, $rotate: null, $flip: null) {
   $t: _mask-transform($rotate, $flip);
-  $inner: if($t != "", "<g transform='#{$t}'>#{$path}</g>", $path);
+  $inner: $path;
+  @if $t != "" {
+    $inner: "<g transform='#{$t}'>#{$path}</g>";
+  }
+
   mask-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'>#{$inner}</svg>");
   mask-size: 100% 100%;
   mask-repeat: no-repeat;

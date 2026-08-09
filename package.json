@@ -34,6 +34,7 @@
     "sassdoc": "^2.7.4"
   },
   "scripts": {
-    "docs": "sassdoc src --dest docs"
+    "docs": "sassdoc src --dest docs",
+    "docs:api-json": "sassdoc src -p --no-update-notifier >sassdoc.json"
   }
 }
