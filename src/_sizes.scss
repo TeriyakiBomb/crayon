@@ -41,15 +41,43 @@ $_sizes: _get-sizes-map();
   @return utility.px-to-rem(config.$base-size * $key);
 }
 
-/// Check breakpoint widths first, then the spacing scale.
-/// @param {Number | String} $key - Size scale key or breakpoint name
+/// Set viewport keywords and breakpoint widths, then fall back to the spacing scale.
+/// @param {Number | String} $key - Size scale key, breakpoint name, or viewport keyword
+/// @param {String | null} $axis [null] - `width` or `height` when resolving viewport keywords
 /// @return {Length}
 /// @access private
-@function _dimension($key) {
-  $breakpoint: map.get(config.$breakpoints, $key);
+@function _dimension($key, $axis: null) {
+  @if $axis == width {
+    @if $key == "screen" or $key == "vw" { @return 100vw; }
+    @if $key == "svw" { @return 100svw; }
+    @if $key == "lvw" { @return 100lvw; }
+    @if $key == "dvw" { @return 100dvw; }
+  }
 
+  @if $axis == height {
+    @if $key == "screen" or $key == "vh" { @return 100vh; }
+    @if $key == "svh" { @return 100svh; }
+    @if $key == "lvh" { @return 100lvh; }
+    @if $key == "dvh" { @return 100dvh; }
+  }
+
+  $breakpoint: map.get(config.$breakpoints, $key);
   @if $breakpoint != null {
     @return utility.px-to-rem($breakpoint);
+  }
+
+  @if map.has-key($_sizes, $key) {
+    @return size($key);
+  }
+
+  @if meta.type-of($key) == "string" {
+    @if $axis == width {
+      @error 'Unknown width key "#{$key}". Use a size key, breakpoint, or screen, vw, svw, lvw, or dvw.';
+    }
+    @if $axis == height {
+      @error 'Unknown height key "#{$key}". Use a size key, breakpoint, or screen, vh, svh, lvh, or dvh.';
+    }
+    @error 'Unknown dimension key "#{$key}". Use a size key or breakpoint.';
   }
 
   @return size($key);
@@ -286,6 +314,7 @@ $_sizes: _get-sizes-map();
 
   .w-full { width: 100%; }
   .w-screen { width: 100vw; }
+  .w-vw { width: 100vw; }
   .w-svw { width: 100svw; }
   .w-lvw { width: 100lvw; }
   .w-dvw { width: 100dvw; }
@@ -294,6 +323,7 @@ $_sizes: _get-sizes-map();
   .w-fit { width: fit-content; }
   .h-full { height: 100%; }
   .h-screen { height: 100vh; }
+  .h-vh { height: 100vh; }
   .h-svh { height: 100svh; }
   .h-lvh { height: 100lvh; }
   .h-dvh { height: 100dvh; }
@@ -506,35 +536,45 @@ $_sizes: _get-sizes-map();
 /// @group Margin
 @mixin minus-my($key) { @include my($key, true); }
 
-/// Set the width from the size scale or a breakpoint.
-/// @param {Number | String} $key - Size scale key or breakpoint name
+/// Set the width from the size scale, a breakpoint, or a viewport keyword.
+/// @param {Number | String} $key - Size scale key, breakpoint name, `screen`, `vw`, `svw`, `lvw`, or `dvw`
 /// @group Width
-@mixin w($key) { width: _dimension($key); }
+/// @example scss
+///   .sidebar { @include crayon.w(64); }
+/// @example sass
+///   .sidebar
+///     +crayon.w(64)
+@mixin w($key) { width: _dimension($key, width); }
 
-/// Set the minimum width from the size scale or a breakpoint.
-/// @param {Number | String} $key - Size scale key or breakpoint name
+/// Set the minimum width from the size scale, a breakpoint, or a viewport keyword.
+/// @param {Number | String} $key - Size scale key, breakpoint name, `screen`, `vw`, `svw`, `lvw`, or `dvw`
 /// @group Width
-@mixin min-w($key) { min-width: _dimension($key); }
+@mixin min-w($key) { min-width: _dimension($key, width); }
 
-/// Set the maximum width from the size scale or a breakpoint.
-/// @param {Number | String} $key - Size scale key or breakpoint name
+/// Set the maximum width from the size scale, a breakpoint, or a viewport keyword.
+/// @param {Number | String} $key - Size scale key, breakpoint name, `screen`, `vw`, `svw`, `lvw`, or `dvw`
 /// @group Width
-@mixin max-w($key) { max-width: _dimension($key); }
+@mixin max-w($key) { max-width: _dimension($key, width); }
 
-/// Set the height from the size scale or a breakpoint.
-/// @param {Number | String} $key - Size scale key or breakpoint name
+/// Set the height from the size scale, a breakpoint, or a viewport keyword.
+/// @param {Number | String} $key - Size scale key, breakpoint name, `screen`, `vh`, `svh`, `lvh`, or `dvh`
 /// @group Height
-@mixin h($key) { height: _dimension($key); }
+/// @example scss
+///   .avatar { @include crayon.h(12); }
+/// @example sass
+///   .avatar
+///     +crayon.h(12)
+@mixin h($key) { height: _dimension($key, height); }
 
-/// Set the minimum height from the size scale or a breakpoint.
-/// @param {Number | String} $key - Size scale key or breakpoint name
+/// Set the minimum height from the size scale, a breakpoint, or a viewport keyword.
+/// @param {Number | String} $key - Size scale key, breakpoint name, `screen`, `vh`, `svh`, `lvh`, or `dvh`
 /// @group Height
-@mixin min-h($key) { min-height: _dimension($key); }
+@mixin min-h($key) { min-height: _dimension($key, height); }
 
-/// Set the maximum height from the size scale or a breakpoint.
-/// @param {Number | String} $key - Size scale key or breakpoint name
+/// Set the maximum height from the size scale, a breakpoint, or a viewport keyword.
+/// @param {Number | String} $key - Size scale key, breakpoint name, `screen`, `vh`, `svh`, `lvh`, or `dvh`
 /// @group Height
-@mixin max-h($key) { max-height: _dimension($key); }
+@mixin max-h($key) { max-height: _dimension($key, height); }
 
 /// Set both `width` and `height`.
 /// @param {Number | String} $key - Size scale key or breakpoint name
