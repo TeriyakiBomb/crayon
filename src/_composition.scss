@@ -87,29 +87,44 @@
 
 /// The solution to the hardest problem developers face. Centering a div.
 /// Pass `x` or `y` to constrain to one axis.
-/// Always sets `display: flex`.
-/// @param {String | null} $axis [`null`] - Axis to center on: `x`, `y`, or omit for both
+/// Set `$children` to `true` to center its children instead.
+/// @param {String | null} $axis [`null`] - Axis to center on: `x`, `y`, or skip for both
+/// @param {Bool} $children [false] - Whether to flex-center the element's children
 /// @group composition
 /// @example scss
-///   .hero    { @include crayon.center; }     // both axes
-///   .nav     { @include crayon.center(x); }  // horizontal only
-///   .sidebar { @include crayon.center(y); }  // vertical only
+///   .page    { @include crayon.center; }
+///   .content { @include crayon.center(x); }
+///   .hero    { @include crayon.center($children: true); }
+///   .sidebar { @include crayon.center(y, $children: true); }
 /// @example sass
-///   .hero
+///   .page
 ///     +crayon.center
-///   .nav
+///   .content
 ///     +crayon.center(x)
+///   .hero
+///     +crayon.center($children: true)
 ///   .sidebar
-///     +crayon.center(y)
-@mixin center($axis: null) {
-  display: flex;
-  @if $axis == x {
-    justify-content: center;
-  } @else if $axis == y {
-    align-items: center;
+///     +crayon.center(y, $children: true)
+@mixin center($axis: null, $children: false) {
+  @if $children {
+    display: flex;
+
+    @if $axis == x {
+      justify-content: center;
+    } @else if $axis == y {
+      align-items: center;
+    } @else {
+      align-items: center;
+      justify-content: center;
+    }
   } @else {
-    align-items: center;
-    justify-content: center;
+    @if $axis == x {
+      margin-inline: auto;
+    } @else if $axis == y {
+      margin-block: auto;
+    } @else {
+      margin: auto;
+    }
   }
 }
 
