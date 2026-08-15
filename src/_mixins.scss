@@ -189,6 +189,28 @@
   @include fluid("padding", $min, $max, $from, $to);
 }
 
+/// Shorthand for `fluid("padding-left/right", ...)`.
+/// @param {Number | String} $min
+/// @param {Number | String} $max
+/// @param {String} $from ['sm']
+/// @param {String} $to ['xl']
+/// @group composition
+@mixin fluid-px($min, $max, $from: "sm", $to: "xl") {
+  @include fluid("padding-left", $min, $max, $from, $to);
+  @include fluid("padding-right", $min, $max, $from, $to);
+}
+
+/// Shorthand for `fluid("padding-top/bottom", ...)`.
+/// @param {Number | String} $min
+/// @param {Number | String} $max
+/// @param {String} $from ['sm']
+/// @param {String} $to ['xl']
+/// @group composition
+@mixin fluid-py($min, $max, $from: "sm", $to: "xl") {
+  @include fluid("padding-top", $min, $max, $from, $to);
+  @include fluid("padding-botom", $min, $max, $from, $to);
+}
+
 /// Shorthand for `fluid("gap", ...)`.
 /// @param {Number | String} $min
 /// @param {Number | String} $max
