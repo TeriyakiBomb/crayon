@@ -103,6 +103,38 @@
 /// @group grid
 @mixin row-span-full { grid-row: 1 / -1; }
 
+/// Size automatically created grid columns according to their contents.
+/// @group grid
+@mixin auto-cols-auto { grid-auto-columns: auto; }
+
+/// Size automatically created grid columns to their minimum content width.
+/// @group grid
+@mixin auto-cols-min { grid-auto-columns: min-content; }
+
+/// Size automatically created grid columns to their maximum content width.
+/// @group grid
+@mixin auto-cols-max { grid-auto-columns: max-content; }
+
+/// Give automatically created grid columns an equal share of available space.
+/// @group grid
+@mixin auto-cols-fr { grid-auto-columns: minmax(0, 1fr); }
+
+/// Size automatically created grid rows according to their contents.
+/// @group grid
+@mixin auto-rows-auto { grid-auto-rows: auto; }
+
+/// Size automatically created grid rows to their minimum content height.
+/// @group grid
+@mixin auto-rows-min { grid-auto-rows: min-content; }
+
+/// Size automatically created grid rows to their maximum content height.
+/// @group grid
+@mixin auto-rows-max { grid-auto-rows: max-content; }
+
+/// Give automatically created grid rows an equal share of available space.
+/// @group grid
+@mixin auto-rows-fr { grid-auto-rows: minmax(0, 1fr); }
+
 /// Add new grid items by row.
 /// @group grid
 @mixin grid-flow-row { grid-auto-flow: row; }
@@ -114,6 +146,14 @@
 /// Fill gaps with smaller grid items when they fit.
 /// @group grid
 @mixin grid-flow-dense { grid-auto-flow: dense; }
+
+/// Add new grid items by row and backfill gaps where possible.
+/// @group grid
+@mixin grid-flow-row-dense { grid-auto-flow: row dense; }
+
+/// Add new grid items by column and backfill gaps where possible.
+/// @group grid
+@mixin grid-flow-col-dense { grid-auto-flow: column dense; }
 
 // ─── Range Mixins ─────────────────────────────────────────────────────────────
 

@@ -653,6 +653,42 @@ $_sizes: _get-sizes-map();
 /// @group Width
 @mixin w-max { width: max-content; }
 
+/// Fill the available minimum width.
+/// @group Width
+@mixin min-w-full { min-width: 100%; }
+
+/// Use the smallest possible content width as the minimum width.
+/// @group Width
+@mixin min-w-min { min-width: min-content; }
+
+/// Use the largest needed content width as the minimum width.
+/// @group Width
+@mixin min-w-max { min-width: max-content; }
+
+/// Fit the minimum width to its content.
+/// @group Width
+@mixin min-w-fit { min-width: fit-content; }
+
+/// Fill the available maximum width.
+/// @group Width
+@mixin max-w-full { max-width: 100%; }
+
+/// Remove any maximum width.
+/// @group Width
+@mixin max-w-none { max-width: none; }
+
+/// Use the smallest possible content width as the maximum width.
+/// @group Width
+@mixin max-w-min { max-width: min-content; }
+
+/// Use the largest needed content width as the maximum width.
+/// @group Width
+@mixin max-w-max { max-width: max-content; }
+
+/// Fit the maximum width to its content.
+/// @group Width
+@mixin max-w-fit { max-width: fit-content; }
+
 /// Fill the available height.
 /// @group Height
 @mixin h-full { height: 100%; }
@@ -676,6 +712,18 @@ $_sizes: _get-sizes-map();
 /// Use the largest needed content height.
 /// @group Height
 @mixin h-max { height: max-content; }
+
+/// Fill the available minimum height.
+/// @group Height
+@mixin min-h-full { min-height: 100%; }
+
+/// Fill the available maximum height.
+/// @group Height
+@mixin max-h-full { max-height: 100%; }
+
+/// Remove any maximum height.
+/// @group Height
+@mixin max-h-none { max-height: none; }
 
 /// Fill the available width and height.
 /// @group Size
