@@ -208,7 +208,7 @@
 /// @group composition
 @mixin fluid-py($min, $max, $from: "sm", $to: "xl") {
   @include fluid("padding-top", $min, $max, $from, $to);
-  @include fluid("padding-botom", $min, $max, $from, $to);
+  @include fluid("padding-bottom", $min, $max, $from, $to);
 }
 
 /// Shorthand for `fluid("gap", ...)`.
