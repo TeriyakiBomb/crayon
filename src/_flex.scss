@@ -130,6 +130,15 @@ $flex: (
 /// Lay out flex items vertically in reverse order.
 /// @group Flexbox
 @mixin flex-col-reverse { flex-direction: column-reverse; }
+
+/// Alias for `flex-row`.
+/// @group Flexbox
+@mixin f-row { @include flex-row; }
+
+/// Alias for `flex-col`.
+/// @group Flexbox
+@mixin f-col { @include flex-col; }
+
 /// Allow a flex item to grow and fill available space.
 /// @group Flexbox
 @mixin grow { flex-grow: 1; }
@@ -254,3 +263,11 @@ $flex: (
 /// @param {Number} $value - Position in the flex order, accepts an arbitrary value
 /// @group Flexbox
 @mixin order($value) { order: $value; }
+
+/// Place a flex item before the others.
+/// @group Flexbox
+@mixin order-first { @include order(-9999); }
+
+/// Place a flex item after all the others.
+/// @group Flexbox
+@mixin order-last { @include order(9999); }
