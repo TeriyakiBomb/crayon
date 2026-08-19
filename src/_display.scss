@@ -29,7 +29,7 @@
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 /// Makes element max width the same as the current breakpoint
 /// @param {Bool} $center [true] - Center the container 
-/// @group display
+/// @group Display
 /// @example scss
 ///   .page { @include crayon.container; }
 ///   .page-start { @include crayon.container($center: false); }
@@ -54,15 +54,15 @@
 }
 
 /// Display an element as a block.
-/// @group display
+/// @group Display
 @mixin block { display: block; }
 
 /// Display an element inline.
-/// @group display
+/// @group Display
 @mixin inline { display: inline; }
 
 /// Display an element as an inline block.
-/// @group display
+/// @group Display
 @mixin inline-block { display: inline-block; }
 
 /// Hide an element.
