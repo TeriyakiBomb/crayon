@@ -66,6 +66,10 @@
 @mixin inline-block { display: inline-block; }
 
 /// Hide an element.
-/// @group display
+/// @group Display
 @mixin hidden { display: none; }
+
+/// Hide an element Alias of hidden.
+/// @group Display
+@mixin hide { display: none; }
 
