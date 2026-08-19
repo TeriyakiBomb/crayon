@@ -103,17 +103,17 @@
 
 /// Wrap content in `:hover`.
 /// @content
-///@group state
+///@group State
 @mixin hover  { &:hover  { @content; } }
 
 /// Wrap content in `:focus`.
 /// @content
-///@group state
+///@group State
 @mixin focus  { &:focus  { @content; } }
 
 /// Wrap content in `:active`.
 /// @content
-///@group state
+///@group State
 @mixin active { &:active { @content; } }
 
 /// Wrap content in `prefers-color-scheme: dark`.
@@ -148,7 +148,7 @@
 /// @param {Number | String} $max-key - Upper bound, same types as `$min-key`
 /// @param {String} $from ['sm'] - Breakpoint where scaling starts
 /// @param {String} $to ['xl'] - Breakpoint where scaling stops
-/// @group composition
+/// @group Composition
 @mixin fluid($property, $min-key, $max-key, $from: "sm", $to: "xl") {
   $min-size:  _resolve-fluid-size($min-key);
   $max-size:  _resolve-fluid-size($max-key);
@@ -174,7 +174,7 @@
 /// @param {Number | String} $max - Maximum font-size key
 /// @param {String} $from ['sm']
 /// @param {String} $to ['xl']
-/// @group composition
+/// @group Composition
 @mixin fluid-text($min, $max, $from: "sm", $to: "xl") {
   @include fluid("font-size", $min, $max, $from, $to);
 }
@@ -184,7 +184,7 @@
 /// @param {Number | String} $max
 /// @param {String} $from ['sm']
 /// @param {String} $to ['xl']
-/// @group composition
+/// @group Composition
 @mixin fluid-p($min, $max, $from: "sm", $to: "xl") {
   @include fluid("padding", $min, $max, $from, $to);
 }
@@ -194,7 +194,7 @@
 /// @param {Number | String} $max
 /// @param {String} $from ['sm']
 /// @param {String} $to ['xl']
-/// @group composition
+/// @group Composition
 @mixin fluid-px($min, $max, $from: "sm", $to: "xl") {
   @include fluid("padding-left", $min, $max, $from, $to);
   @include fluid("padding-right", $min, $max, $from, $to);
@@ -205,7 +205,7 @@
 /// @param {Number | String} $max
 /// @param {String} $from ['sm']
 /// @param {String} $to ['xl']
-/// @group composition
+/// @group Composition
 @mixin fluid-py($min, $max, $from: "sm", $to: "xl") {
   @include fluid("padding-top", $min, $max, $from, $to);
   @include fluid("padding-bottom", $min, $max, $from, $to);
@@ -216,7 +216,7 @@
 /// @param {Number | String} $max
 /// @param {String} $from ['sm']
 /// @param {String} $to ['xl']
-/// @group composition
+/// @group Composition
 @mixin fluid-gap($min, $max, $from: "sm", $to: "xl") {
   @include fluid("gap", $min, $max, $from, $to);
 }
