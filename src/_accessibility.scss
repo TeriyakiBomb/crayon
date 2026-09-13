@@ -25,6 +25,8 @@
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
+/// Visible only to screen readers
+/// @group Accessibility
 @mixin sr-only {
   position: absolute;
   width: 1px;
@@ -37,6 +39,9 @@
   border-width: 0;
 }
 
+/// Visible to everyone
+/// Mostly for restoring things previously hidden by `sr-only`
+/// @group Accessibility
 @mixin not-sr-only {
   position: static;
   width: auto;

@@ -1,38 +1,35 @@
 # Crayon
 
-A Sass utility CSS toolkit. Familiar tailwind-flavoured utility classes with some stronger opinions - docs are WIP.
-full docs are here: https://crayon.craft.me/73WtRO1gK3U9aN
+A Sass-first CSS toolkit combining utility classes, design tokens, functions, and mixins for component-scoped styling for projects working a production scale.
 
-## Install
+[Full docs](https://crayoncss.com)
+[Why does this exist?](https://crayoncss.com/docs/introduction.html)
 
-```bash
+## Installation
+
+```sh
 yarn add crayon-css
+yarn add --dev sass-embedded
 ```
 
-You'll also need `sass-embedded`:
-
-```bash
-yarn add -D sass-embedded
+```sh
+pnpm add crayon-css
+pnpm add --save-dev sass-embedded
 ```
 
-## Setup
-
-### Vite (Vue, Svelte, etc.)
-
-Import Crayon in your main stylesheet or entry point:
-
-```scss
-@use 'crayon-css';
+```sh
+npm install crayon-css
+npm install --save-dev sass-embedded
 ```
 
-That's it. Vite resolves the `sass` export automatically.
+Crayon works best with frameworks that support co-located scoped `<style>` blocks. The recommended workflow combines utility classes with mixins in those scoped styles.
 
-#### Vue
+## Vue/Vite
 
 Create or add to your global stylesheet (e.g. `src/assets/main.scss`):
 
 ```scss
-@use 'crayon-css';
+@use 'crayon-css' as crayon;
 ```
 
 Then import it in your `main.js` / `main.ts`:
@@ -59,19 +56,17 @@ You can also use Crayon's functions directly in component `<style>` blocks:
 </style>
 ```
 
-#### Svelte
+## Svelte/SvelteKit
 
-Import in your root layout or component:
+Add to your root `+layout.svelte`:
 
 ```svelte
 <style lang="scss">
-@use 'crayon-css';
+@use 'crayon-css' as crayon;
 </style>
 ```
 
-Or in a global stylesheet loaded from your `+layout.svelte` / entry point.
-
-Using functions and mixins in component styles:
+Use functions and mixins in any component:
 
 ```svelte
 <style lang="scss">
@@ -88,14 +83,63 @@ h1 {
 </style>
 ```
 
-#### Ember (Polaris / Embroider + Vite)
+## Astro
 
-Add `sass-embedded` and configure Vite to resolve Sass packages from `node_modules`:
+Add the Vite Sass load path config in `astro.config.mjs`:
 
-```js
+```mjs
+import { defineConfig } from 'astro/config';
+
+export default defineConfig({
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          loadPaths: ['node_modules'],
+        },
+      },
+    },
+  },
+});
+```
+
+Create `src/styles/crayon.scss`:
+
+```scss
+@use 'crayon-css' as crayon;
+```
+
+Import it in your base layout frontmatter so it applies everywhere:
+
+```md
+---
+// src/layouts/Layout.astro
+import '../styles/crayon.scss';
+---
+```
+
+Use Crayon's mixins in any `.astro` component:
+
+```html
+<style lang="scss">
+  @use 'crayon-css' as crayon;
+
+  .card {
+    @include crayon.box($p: 6, $rounded: "xl", $bg: "white", $border: "slate-200");
+    @include crayon.vstack(4);
+  }
+</style>
+```
+
+## Ember
+
+Requires **Polaris / Embroider + Vite** — classic Ember CLI is not supported.
+
+Configure Vite to resolve Sass packages from `node_modules`:
+
+```mjs
 // vite.config.mjs
 export default defineConfig({
-  // ... plugins
   css: {
     preprocessorOptions: {
       scss: {
@@ -106,11 +150,11 @@ export default defineConfig({
 });
 ```
 
-Import Crayon globally by adding a Sass entry point to your app:
+Add a Sass entry point and import it in `app.js`:
 
 ```scss
 // app/styles/crayon.scss
-@use 'crayon-css';
+@use 'crayon-css' as crayon;
 ```
 
 ```js
@@ -118,7 +162,7 @@ Import Crayon globally by adding a Sass entry point to your app:
 import './styles/crayon.scss';
 ```
 
-To use Crayon's functions in scoped component styles, set up [ember-scoped-css](https://github.com/auditboard/ember-scoped-css) in your Vite and Babel configs, then in your components:
+For scoped component styles (highly recommended), set up [ember-scoped-css](https://github.com/auditboard/ember-scoped-css):
 
 ```gjs
 <template>
@@ -133,24 +177,53 @@ To use Crayon's functions in scoped component styles, set up [ember-scoped-css](
 </template>
 ```
 
-### Plain HTML / vanilla Sass
+## React (Experimental)
 
-If you're compiling Sass yourself (without a bundler), add `node_modules` to your load paths:
+> [!WARNING]
+> Crayon can be used in React projects that compile Sass, but the recommended component-scoped workflow has not yet been tested thoroughly. Third-party tools such as [styled-jsx](https://github.com/vercel/styled-jsx) or [Astroturf](https://astroturfcss.github.io/astroturf/) can work, but these integrations are not officially supported by Crayon.
 
-```bash
-sass --load-path=node_modules src/style.scss dist/style.css
-```
+### Vite
 
-Then in your Sass:
+Create a global stylesheet, e.g. `src/assets/main.scss`:
 
 ```scss
-@use 'crayon-css';
+@use 'crayon-css' as crayon;
 ```
 
-Link the compiled CSS in your HTML:
+Import it in `main.jsx` / `main.tsx`:
 
-```html
-<link rel="stylesheet" href="dist/style.css">
+```tsx
+import './assets/main.scss'
+```
+
+### Next.js
+
+Configure Next.js to use `sass-embedded`:
+
+```ts
+// next.config.ts
+import type { NextConfig } from 'next'
+
+const nextConfig: NextConfig = {
+  sassOptions: {
+    implementation: 'sass-embedded',
+  },
+}
+
+export default nextConfig
+```
+
+Create `app/globals.scss`:
+
+```scss
+@use 'crayon-css' as crayon;
+```
+
+Import it in the root layout:
+
+```tsx
+// app/layout.tsx
+import './globals.scss'
 ```
 
 ## Usage
@@ -248,4 +321,3 @@ Then use your wrapper everywhere instead of `crayon-css` directly:
 ```
 
 This keeps all your overrides in one place. Every other file just does `@use "crayon"` and gets the customised version. If you don't create a wrapper, you get the defaults.
-
