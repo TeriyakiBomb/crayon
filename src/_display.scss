@@ -27,19 +27,49 @@
 }
 
 // ─── Mixins ──────────────────────────────────────────────────────────────────
+/// Makes element max width the same as the current breakpoint
+/// @param {Bool} $center [true] - Center the container 
+/// @group Display
+/// @example scss
+///   .page { @include crayon.container; }
+///   .page-start { @include crayon.container($center: false); }
+/// @example sass
+///   .page
+///     +crayon.container
+///   .page-start
+///     +crayon.container($center: false)
+@mixin container($center: true) {
+  width: 100%;
+
+  @if $center {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @each $name, $breakpoint in config.$breakpoints {
+    @media (min-width: #{$breakpoint}) {
+      max-width: $breakpoint;
+    }
+  }
+}
 
 /// Display an element as a block.
-/// @group display
+/// @group Display
 @mixin block { display: block; }
 
 /// Display an element inline.
-/// @group display
+/// @group Display
 @mixin inline { display: inline; }
 
 /// Display an element as an inline block.
-/// @group display
+/// @group Display
 @mixin inline-block { display: inline-block; }
 
 /// Hide an element.
-/// @group display
+/// @group Display
 @mixin hidden { display: none; }
+
+/// Hide an element Alias of hidden.
+/// @group Display
+@mixin hide { display: none; }
+

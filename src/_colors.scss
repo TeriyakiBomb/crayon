@@ -5,7 +5,7 @@
 
 /// Palette includes Tailwind colours when enabled, with custom colours merged on top.
 /// @type Map
-/// @group color
+/// @group Color
 $palette: config.$colors;
 @if config.$use-tailwind-colors {
   $palette: map.merge(tw.$palette, config.$colors);
@@ -14,7 +14,7 @@ $palette: config.$colors;
 // ─── lookup ───────────────────────────────────────────────────────────────────
 
 /// Look up a colour from the palette by name.
-/// @group color
+/// @group Color
 /// @param {String} $name - Colour name (e.g. `"blue-500"`)
 /// @return {Color}
 @function color($name) {
@@ -25,7 +25,7 @@ $palette: config.$colors;
 
 /// Convert a colour to the selected  `$output-colorspace`.
 /// Returns unchanged if `$convert-colorspace` is `false`.
-/// @group color
+/// @group Color
 /// @param {Color} $color
 /// @param {String} $space [config.$output-colorspace]
 /// @return {Color}
@@ -38,7 +38,7 @@ $palette: config.$colors;
 }
 
 /// Convert a colour to OKLCH.
-/// @group color
+/// @group Color
 /// @param {Color} $color
 /// @return {Color}
 @function to-oklch($color) {
@@ -50,7 +50,7 @@ $palette: config.$colors;
 }
 
 /// Convert a colour to OKLab.
-/// @group color
+/// @group Color
 /// @param {Color} $color
 /// @return {Color}
 @function to-oklab($color) {
@@ -62,7 +62,7 @@ $palette: config.$colors;
 }
 
 /// Convert a colour to HSL.
-/// @group color
+/// @group Color
 /// @param {Color} $color
 /// @return {Color}
 @function to-hsl($color) {
@@ -74,7 +74,7 @@ $palette: config.$colors;
 }
 
 /// Convert a colour to sRGB.
-/// @group color
+/// @group Color
 /// @param {Color} $color
 /// @return {Color}
 @function to-rgb($color) {
@@ -86,7 +86,7 @@ $palette: config.$colors;
 }
 
 /// Convert a colour to Display P3.
-/// @group color
+/// @group Color
 /// @param {Color} $color
 /// @return {Color}
 @function to-p3($color) {
@@ -125,7 +125,7 @@ $palette: config.$colors;
 // ─── Mixins ──────────────────────────────────────────────────────────────────
 
 /// Set `background-color` from the  colour palette.
-/// @group color
+/// @group Color
 /// @param {String} $name - Colour name
 /// @example scss
 ///   .card { @include crayon.bg("blue-500"); }
@@ -135,7 +135,7 @@ $palette: config.$colors;
 @mixin bg($name) { background-color: convert(color($name)); }
 
 /// Set `color` from the colour palette.
-/// @group color
+/// @group Color
 /// @param {String} $name - Colour name
 /// @example scss
 ///   .title { @include crayon.text-color("slate-900"); }
@@ -145,7 +145,7 @@ $palette: config.$colors;
 @mixin text-color($name) { color: convert(color($name)); }
 
 /// Set `border-color` from the colour palette.
-/// @group color
+/// @group Color
 /// @param {String} $name - Colour name
 /// @example scss
 ///   .panel { @include crayon.border-color("slate-200"); }

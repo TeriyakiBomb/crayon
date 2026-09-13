@@ -1,6 +1,6 @@
 {
   "name": "crayon-css",
-  "version": "0.9.2",
+  "version": "0.10.2",
   "description": "A Sass utility CSS toolkit.",
   "sass": "src/crayon.scss",
   "exports": {
@@ -34,6 +34,7 @@
     "sassdoc": "^2.7.4"
   },
   "scripts": {
-    "docs": "sassdoc src --dest docs"
+    "docs": "sassdoc src --dest docs",
+    "docs:api-json": "sassdoc src -p --no-update-notifier >sassdoc.json"
   }
 }

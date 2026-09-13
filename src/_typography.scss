@@ -121,12 +121,12 @@ body {
     @each $name, $value in config.$font-weights {
       $escaped: utility.str-replace($name, ".", "\\.");
 
-      .#{$escaped} { font-weight: $value; }
+      &.#{$escaped} { font-weight: $value; }
     }
 
     //style
-    .italic { font-style: italic; }
-    .not-italic { font-style: normal; }
+    &.italic { font-style: italic; }
+    &.not-italic { font-style: normal; }
   }
 
   // Font sizes
