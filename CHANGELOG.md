@@ -13,6 +13,7 @@ This release fills gaps between utility classes and Sass mixins and expands the 
 - Added `min-w-full`, `min-w-min`, `min-w-max`, `min-w-fit`, `max-w-full`, `max-w-none`, `max-w-min`, `max-w-max`, and `max-w-fit` width mixins.
 - Added `min-h-full`, `max-h-full`, and `max-h-none` height mixins.
 - Added `fluid-px` and `fluid-py` for fluid horizontal and vertical padding.
+- Added `$children` to `center` for flex-centring an element's children.
 
 ## Improvements
 
@@ -23,6 +24,10 @@ This release fills gaps between utility classes and Sass mixins and expands the 
 ## Fixes
 
 - Fixed divide mixins being grouped with border mixins in the generated API.
+
+## Breaking changes
+
+- `center` now centres the element itself with auto margins by default. Pass `$children: true` to retain flex centring of its children.
 
 # Crayon 0.10.0
 
