@@ -1,3 +1,29 @@
+# Crayon 0.11.0
+
+This release fills gaps between utility classes and Sass mixins and expands the state and fluid composition APIs.
+
+## New features
+
+- Added `focus-visible`, `focus-within`, `enabled`, `disabled`, and `checked` state mixins.
+- Added the `hide` display mixin as an alias for `hidden`.
+- Added the `f-row` and `f-col` flex-direction aliases.
+- Added `order-first` and `order-last` flex-order mixins.
+- Added `border-x`, `border-y`, `border-t`, `border-r`, `border-b`, and `border-l` directional border-width mixins.
+- Added grid auto-column, auto-row, and dense-flow mixins matching the existing utility classes.
+- Added `min-w-full`, `min-w-min`, `min-w-max`, `min-w-fit`, `max-w-full`, `max-w-none`, `max-w-min`, `max-w-max`, and `max-w-fit` width mixins.
+- Added `min-h-full`, `max-h-full`, and `max-h-none` height mixins.
+- Added `fluid-px` and `fluid-py` for fluid horizontal and vertical padding.
+
+## Improvements
+
+- Reorganised the internal Sass sources by moving fluid mixins into Composition and SVG masks into Decorative; the root API remains unchanged.
+- Improved README wording and reorganised SassDoc groups for consistent generated API navigation.
+- Added SassDoc descriptions for the `sr-only` and `not-sr-only` accessibility mixins.
+
+## Fixes
+
+- Fixed divide mixins being grouped with border mixins in the generated API.
+
 # Crayon 0.10.0
 
 This release improves the Sass API, simplifies configuration, and adds full API documentation.
