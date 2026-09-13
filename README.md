@@ -1,6 +1,6 @@
 # Crayon
 
-A Sass-first CSS toolkit combining utility classes, design tokens, functions, and mixins for component-scoped styling for projects working a production scale.
+A Sass-first CSS toolkit combining utility classes, design tokens, functions, and mixins for component-scoped styling for projects working at scale.
 
 [Full docs](https://crayoncss.com)
 [Why does this exist?](https://crayoncss.com/docs/introduction.html)
