@@ -197,6 +197,44 @@
 /// @param {String} $key ['DEFAULT']
 @mixin border($key: "DEFAULT") { border-width: border-width($key); }
 
+/// Set left and right `border-width` from the border width scale.
+/// @group Borders
+/// @param {String} $key ['DEFAULT']
+@mixin border-x($key: "DEFAULT") {
+  $width: border-width($key);
+  border-left-width: $width;
+  border-right-width: $width;
+}
+
+/// Set top and bottom `border-width` from the border width scale.
+/// @group Borders
+/// @param {String} $key ['DEFAULT']
+@mixin border-y($key: "DEFAULT") {
+  $width: border-width($key);
+  border-top-width: $width;
+  border-bottom-width: $width;
+}
+
+/// Set `border-top-width` from the border width scale.
+/// @group Borders
+/// @param {String} $key ['DEFAULT']
+@mixin border-t($key: "DEFAULT") { border-top-width: border-width($key); }
+
+/// Set `border-right-width` from the border width scale.
+/// @group Borders
+/// @param {String} $key ['DEFAULT']
+@mixin border-r($key: "DEFAULT") { border-right-width: border-width($key); }
+
+/// Set `border-bottom-width` from the border width scale.
+/// @group Borders
+/// @param {String} $key ['DEFAULT']
+@mixin border-b($key: "DEFAULT") { border-bottom-width: border-width($key); }
+
+/// Set `border-left-width` from the border width scale.
+/// @group Borders
+/// @param {String} $key ['DEFAULT']
+@mixin border-l($key: "DEFAULT") { border-left-width: border-width($key); }
+
 // ─── Range Mixins ─────────────────────────────────────────────────────────────
 
 /// Responsive `border-radius`. Base value + overrides at named breakpoints.
